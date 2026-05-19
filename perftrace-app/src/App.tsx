@@ -1,10 +1,11 @@
-import React from 'react';
+
 import { BoardCanvas } from './canvas/BoardCanvas';
 import { Toolbar } from './components/Toolbar';
 import { StatusBar } from './components/StatusBar';
 import { Sidebar } from './components/Sidebar';
 import { PropertiesPanel } from './components/PropertiesPanel';
 import { BoardSizeModal } from './components/BoardSizeModal';
+import { LayerScrubber } from './components/LayerScrubber';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Sidebar />
         <BoardCanvas />
         <PropertiesPanel />
+        <LayerScrubber />
       </div>
       <StatusBar />
       <BoardSizeModal />

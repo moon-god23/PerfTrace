@@ -1,12 +1,12 @@
 import React from 'react';
-import { Zap, Ruler, RefreshCw, MousePointer2, PenTool, Pencil, Spline, Link, Eraser, Undo, Redo } from 'lucide-react';
+import { Zap, Ruler, RefreshCw, MousePointer2, PenTool, Pencil, Spline, Link, Eraser, Undo, Redo, FlipVertical } from 'lucide-react';
 import { useBoardStore, useUIStore } from '../store';
 import type { DrawingTool, SignalType } from '../types';
 import { clsx } from 'clsx';
 
 export const Toolbar: React.FC = () => {
   const { rows, cols, undo, redo, past, future } = useBoardStore();
-  const { zoom, setIsBoardSizeModalOpen, activeTool, setActiveTool, activeSignalType, setActiveSignalType } = useUIStore();
+  const { zoom, setIsBoardSizeModalOpen, activeTool, setActiveTool, activeSignalType, setActiveSignalType, boardSide, setBoardSide } = useUIStore();
 
   const tools: { id: DrawingTool; icon: React.FC<any>; tooltip: string }[] = [
     { id: 'select', icon: MousePointer2, tooltip: 'Select (S)' },
@@ -70,6 +70,29 @@ export const Toolbar: React.FC = () => {
               <span className={clsx("w-4 h-4 rounded-full border border-gray-600/50", sig.color)} />
             </button>
           ))}
+        </div>
+
+        {/* Board Side Toggle */}
+        <div className="flex items-center bg-[#1e2136] rounded p-1 border border-[#2a2d3e] text-xs font-medium">
+          <button
+            onClick={() => setBoardSide('top')}
+            className={clsx(
+              "px-3 py-1.5 rounded transition-colors",
+              boardSide === 'top' ? "bg-[#3b82f6] text-white" : "text-[#8b92b2] hover:text-white hover:bg-[#2a2d45]"
+            )}
+          >
+            Top
+          </button>
+          <button
+            onClick={() => setBoardSide('bottom')}
+            className={clsx(
+              "px-3 py-1.5 rounded flex items-center gap-1 transition-colors",
+              boardSide === 'bottom' ? "bg-[#3b82f6] text-white" : "text-[#8b92b2] hover:text-white hover:bg-[#2a2d45]"
+            )}
+          >
+            <FlipVertical className="w-3 h-3" />
+            Bottom
+          </button>
         </div>
 
         {/* History */}

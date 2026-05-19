@@ -1,8 +1,11 @@
 import React from 'react';
 import { COMPONENT_LIBRARY } from '../types/componentLibrary';
 import type { ComponentDefinition } from '../types/componentLibrary';
+import { useUIStore } from '../store';
+import { Eye, EyeOff } from 'lucide-react';
 
 export const Sidebar: React.FC = () => {
+  const { layerVisibility, setLayerVisibility } = useUIStore();
   const categories = Array.from(new Set(COMPONENT_LIBRARY.map(c => c.category)));
 
   const handleDragStart = (e: React.DragEvent, component: ComponentDefinition) => {
@@ -10,9 +13,32 @@ export const Sidebar: React.FC = () => {
     e.dataTransfer.effectAllowed = 'copy';
   };
 
+  const LayerToggle = ({ name, layerKey }: { name: string, layerKey: keyof typeof layerVisibility }) => {
+    const isVisible = layerVisibility[layerKey];
+    return (
+      <div 
+        className="flex items-center justify-between p-1.5 hover:bg-[#1e2136] rounded cursor-pointer transition-colors"
+        onClick={() => setLayerVisibility(layerKey, !isVisible)}
+      >
+        <span className="text-gray-300 font-medium">{name}</span>
+        {isVisible ? <Eye className="w-4 h-4 text-[#10b981]" /> : <EyeOff className="w-4 h-4 text-gray-500" />}
+      </div>
+    );
+  };
+
   return (
     <div className="w-64 bg-[#141622] border-r border-[#2a2d3e] flex flex-col h-full font-sans text-sm">
       <div className="p-4 border-b border-[#2a2d3e] shrink-0">
+        <h2 className="font-semibold text-gray-200 mb-3">Layers</h2>
+        <div className="space-y-1">
+          <LayerToggle name="Components" layerKey="components" />
+          <LayerToggle name="Labels" layerKey="labels" />
+          <LayerToggle name="Solder Traces" layerKey="solderTraces" />
+          <LayerToggle name="Wire Jumps" layerKey="wireJumps" />
+        </div>
+      </div>
+      
+      <div className="p-4 border-b border-[#2a2d3e] shrink-0 bg-[#0f111a]">
         <h2 className="font-semibold text-gray-200">Components</h2>
       </div>
       

@@ -4,7 +4,7 @@ import { useBoardStore, useUIStore } from '../store';
 import type { KonvaEventObject } from 'konva/lib/Node';
 import { ComponentRenderer } from './ComponentRenderer';
 import type { ComponentDefinition } from '../types/componentLibrary';
-import type { HoleCoord, SignalType, TraceMaterial } from '../types';
+import type { HoleCoord, SignalType } from '../types';
 import { v4 as uuidv4 } from 'uuid';
 
 const GRID_SPACING = 20;
@@ -24,7 +24,7 @@ const columnToLetter = (col: number) => {
 
 export const BoardCanvas: React.FC = () => {
   const { rows, cols, components, traces, addComponent, removeComponent, updateComponent, addTrace, removeTrace, commitHistory } = useBoardStore();
-  const { zoom, setZoom, setCursorHole, cursorHole, pan, setPan, selectedComponentId, setSelectedComponentId, activeTool, activeSignalType, selectedTraceId, setSelectedTraceId } = useUIStore();
+  const { zoom, setZoom, setCursorHole, cursorHole, pan, setPan, selectedComponentId, setSelectedComponentId, activeTool, activeSignalType, selectedTraceId, setSelectedTraceId, boardSide, layerVisibility, scrubberValue } = useUIStore();
   
   const stageRef = useRef<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -32,6 +32,10 @@ export const BoardCanvas: React.FC = () => {
   // Drawing State
   const [drawingStartHole, setDrawingStartHole] = React.useState<HoleCoord | null>(null);
   const [isDrawing, setIsDrawing] = React.useState(false);
+
+  // Middle-mouse pan state
+  const [isMiddlePanning, setIsMiddlePanning] = React.useState(false);
+  const middlePanStart = React.useRef<{ x: number; y: number; panX: number; panY: number } | null>(null);
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -66,6 +70,35 @@ export const BoardCanvas: React.FC = () => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedComponentId, selectedTraceId, components, removeComponent, removeTrace, updateComponent, setSelectedComponentId, setSelectedTraceId, commitHistory]);
+
+  const boardCenterX = MARGIN + (cols * GRID_SPACING) / 2;
+  const isBottom = boardSide === 'bottom';
+
+  // Opacity Calculations
+  const getTraceOpacity = () => {
+    if (!layerVisibility.solderTraces) return 0;
+    if (scrubberValue < 20) return scrubberValue / 20;
+    return 1;
+  };
+
+  const getJumperOpacity = () => {
+    if (!layerVisibility.wireJumps) return 0;
+    if (scrubberValue < 40) return Math.max(0, (scrubberValue - 20) / 20);
+    return 1;
+  };
+
+  const getComponentOpacity = () => {
+    if (!layerVisibility.components) return 0;
+    let baseOp = 1;
+    if (scrubberValue < 60) baseOp = Math.max(0, (scrubberValue - 40) / 20);
+    return isBottom ? Math.min(baseOp, 0.3) : baseOp;
+  };
+
+  const getLabelOpacity = () => {
+    if (!layerVisibility.labels) return 0;
+    if (scrubberValue < 80) return Math.max(0, (scrubberValue - 60) / 20);
+    return 1;
+  };
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
@@ -138,9 +171,20 @@ export const BoardCanvas: React.FC = () => {
     });
   };
 
-  const handleMouseMove = () => {
+  const handleMouseMove = (e: KonvaEventObject<MouseEvent>) => {
     const stage = stageRef.current;
     if (!stage) return;
+
+    // Middle-mouse panning
+    if (isMiddlePanning && middlePanStart.current) {
+      const dx = e.evt.clientX - middlePanStart.current.x;
+      const dy = e.evt.clientY - middlePanStart.current.y;
+      setPan({
+        x: middlePanStart.current.panX + dx,
+        y: middlePanStart.current.panY + dy,
+      });
+      return;
+    }
 
     const pointer = stage.getPointerPosition();
     if (!pointer) return;
@@ -182,6 +226,14 @@ export const BoardCanvas: React.FC = () => {
     const dc = Math.abs(h1.col - h2.col);
     const dr = Math.abs(h1.row - h2.row);
     return (dc === 1 && dr === 0) || (dc === 0 && dr === 1) || (dc === 1 && dr === 1);
+  };
+
+  const handleStageContextMenu = (e: KonvaEventObject<MouseEvent>) => {
+    e.evt.preventDefault();
+    if (isDrawing || drawingStartHole) {
+      setIsDrawing(false);
+      setDrawingStartHole(null);
+    }
   };
 
   const handleStageClick = (e: KonvaEventObject<MouseEvent>) => {
@@ -240,6 +292,14 @@ export const BoardCanvas: React.FC = () => {
   };
 
   const handleStageMouseDown = (e: KonvaEventObject<MouseEvent>) => {
+    // Middle mouse button — start panning
+    if (e.evt.button === 1) {
+      e.evt.preventDefault();
+      setIsMiddlePanning(true);
+      middlePanStart.current = { x: e.evt.clientX, y: e.evt.clientY, panX: pan.x, panY: pan.y };
+      return;
+    }
+
     if (e.evt.button !== 0) return;
     if (!cursorHole) return;
 
@@ -253,6 +313,13 @@ export const BoardCanvas: React.FC = () => {
   };
 
   const handleStageMouseUp = (e: KonvaEventObject<MouseEvent>) => {
+    // Middle mouse button — stop panning
+    if (e.evt.button === 1) {
+      setIsMiddlePanning(false);
+      middlePanStart.current = null;
+      return;
+    }
+
     if (e.evt.button !== 0) return;
 
     if (activeTool === 'freehand' && isDrawing) {
@@ -397,7 +464,7 @@ export const BoardCanvas: React.FC = () => {
 
       if (trace.material === 'solder') {
         return (
-          <Group key={trace.id} onClick={handleTraceClick}>
+          <Group key={trace.id} onClick={handleTraceClick} opacity={getTraceOpacity()}>
             <Line
               points={[x1, y1, x2, y2]}
               stroke={color}
@@ -414,17 +481,14 @@ export const BoardCanvas: React.FC = () => {
         const dx = x2 - x1;
         const dy = y2 - y1;
         const dist = Math.sqrt(dx*dx + dy*dy);
-        // Normal vector for arc control point
         const nx = -dy / dist;
         const ny = dx / dist;
-        const arcHeight = Math.min(dist * 0.4, 60); // Cap the arc height
-        
-        // Control point
+        const arcHeight = Math.min(dist * 0.4, 60);
         const cx = mx + nx * arcHeight;
         const cy = my + ny * arcHeight;
 
         return (
-          <Group key={trace.id} onClick={handleTraceClick}>
+          <Group key={trace.id} onClick={handleTraceClick} opacity={getJumperOpacity()}>
             <Path
               data={`M ${x1} ${y1} Q ${cx} ${cy} ${x2} ${y2}`}
               stroke={color}
@@ -455,7 +519,7 @@ export const BoardCanvas: React.FC = () => {
             stroke={getSignalColor(activeSignalType)}
             strokeWidth={4}
             dash={[8, 4]}
-            opacity={0.6}
+            opacity={getTraceOpacity() * 0.6}
             lineCap="round"
           />
         );
@@ -478,7 +542,7 @@ export const BoardCanvas: React.FC = () => {
               stroke={getSignalColor(activeSignalType)}
               strokeWidth={2}
               dash={[6, 4]}
-              opacity={0.6}
+              opacity={getJumperOpacity() * 0.6}
             />
           );
         }
@@ -491,9 +555,10 @@ export const BoardCanvas: React.FC = () => {
   return (
     <div 
       ref={containerRef}
-      className="flex-1 bg-[#0f111a] cursor-crosshair overflow-hidden w-full h-full relative"
+      className={`flex-1 bg-[#0f111a] overflow-hidden w-full h-full relative ${isMiddlePanning ? 'cursor-grabbing' : 'cursor-crosshair'}`}
       onDrop={handleDrop}
       onDragOver={handleDragOver}
+      onMouseDown={(e) => { if (e.button === 1) e.preventDefault(); }}
     >
       <Stage
         width={window.innerWidth - 512} // Subtracting both sidebars (256 * 2)
@@ -502,6 +567,7 @@ export const BoardCanvas: React.FC = () => {
         onMouseMove={handleMouseMove}
         onMouseLeave={() => setCursorHole(null)}
         onClick={handleStageClick}
+        onContextMenu={handleStageContextMenu}
         onMouseDown={handleStageMouseDown}
         onMouseUp={handleStageMouseUp}
         scaleX={zoom}
@@ -517,23 +583,39 @@ export const BoardCanvas: React.FC = () => {
         ref={stageRef}
       >
         <Layer>
-          {renderBoardBackground()}
-          {renderGridLabels()}
-          {renderGridDots()}
-          {renderTraces()}
-          
-          {components.map(comp => (
-            <ComponentRenderer
-              key={comp.id}
-              component={comp}
-              isSelected={comp.id === selectedComponentId}
-              onSelect={() => setSelectedComponentId(comp.id)}
-              gridSpacing={GRID_SPACING}
-              margin={MARGIN}
-            />
-          ))}
+          <Group
+            x={isBottom ? boardCenterX : 0}
+            offsetX={isBottom ? boardCenterX : 0}
+            scaleX={isBottom ? -1 : 1}
+          >
+            {renderBoardBackground()}
+            {renderGridLabels()}
+            {renderGridDots()}
+            {renderTraces()}
+            
+            <Group>
+              {components.map(comp => (
+                <ComponentRenderer
+                  key={comp.id}
+                  component={comp}
+                  isSelected={comp.id === selectedComponentId}
+                  onSelect={() => setSelectedComponentId(comp.id)}
+                  gridSpacing={GRID_SPACING}
+                  margin={MARGIN}
+                  bodyOpacity={getComponentOpacity()}
+                  labelOpacity={getLabelOpacity()}
+                />
+              ))}
+            </Group>
+          </Group>
         </Layer>
       </Stage>
+      {isBottom && (
+        <div className="absolute top-4 right-4 pointer-events-none bg-red-500/20 text-red-400 border border-red-500/50 px-4 py-2 rounded-lg font-bold tracking-widest text-sm flex items-center gap-2 backdrop-blur-sm z-10 shadow-lg">
+          <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+          SOLDER SIDE — MIRRORED VIEW
+        </div>
+      )}
     </div>
   );
 };

@@ -106,6 +106,20 @@ interface UIStore {
   activeSignalType: SignalType;
   setActiveSignalType: (type: SignalType) => void;
 
+  boardSide: 'top' | 'bottom';
+  setBoardSide: (side: 'top' | 'bottom') => void;
+
+  layerVisibility: {
+    components: boolean;
+    labels: boolean;
+    solderTraces: boolean;
+    wireJumps: boolean;
+  };
+  setLayerVisibility: (layer: keyof UIStore['layerVisibility'], visible: boolean) => void;
+
+  scrubberValue: number;
+  setScrubberValue: (val: number) => void;
+
   isBoardSizeModalOpen: boolean;
   setIsBoardSizeModalOpen: (isOpen: boolean) => void;
 }
@@ -113,10 +127,10 @@ interface UIStore {
 export const useUIStore = create<UIStore>((set) => ({
   zoom: 1,
   setZoom: (zoom) => set({ zoom }),
-  pan: { x: 100, y: 100 },
+  pan: { x: 0, y: 0 },
   setPan: (pan) => set({ pan }),
   cursorHole: null,
-  setCursorHole: (hole) => set({ cursorHole: hole }),
+  setCursorHole: (cursorHole) => set({ cursorHole }),
   
   selectedComponentId: null,
   setSelectedComponentId: (id) => set({ selectedComponentId: id, selectedTraceId: null }), // mutually exclusive selection
@@ -129,6 +143,20 @@ export const useUIStore = create<UIStore>((set) => ({
 
   activeSignalType: 'unknown',
   setActiveSignalType: (type) => set({ activeSignalType: type }),
+
+  boardSide: 'top',
+  setBoardSide: (side) => set({ boardSide: side }),
+  layerVisibility: {
+    components: true,
+    labels: true,
+    solderTraces: true,
+    wireJumps: true,
+  },
+  setLayerVisibility: (layer, visible) => set((state) => ({
+    layerVisibility: { ...state.layerVisibility, [layer]: visible }
+  })),
+  scrubberValue: 100,
+  setScrubberValue: (val) => set({ scrubberValue: val }),
 
   isBoardSizeModalOpen: false,
   setIsBoardSizeModalOpen: (isOpen) => set({ isBoardSizeModalOpen: isOpen }),
