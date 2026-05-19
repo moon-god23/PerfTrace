@@ -1,9 +1,10 @@
 import React, { useRef, useEffect } from 'react';
-import { Stage, Layer, Circle, Rect, Text, Group } from 'react-konva';
+import { Stage, Layer, Circle, Rect, Text, Group, Line, Path } from 'react-konva';
 import { useBoardStore, useUIStore } from '../store';
 import type { KonvaEventObject } from 'konva/lib/Node';
 import { ComponentRenderer } from './ComponentRenderer';
 import type { ComponentDefinition } from '../types/componentLibrary';
+import type { HoleCoord, SignalType, TraceMaterial } from '../types';
 import { v4 as uuidv4 } from 'uuid';
 
 const GRID_SPACING = 20;
@@ -22,32 +23,49 @@ const columnToLetter = (col: number) => {
 };
 
 export const BoardCanvas: React.FC = () => {
-  const { rows, cols, components, addComponent, removeComponent, updateComponent } = useBoardStore();
-  const { zoom, setZoom, setCursorHole, pan, setPan, selectedComponentId, setSelectedComponentId } = useUIStore();
+  const { rows, cols, components, traces, addComponent, removeComponent, updateComponent, addTrace, removeTrace, commitHistory } = useBoardStore();
+  const { zoom, setZoom, setCursorHole, cursorHole, pan, setPan, selectedComponentId, setSelectedComponentId, activeTool, activeSignalType, selectedTraceId, setSelectedTraceId } = useUIStore();
   
   const stageRef = useRef<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // Drawing State
+  const [drawingStartHole, setDrawingStartHole] = React.useState<HoleCoord | null>(null);
+  const [isDrawing, setIsDrawing] = React.useState(false);
+
   // Keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (!selectedComponentId) return;
+      if (e.key === 'Escape') {
+        setDrawingStartHole(null);
+        setIsDrawing(false);
+        return;
+      }
 
-      if (e.key === 'Delete') {
-        removeComponent(selectedComponentId);
-        setSelectedComponentId(null);
-      } else if (e.key === 'r' || e.key === 'R') {
-        const comp = components.find(c => c.id === selectedComponentId);
-        if (comp) {
-          const newOrientation = comp.orientation === 'horizontal' ? 'vertical' : 'horizontal';
-          updateComponent(selectedComponentId, { orientation: newOrientation });
+      if (selectedComponentId || selectedTraceId) {
+        if (e.key === 'Delete') {
+          if (selectedComponentId) {
+            removeComponent(selectedComponentId);
+            setSelectedComponentId(null);
+          } else if (selectedTraceId) {
+            removeTrace(selectedTraceId);
+            setSelectedTraceId(null);
+          }
+          commitHistory();
+        } else if ((e.key === 'r' || e.key === 'R') && selectedComponentId) {
+          const comp = components.find(c => c.id === selectedComponentId);
+          if (comp) {
+            const newOrientation = comp.orientation === 'horizontal' ? 'vertical' : 'horizontal';
+            updateComponent(selectedComponentId, { orientation: newOrientation });
+            commitHistory();
+          }
         }
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedComponentId, components, removeComponent, updateComponent, setSelectedComponentId]);
+  }, [selectedComponentId, selectedTraceId, components, removeComponent, removeTrace, updateComponent, setSelectedComponentId, setSelectedTraceId, commitHistory]);
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
@@ -86,6 +104,7 @@ export const BoardCanvas: React.FC = () => {
           value: def.defaultLabel,
           locked: false
         });
+        commitHistory();
       }
     }
   };
@@ -126,18 +145,134 @@ export const BoardCanvas: React.FC = () => {
     const pointer = stage.getPointerPosition();
     if (!pointer) return;
 
-    // Calculate position relative to the grid start (margin)
     const gridX = (pointer.x - stage.x()) / zoom - MARGIN;
     const gridY = (pointer.y - stage.y()) / zoom - MARGIN;
 
-    // Snap to nearest hole
     const col = Math.round(gridX / GRID_SPACING);
     const row = Math.round(gridY / GRID_SPACING);
 
+    let newCursorHole: HoleCoord | null = null;
     if (col >= 0 && col < cols && row >= 0 && row < rows) {
-      setCursorHole({ col, row });
-    } else {
-      setCursorHole(null);
+      newCursorHole = { col, row };
+    }
+    
+    // Only update if changed to avoid excessive re-renders
+    if (newCursorHole?.col !== cursorHole?.col || newCursorHole?.row !== cursorHole?.row) {
+      setCursorHole(newCursorHole);
+      
+      // Freehand drawing logic during move
+      if (isDrawing && activeTool === 'freehand' && newCursorHole && drawingStartHole) {
+        // Prevent drawing a 0-length trace
+        if (newCursorHole.col !== drawingStartHole.col || newCursorHole.row !== drawingStartHole.row) {
+          addTrace({
+            id: uuidv4(),
+            from: drawingStartHole,
+            to: newCursorHole,
+            signalType: activeSignalType,
+            material: 'solder',
+            locked: false
+          });
+          setDrawingStartHole(newCursorHole);
+        }
+      }
+    }
+  };
+
+  const areAdjacent = (h1: HoleCoord, h2: HoleCoord) => {
+    const dc = Math.abs(h1.col - h2.col);
+    const dr = Math.abs(h1.row - h2.row);
+    return (dc === 1 && dr === 0) || (dc === 0 && dr === 1) || (dc === 1 && dr === 1);
+  };
+
+  const handleStageClick = (e: KonvaEventObject<MouseEvent>) => {
+    // Left click only
+    if (e.evt.button !== 0) return;
+
+    // Handle component selection clicks
+    if (activeTool === 'select' && e.target !== stageRef.current) {
+      // Handled by ComponentRenderer onClick
+      return;
+    }
+
+    if (activeTool === 'select') {
+      setSelectedComponentId(null);
+      setSelectedTraceId(null);
+      return;
+    }
+
+    if (!cursorHole) return;
+
+    if (activeTool === 'pen') {
+      if (!drawingStartHole) {
+        setDrawingStartHole(cursorHole);
+      } else {
+        if (cursorHole.col !== drawingStartHole.col || cursorHole.row !== drawingStartHole.row) {
+          addTrace({
+            id: uuidv4(),
+            from: drawingStartHole,
+            to: cursorHole,
+            signalType: activeSignalType,
+            material: 'solder',
+            locked: false
+          });
+          setDrawingStartHole(cursorHole); // Continue pen tool
+          commitHistory();
+        }
+      }
+    } else if (activeTool === 'wire') {
+      if (!drawingStartHole) {
+        setDrawingStartHole(cursorHole);
+      } else {
+        if (cursorHole.col !== drawingStartHole.col || cursorHole.row !== drawingStartHole.row) {
+          addTrace({
+            id: uuidv4(),
+            from: drawingStartHole,
+            to: cursorHole,
+            signalType: activeSignalType,
+            material: 'wire',
+            locked: false
+          });
+          setDrawingStartHole(null); // Wire jump is one-off
+          commitHistory();
+        }
+      }
+    }
+  };
+
+  const handleStageMouseDown = (e: KonvaEventObject<MouseEvent>) => {
+    if (e.evt.button !== 0) return;
+    if (!cursorHole) return;
+
+    if (activeTool === 'freehand') {
+      setIsDrawing(true);
+      setDrawingStartHole(cursorHole);
+    } else if (activeTool === 'solder_bridge') {
+      setIsDrawing(true);
+      setDrawingStartHole(cursorHole);
+    }
+  };
+
+  const handleStageMouseUp = (e: KonvaEventObject<MouseEvent>) => {
+    if (e.evt.button !== 0) return;
+
+    if (activeTool === 'freehand' && isDrawing) {
+      setIsDrawing(false);
+      setDrawingStartHole(null);
+      commitHistory();
+    } else if (activeTool === 'solder_bridge' && isDrawing && drawingStartHole && cursorHole) {
+      if ((cursorHole.col !== drawingStartHole.col || cursorHole.row !== drawingStartHole.row) && areAdjacent(drawingStartHole, cursorHole)) {
+        addTrace({
+          id: uuidv4(),
+          from: drawingStartHole,
+          to: cursorHole,
+          signalType: activeSignalType,
+          material: 'solder',
+          locked: false
+        });
+        commitHistory();
+      }
+      setIsDrawing(false);
+      setDrawingStartHole(null);
     }
   };
 
@@ -231,11 +366,126 @@ export const BoardCanvas: React.FC = () => {
     return dots;
   };
 
-  const handleStageClick = (e: KonvaEventObject<MouseEvent>) => {
-    // If we click on the empty stage (not a component), deselect
-    if (e.target === stageRef.current) {
-      setSelectedComponentId(null);
+  const getSignalColor = (type: SignalType) => {
+    switch (type) {
+      case 'power': return '#ef4444'; // Red
+      case 'ground': return '#000000'; // Black
+      case 'hf_data': return '#3b82f6'; // Blue
+      case 'lf_data': return '#22c55e'; // Green
+      default: return '#9ca3af'; // Gray
     }
+  };
+
+  const renderTraces = () => {
+    const rendered = traces.map(trace => {
+      const x1 = MARGIN + trace.from.col * GRID_SPACING;
+      const y1 = MARGIN + trace.from.row * GRID_SPACING;
+      const x2 = MARGIN + trace.to.col * GRID_SPACING;
+      const y2 = MARGIN + trace.to.row * GRID_SPACING;
+      const isSelected = trace.id === selectedTraceId;
+      const color = isSelected ? '#f59e0b' : getSignalColor(trace.signalType);
+
+      const handleTraceClick = (e: KonvaEventObject<MouseEvent>) => {
+        e.cancelBubble = true; // Prevent stage click
+        if (activeTool === 'eraser') {
+          removeTrace(trace.id);
+          commitHistory();
+        } else if (activeTool === 'select') {
+          setSelectedTraceId(trace.id);
+        }
+      };
+
+      if (trace.material === 'solder') {
+        return (
+          <Group key={trace.id} onClick={handleTraceClick}>
+            <Line
+              points={[x1, y1, x2, y2]}
+              stroke={color}
+              strokeWidth={isSelected ? 6 : 4}
+              lineCap="round"
+              hitStrokeWidth={12}
+            />
+          </Group>
+        );
+      } else {
+        // Wire Jump -> Quadratic Bezier Arc
+        const mx = (x1 + x2) / 2;
+        const my = (y1 + y2) / 2;
+        const dx = x2 - x1;
+        const dy = y2 - y1;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        // Normal vector for arc control point
+        const nx = -dy / dist;
+        const ny = dx / dist;
+        const arcHeight = Math.min(dist * 0.4, 60); // Cap the arc height
+        
+        // Control point
+        const cx = mx + nx * arcHeight;
+        const cy = my + ny * arcHeight;
+
+        return (
+          <Group key={trace.id} onClick={handleTraceClick}>
+            <Path
+              data={`M ${x1} ${y1} Q ${cx} ${cy} ${x2} ${y2}`}
+              stroke={color}
+              strokeWidth={isSelected ? 4 : 2}
+              hitStrokeWidth={12}
+              shadowColor="#000"
+              shadowBlur={3}
+              shadowOffset={{x: 2, y: 2}}
+              shadowOpacity={0.4}
+            />
+          </Group>
+        );
+      }
+    });
+
+    // Render in-progress trace
+    if (drawingStartHole && cursorHole && (activeTool === 'pen' || activeTool === 'wire' || activeTool === 'solder_bridge')) {
+      const x1 = MARGIN + drawingStartHole.col * GRID_SPACING;
+      const y1 = MARGIN + drawingStartHole.row * GRID_SPACING;
+      const x2 = MARGIN + cursorHole.col * GRID_SPACING;
+      const y2 = MARGIN + cursorHole.row * GRID_SPACING;
+
+      if (activeTool === 'pen' || activeTool === 'solder_bridge') {
+        rendered.push(
+          <Line
+            key="in-progress"
+            points={[x1, y1, x2, y2]}
+            stroke={getSignalColor(activeSignalType)}
+            strokeWidth={4}
+            dash={[8, 4]}
+            opacity={0.6}
+            lineCap="round"
+          />
+        );
+      } else if (activeTool === 'wire') {
+        const mx = (x1 + x2) / 2;
+        const my = (y1 + y2) / 2;
+        const dx = x2 - x1;
+        const dy = y2 - y1;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist > 0) {
+          const nx = -dy / dist;
+          const ny = dx / dist;
+          const arcHeight = Math.min(dist * 0.4, 60);
+          const cx = mx + nx * arcHeight;
+          const cy = my + ny * arcHeight;
+          rendered.push(
+            <Path
+              key="in-progress-wire"
+              data={`M ${x1} ${y1} Q ${cx} ${cy} ${x2} ${y2}`}
+              stroke={getSignalColor(activeSignalType)}
+              strokeWidth={2}
+              dash={[6, 4]}
+              opacity={0.6}
+            />
+          );
+        }
+      }
+    }
+
+    return rendered;
   };
 
   return (
@@ -252,13 +502,17 @@ export const BoardCanvas: React.FC = () => {
         onMouseMove={handleMouseMove}
         onMouseLeave={() => setCursorHole(null)}
         onClick={handleStageClick}
+        onMouseDown={handleStageMouseDown}
+        onMouseUp={handleStageMouseUp}
         scaleX={zoom}
         scaleY={zoom}
         x={pan.x}
         y={pan.y}
-        draggable
+        draggable={activeTool === 'select'}
         onDragEnd={(e) => {
-          setPan({ x: e.target.x(), y: e.target.y() });
+          if (activeTool === 'select' && e.target === stageRef.current) {
+            setPan({ x: e.target.x(), y: e.target.y() });
+          }
         }}
         ref={stageRef}
       >
@@ -266,6 +520,7 @@ export const BoardCanvas: React.FC = () => {
           {renderBoardBackground()}
           {renderGridLabels()}
           {renderGridDots()}
+          {renderTraces()}
           
           {components.map(comp => (
             <ComponentRenderer

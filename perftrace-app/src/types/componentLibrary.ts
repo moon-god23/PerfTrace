@@ -8,7 +8,8 @@ export type ComponentType =
   | 'header1x2' 
   | 'header1x4' 
   | 'to92' 
-  | 'to220';
+  | 'to220'
+  | 'arduino_nano';
 
 export interface ComponentDefinition {
   type: ComponentType;
@@ -74,6 +75,15 @@ export const COMPONENT_LIBRARY: ComponentDefinition[] = [
     width: 8,
     height: 3,
     color: '#1f2937'
+  },
+  {
+    type: 'arduino_nano',
+    namePrefix: 'A',
+    category: 'Microcontrollers',
+    defaultLabel: 'Arduino Nano',
+    width: 15,
+    height: 7, // 0.6" spacing is 7 holes total (0 to 6)
+    color: '#0369a1' // Arduino blue
   },
   {
     type: 'header1x2',

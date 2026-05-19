@@ -4,7 +4,7 @@ This file tracks the completion status of the 13 phases defined in the developme
 
 - [x] **Phase 1:** Project Setup and Bare Canvas
 - [x] **Phase 2:** Component Data Model and Placement (Includes Drag & Drop, Polarity markers, Value restrictions, and custom Board Size modal)
-- [ ] **Phase 3:** Manual Trace Drawing Tools
+- [x] **Phase 3:** Manual Trace Drawing Tools
 - [ ] **Phase 4:** Board Side Management and Layer Scrubber
 - [ ] **Phase 5:** Trace Advisor Rule Engine
 - [ ] **Phase 6:** Save, Load, and Project File Format

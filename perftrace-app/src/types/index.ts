@@ -4,6 +4,8 @@ export type SignalType = "power" | "ground" | "hf_data" | "lf_data" | "unknown";
 
 export type TraceMaterial = "solder" | "wire";
 
+export type DrawingTool = 'select' | 'pen' | 'freehand' | 'wire' | 'solder_bridge' | 'eraser';
+
 export interface Trace {
   id: string;
   from: HoleCoord;
