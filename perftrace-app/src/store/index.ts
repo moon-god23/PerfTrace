@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { BoardState, HoleCoord, PlacedComponent, Trace, DrawingTool, SignalType } from '../types';
+import type { BoardState, HoleCoord, PlacedComponent, Trace, DrawingTool, SignalType, AdvisorWarning } from '../types';
 
 type HistorySnapshot = {
   components: PlacedComponent[];
@@ -122,6 +122,21 @@ interface UIStore {
 
   isBoardSizeModalOpen: boolean;
   setIsBoardSizeModalOpen: (isOpen: boolean) => void;
+
+  advisorWarnings: AdvisorWarning[];
+  setAdvisorWarnings: (warnings: AdvisorWarning[]) => void;
+
+  highlightedWarningId: string | null;
+  setHighlightedWarningId: (id: string | null) => void;
+
+  activeRightTab: 'advisor' | 'properties' | 'nets';
+  setActiveRightTab: (tab: 'advisor' | 'properties' | 'nets') => void;
+
+  isSidebarCollapsed: boolean;
+  setIsSidebarCollapsed: (v: boolean) => void;
+
+  isRightPanelCollapsed: boolean;
+  setIsRightPanelCollapsed: (v: boolean) => void;
 }
 
 export const useUIStore = create<UIStore>((set) => ({
@@ -160,4 +175,19 @@ export const useUIStore = create<UIStore>((set) => ({
 
   isBoardSizeModalOpen: false,
   setIsBoardSizeModalOpen: (isOpen) => set({ isBoardSizeModalOpen: isOpen }),
+
+  advisorWarnings: [],
+  setAdvisorWarnings: (warnings) => set({ advisorWarnings: warnings }),
+
+  highlightedWarningId: null,
+  setHighlightedWarningId: (id) => set({ highlightedWarningId: id }),
+
+  activeRightTab: 'advisor',
+  setActiveRightTab: (tab) => set({ activeRightTab: tab }),
+
+  isSidebarCollapsed: false,
+  setIsSidebarCollapsed: (v) => set({ isSidebarCollapsed: v }),
+
+  isRightPanelCollapsed: false,
+  setIsRightPanelCollapsed: (v) => set({ isRightPanelCollapsed: v }),
 }));

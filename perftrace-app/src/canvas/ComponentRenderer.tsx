@@ -14,9 +14,18 @@ interface Props {
   margin: number;
   bodyOpacity: number;
   labelOpacity: number;
+  /** Called when drag starts — receives the original grid position */
+  onDragStartGrid?: (originalPos: { col: number; row: number }) => void;
+  /** Called every frame during drag — receives current delta in grid cols/rows */
+  onDragMoveGrid?: (delta: { dcol: number; drow: number }) => void;
+  /** Called when drag ends — after component position has been committed to store */
+  onDragEndGrid?: () => void;
 }
 
-export const ComponentRenderer: React.FC<Props> = ({ component, isSelected, onSelect, gridSpacing, margin, bodyOpacity, labelOpacity }) => {
+export const ComponentRenderer: React.FC<Props> = ({
+  component, isSelected, onSelect, gridSpacing, margin, bodyOpacity, labelOpacity,
+  onDragStartGrid, onDragMoveGrid, onDragEndGrid,
+}) => {
   const { updateComponent, commitHistory } = useBoardStore();
   const { activeTool } = useUIStore();
   const def = COMPONENT_LIBRARY.find(c => c.type === component.type);
@@ -41,6 +50,22 @@ export const ComponentRenderer: React.FC<Props> = ({ component, isSelected, onSe
   const rectW = pxWidth;
   const rectH = pxHeight;
 
+  const handleDragStart = () => {
+    onSelect();
+    onDragStartGrid?.(component.position);
+  };
+
+  const handleDragMove = (e: KonvaEventObject<DragEvent>) => {
+    const newX = e.target.x() - margin;
+    const newY = e.target.y() - margin;
+    const col  = Math.round(newX / gridSpacing);
+    const row  = Math.round(newY / gridSpacing);
+    onDragMoveGrid?.({
+      dcol: col - component.position.col,
+      drow: row - component.position.row,
+    });
+  };
+
   const handleDragEnd = (e: KonvaEventObject<DragEvent>) => {
     const newX = e.target.x() - margin;
     const newY = e.target.y() - margin;
@@ -55,6 +80,9 @@ export const ComponentRenderer: React.FC<Props> = ({ component, isSelected, onSe
       x: margin + col * gridSpacing,
       y: margin + row * gridSpacing
     });
+
+    // Notify parent so it can commit connected trace positions
+    onDragEndGrid?.();
   };
 
   return (
@@ -64,8 +92,9 @@ export const ComponentRenderer: React.FC<Props> = ({ component, isSelected, onSe
       onClick={onSelect} 
       onTap={onSelect}
       draggable={activeTool === 'select'}
+      onDragStart={handleDragStart}
+      onDragMove={handleDragMove}
       onDragEnd={handleDragEnd}
-      onDragStart={onSelect}
     >
       <Group opacity={bodyOpacity}>
         {/* Selection Highlight */}

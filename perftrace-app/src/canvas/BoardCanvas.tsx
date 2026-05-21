@@ -1,11 +1,13 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { Stage, Layer, Circle, Rect, Text, Group, Line, Path } from 'react-konva';
 import { useBoardStore, useUIStore } from '../store';
 import type { KonvaEventObject } from 'konva/lib/Node';
 import { ComponentRenderer } from './ComponentRenderer';
 import type { ComponentDefinition } from '../types/componentLibrary';
-import type { HoleCoord, SignalType } from '../types';
+import { COMPONENT_LIBRARY } from '../types/componentLibrary';
+import type { HoleCoord, SignalType, AdvisorWarning } from '../types';
 import { v4 as uuidv4 } from 'uuid';
+import { TraceCompletionPopup } from '../components/TraceCompletionPopup';
 
 const GRID_SPACING = 20;
 const HOLE_RADIUS = 3;
@@ -22,20 +24,111 @@ const columnToLetter = (col: number) => {
   return letter;
 };
 
+interface TooltipState {
+  x: number;
+  y: number;
+  warning: AdvisorWarning;
+}
+
+interface PopupState {
+  visible: boolean;
+  traceId: string;
+  x: number;
+  y: number;
+}
+
 export const BoardCanvas: React.FC = () => {
-  const { rows, cols, components, traces, addComponent, removeComponent, updateComponent, addTrace, removeTrace, commitHistory } = useBoardStore();
-  const { zoom, setZoom, setCursorHole, cursorHole, pan, setPan, selectedComponentId, setSelectedComponentId, activeTool, activeSignalType, selectedTraceId, setSelectedTraceId, boardSide, layerVisibility, scrubberValue } = useUIStore();
-  
+  const { rows, cols, components, traces, addComponent, removeComponent, updateComponent, addTrace, removeTrace, updateTrace, commitHistory } = useBoardStore();
+  const { zoom, setZoom, setCursorHole, cursorHole, pan, setPan, selectedComponentId, setSelectedComponentId, activeTool, activeSignalType, selectedTraceId, setSelectedTraceId, boardSide, layerVisibility, scrubberValue, advisorWarnings, highlightedWarningId, isSidebarCollapsed, isRightPanelCollapsed } = useUIStore();
+
   const stageRef = useRef<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Drawing State
-  const [drawingStartHole, setDrawingStartHole] = React.useState<HoleCoord | null>(null);
-  const [isDrawing, setIsDrawing] = React.useState(false);
+  const [drawingStartHole, setDrawingStartHole] = useState<HoleCoord | null>(null);
+  const [isDrawing, setIsDrawing] = useState(false);
 
   // Middle-mouse pan state
-  const [isMiddlePanning, setIsMiddlePanning] = React.useState(false);
-  const middlePanStart = React.useRef<{ x: number; y: number; panX: number; panY: number } | null>(null);
+  const [isMiddlePanning, setIsMiddlePanning] = useState(false);
+  const middlePanStart = useRef<{ x: number; y: number; panX: number; panY: number } | null>(null);
+
+  // Tooltip for warning overlays
+  const [tooltip, setTooltip] = useState<TooltipState | null>(null);
+
+  // HF trace completion popup
+  const [popup, setPopup] = useState<PopupState | null>(null);
+
+  // Drag-with-traces state
+  const [draggingCompId, setDraggingCompId] = useState<string | null>(null);
+  const [draggingOrigPos, setDraggingOrigPos] = useState<HoleCoord | null>(null);
+  const [draggingDelta, setDraggingDelta] = useState<{ dcol: number; drow: number }>({ dcol: 0, drow: 0 });
+
+  // Pulsing animation for High-severity overlays
+  const [pulseOpacity, setPulseOpacity] = useState(0.6);
+
+  // --- Helpers for trace-drag ---
+  function isPinOf(compId: string, hole: HoleCoord, overridePos?: HoleCoord): boolean {
+    const comp = components.find(c => c.id === compId);
+    if (!comp) return false;
+    const def = COMPONENT_LIBRARY.find(d => d.type === comp.type);
+    if (!def) return false;
+    
+    const checkComp = overridePos ? { ...comp, position: overridePos } : comp;
+    const isVert = checkComp.orientation === 'vertical';
+    const widthHoles = isVert ? def.height : def.width;
+    const heightHoles = isVert ? def.width : def.height;
+    
+    const dCol = hole.col - checkComp.position.col;
+    const dRow = hole.row - checkComp.position.row;
+
+    if (dCol < 0 || dCol >= widthHoles || dRow < 0 || dRow >= heightHoles) return false;
+
+    if (def.type.startsWith('header') || def.type.startsWith('to')) return true;
+
+    if (def.type === 'resistor' || def.type === 'capacitor' || def.type === 'led') {
+      if (isVert) {
+        return (dCol === 0 && dRow === 0) || (dCol === 0 && dRow === heightHoles - 1);
+      } else {
+        return (dRow === 0 && dCol === 0) || (dRow === 0 && dCol === widthHoles - 1);
+      }
+    }
+
+    if (def.type.startsWith('dip') || def.type === 'arduino_nano') {
+      if (isVert) {
+        return dCol === 0 || dCol === widthHoles - 1;
+      } else {
+        return dRow === 0 || dRow === heightHoles - 1;
+      }
+    }
+
+    return true;
+  }
+
+  /** IDs of traces that have at least one endpoint inside dragging comp's pins */
+  function getConnectedTraceIds(compId: string): Set<string> {
+    const ids = new Set<string>();
+    for (const trace of traces) {
+      if (isPinOf(compId, trace.from) || isPinOf(compId, trace.to)) {
+        ids.add(trace.id);
+      }
+    }
+    return ids;
+  }
+  useEffect(() => {
+    let rising = true;
+    const interval = setInterval(() => {
+      setPulseOpacity(prev => {
+        if (rising) {
+          if (prev >= 0.9) { rising = false; return 0.9; }
+          return prev + 0.05;
+        } else {
+          if (prev <= 0.25) { rising = true; return 0.25; }
+          return prev - 0.05;
+        }
+      });
+    }, 50);
+    return () => clearInterval(interval);
+  }, []);
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -105,25 +198,20 @@ export const BoardCanvas: React.FC = () => {
     const stage = stageRef.current;
     if (!stage) return;
 
-    // Get pointer position relative to the container
     stage.setPointersPositions(e);
     const pointer = stage.getPointerPosition();
     if (!pointer) return;
 
-    // Convert to grid coordinates
     const gridX = (pointer.x - stage.x()) / zoom - MARGIN;
     const gridY = (pointer.y - stage.y()) / zoom - MARGIN;
 
     const col = Math.round(gridX / GRID_SPACING);
     const row = Math.round(gridY / GRID_SPACING);
 
-    // Validate bounds
     if (col >= 0 && col < cols && row >= 0 && row < rows) {
       const compData = e.dataTransfer.getData('application/json');
       if (compData) {
         const def: ComponentDefinition = JSON.parse(compData);
-        
-        // Count existing components of this prefix to generate a name (e.g., R1, R2)
         const prefixCount = components.filter(c => c.name.startsWith(def.namePrefix)).length + 1;
         const name = `${def.namePrefix}${prefixCount}`;
 
@@ -133,7 +221,7 @@ export const BoardCanvas: React.FC = () => {
           type: def.type,
           position: { col, row },
           orientation: 'horizontal',
-          pinMap: {}, // Will implement dynamic pin mapping later
+          pinMap: {},
           value: def.defaultLabel,
           locked: false
         });
@@ -143,7 +231,7 @@ export const BoardCanvas: React.FC = () => {
   };
 
   const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault(); // Required to allow drop
+    e.preventDefault();
   };
 
   const handleWheel = (e: KonvaEventObject<WheelEvent>) => {
@@ -163,7 +251,7 @@ export const BoardCanvas: React.FC = () => {
 
     const newScale = e.evt.deltaY < 0 ? oldScale * scaleBy : oldScale / scaleBy;
     const clampedScale = Math.max(0.2, Math.min(newScale, 5));
-    
+
     setZoom(clampedScale);
     setPan({
       x: pointer.x - mousePointTo.x * clampedScale,
@@ -175,7 +263,6 @@ export const BoardCanvas: React.FC = () => {
     const stage = stageRef.current;
     if (!stage) return;
 
-    // Middle-mouse panning
     if (isMiddlePanning && middlePanStart.current) {
       const dx = e.evt.clientX - middlePanStart.current.x;
       const dy = e.evt.clientY - middlePanStart.current.y;
@@ -199,14 +286,11 @@ export const BoardCanvas: React.FC = () => {
     if (col >= 0 && col < cols && row >= 0 && row < rows) {
       newCursorHole = { col, row };
     }
-    
-    // Only update if changed to avoid excessive re-renders
+
     if (newCursorHole?.col !== cursorHole?.col || newCursorHole?.row !== cursorHole?.row) {
       setCursorHole(newCursorHole);
-      
-      // Freehand drawing logic during move
+
       if (isDrawing && activeTool === 'freehand' && newCursorHole && drawingStartHole) {
-        // Prevent drawing a 0-length trace
         if (newCursorHole.col !== drawingStartHole.col || newCursorHole.row !== drawingStartHole.row) {
           addTrace({
             id: uuidv4(),
@@ -236,13 +320,22 @@ export const BoardCanvas: React.FC = () => {
     }
   };
 
+  // Helper: get viewport coords from a board hole
+  const holeToViewport = useCallback((hole: HoleCoord): { x: number; y: number } => {
+    const stage = stageRef.current;
+    if (!stage) return { x: 0, y: 0 };
+    const bx = MARGIN + hole.col * GRID_SPACING;
+    const by = MARGIN + hole.row * GRID_SPACING;
+    return {
+      x: bx * zoom + pan.x,
+      y: by * zoom + pan.y,
+    };
+  }, [zoom, pan]);
+
   const handleStageClick = (e: KonvaEventObject<MouseEvent>) => {
-    // Left click only
     if (e.evt.button !== 0) return;
 
-    // Handle component selection clicks
     if (activeTool === 'select' && e.target !== stageRef.current) {
-      // Handled by ComponentRenderer onClick
       return;
     }
 
@@ -259,16 +352,23 @@ export const BoardCanvas: React.FC = () => {
         setDrawingStartHole(cursorHole);
       } else {
         if (cursorHole.col !== drawingStartHole.col || cursorHole.row !== drawingStartHole.row) {
-          addTrace({
+          const newTrace = {
             id: uuidv4(),
             from: drawingStartHole,
             to: cursorHole,
             signalType: activeSignalType,
-            material: 'solder',
+            material: 'solder' as const,
             locked: false
-          });
-          setDrawingStartHole(cursorHole); // Continue pen tool
+          };
+          addTrace(newTrace);
+          setDrawingStartHole(cursorHole);
           commitHistory();
+
+          // HF solder trace popup
+          if (activeSignalType === 'hf_data') {
+            const vp = holeToViewport(cursorHole);
+            setPopup({ visible: true, traceId: newTrace.id, x: vp.x, y: vp.y });
+          }
         }
       }
     } else if (activeTool === 'wire') {
@@ -284,7 +384,7 @@ export const BoardCanvas: React.FC = () => {
             material: 'wire',
             locked: false
           });
-          setDrawingStartHole(null); // Wire jump is one-off
+          setDrawingStartHole(null);
           commitHistory();
         }
       }
@@ -292,7 +392,6 @@ export const BoardCanvas: React.FC = () => {
   };
 
   const handleStageMouseDown = (e: KonvaEventObject<MouseEvent>) => {
-    // Middle mouse button — start panning
     if (e.evt.button === 1) {
       e.evt.preventDefault();
       setIsMiddlePanning(true);
@@ -313,7 +412,6 @@ export const BoardCanvas: React.FC = () => {
   };
 
   const handleStageMouseUp = (e: KonvaEventObject<MouseEvent>) => {
-    // Middle mouse button — stop panning
     if (e.evt.button === 1) {
       setIsMiddlePanning(false);
       middlePanStart.current = null;
@@ -346,14 +444,14 @@ export const BoardCanvas: React.FC = () => {
   const renderBoardBackground = () => {
     const boardWidth = (cols - 1) * GRID_SPACING + MARGIN * 2;
     const boardHeight = (rows - 1) * GRID_SPACING + MARGIN * 2;
-    
+
     return (
       <Rect
         x={0}
         y={0}
         width={boardWidth}
         height={boardHeight}
-        fill="#1a4f2c" // Deep green perfboard color
+        fill="#1a4f2c"
         cornerRadius={8}
         shadowColor="#000"
         shadowBlur={10}
@@ -365,8 +463,7 @@ export const BoardCanvas: React.FC = () => {
 
   const renderGridLabels = () => {
     const labels = [];
-    
-    // Column labels (A, B, C...)
+
     for (let c = 0; c < cols; c++) {
       labels.push(
         <Text
@@ -377,13 +474,12 @@ export const BoardCanvas: React.FC = () => {
           text={columnToLetter(c)}
           fontSize={10}
           fontFamily="monospace"
-          fill="#9ca3af" // subtle gray
+          fill="#9ca3af"
           align="center"
         />
       );
     }
 
-    // Row labels (1, 2, 3...)
     for (let r = 0; r < rows; r++) {
       labels.push(
         <Text
@@ -399,7 +495,7 @@ export const BoardCanvas: React.FC = () => {
         />
       );
     }
-    
+
     return labels;
   };
 
@@ -409,21 +505,19 @@ export const BoardCanvas: React.FC = () => {
       for (let c = 0; c < cols; c++) {
         const x = MARGIN + c * GRID_SPACING;
         const y = MARGIN + r * GRID_SPACING;
-        
+
         dots.push(
           <Group key={`hole-${c}-${r}`} x={x} y={y}>
-            {/* Outer copper pad */}
             <Circle
               radius={PAD_RADIUS}
-              stroke="#d4af37" // Golden copper
+              stroke="#d4af37"
               strokeWidth={1.5}
-              fill="#1f5d34" // Slightly lighter green inside ring
+              fill="#1f5d34"
               perfectDrawEnabled={false}
             />
-            {/* Inner empty hole */}
             <Circle
               radius={HOLE_RADIUS}
-              fill="#0f111a" // Deep background color (shows through)
+              fill="#0f111a"
               perfectDrawEnabled={false}
             />
           </Group>
@@ -435,25 +529,35 @@ export const BoardCanvas: React.FC = () => {
 
   const getSignalColor = (type: SignalType) => {
     switch (type) {
-      case 'power': return '#ef4444'; // Red
-      case 'ground': return '#000000'; // Black
-      case 'hf_data': return '#3b82f6'; // Blue
-      case 'lf_data': return '#22c55e'; // Green
-      default: return '#9ca3af'; // Gray
+      case 'power':   return '#ef4444';
+      case 'ground':  return '#000000';
+      case 'hf_data': return '#3b82f6';
+      case 'lf_data': return '#22c55e';
+      default:        return '#9ca3af';
     }
   };
 
   const renderTraces = () => {
+    // When a component is being dragged, offset endpoints that sit on its pins
+    const applyDelta = (hole: HoleCoord): HoleCoord => {
+      if (!draggingCompId || !draggingOrigPos) return hole;
+      if (!isPinOf(draggingCompId, hole, draggingOrigPos)) return hole;
+      return { col: hole.col + draggingDelta.dcol, row: hole.row + draggingDelta.drow };
+    };
+
     const rendered = traces.map(trace => {
-      const x1 = MARGIN + trace.from.col * GRID_SPACING;
-      const y1 = MARGIN + trace.from.row * GRID_SPACING;
-      const x2 = MARGIN + trace.to.col * GRID_SPACING;
-      const y2 = MARGIN + trace.to.row * GRID_SPACING;
+      const from = applyDelta(trace.from);
+      const to   = applyDelta(trace.to);
+
+      const x1 = MARGIN + from.col * GRID_SPACING;
+      const y1 = MARGIN + from.row * GRID_SPACING;
+      const x2 = MARGIN + to.col   * GRID_SPACING;
+      const y2 = MARGIN + to.row   * GRID_SPACING;
       const isSelected = trace.id === selectedTraceId;
       const color = isSelected ? '#f59e0b' : getSignalColor(trace.signalType);
 
       const handleTraceClick = (e: KonvaEventObject<MouseEvent>) => {
-        e.cancelBubble = true; // Prevent stage click
+        e.cancelBubble = true;
         if (activeTool === 'eraser') {
           removeTrace(trace.id);
           commitHistory();
@@ -463,24 +567,41 @@ export const BoardCanvas: React.FC = () => {
       };
 
       if (trace.material === 'solder') {
+        const dcol = to.col - from.col;
+        const drow = to.row - from.row;
+        
+        let points = [x1, y1, x2, y2];
+        
+        // If the trace isn't purely horizontal, vertical, or exactly 45-degrees,
+        // route it as a 45-degree segment followed by an orthogonal segment
+        // so it perfectly follows the grid holes.
+        if (dcol !== 0 && drow !== 0 && Math.abs(dcol) !== Math.abs(drow)) {
+          const step = Math.min(Math.abs(dcol), Math.abs(drow));
+          const cx = from.col + Math.sign(dcol) * step;
+          const cy = from.row + Math.sign(drow) * step;
+          const pxC = MARGIN + cx * GRID_SPACING;
+          const pyC = MARGIN + cy * GRID_SPACING;
+          points = [x1, y1, pxC, pyC, x2, y2];
+        }
+
         return (
           <Group key={trace.id} onClick={handleTraceClick} opacity={getTraceOpacity()}>
             <Line
-              points={[x1, y1, x2, y2]}
+              points={points}
               stroke={color}
               strokeWidth={isSelected ? 6 : 4}
               lineCap="round"
+              lineJoin="round"
               hitStrokeWidth={12}
             />
           </Group>
         );
       } else {
-        // Wire Jump -> Quadratic Bezier Arc
         const mx = (x1 + x2) / 2;
         const my = (y1 + y2) / 2;
         const dx = x2 - x1;
         const dy = y2 - y1;
-        const dist = Math.sqrt(dx*dx + dy*dy);
+        const dist = Math.sqrt(dx * dx + dy * dy);
         const nx = -dy / dist;
         const ny = dx / dist;
         const arcHeight = Math.min(dist * 0.4, 60);
@@ -496,7 +617,7 @@ export const BoardCanvas: React.FC = () => {
               hitStrokeWidth={12}
               shadowColor="#000"
               shadowBlur={3}
-              shadowOffset={{x: 2, y: 2}}
+              shadowOffset={{ x: 2, y: 2 }}
               shadowOpacity={0.4}
             />
           </Group>
@@ -504,7 +625,7 @@ export const BoardCanvas: React.FC = () => {
       }
     });
 
-    // Render in-progress trace
+    // In-progress trace preview
     if (drawingStartHole && cursorHole && (activeTool === 'pen' || activeTool === 'wire' || activeTool === 'solder_bridge')) {
       const x1 = MARGIN + drawingStartHole.col * GRID_SPACING;
       const y1 = MARGIN + drawingStartHole.row * GRID_SPACING;
@@ -528,7 +649,7 @@ export const BoardCanvas: React.FC = () => {
         const my = (y1 + y2) / 2;
         const dx = x2 - x1;
         const dy = y2 - y1;
-        const dist = Math.sqrt(dx*dx + dy*dy);
+        const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist > 0) {
           const nx = -dy / dist;
           const ny = dx / dist;
@@ -552,8 +673,112 @@ export const BoardCanvas: React.FC = () => {
     return rendered;
   };
 
+  /**
+   * Renders Konva warning overlays for Critical and High severity warnings.
+   * Warning/Suggestion are panel-only.
+   */
+  const renderAdvisorOverlays = () => {
+    const overlays: React.ReactNode[] = [];
+
+    for (const warning of advisorWarnings) {
+      if (warning.severity !== 'critical' && warning.severity !== 'high') continue;
+
+      const isHighlighted = highlightedWarningId === warning.id;
+
+      for (const hole of warning.affectedHoles) {
+        const x = MARGIN + hole.col * GRID_SPACING;
+        const y = MARGIN + hole.row * GRID_SPACING;
+        const key = `${warning.id}-${hole.col}-${hole.row}`;
+
+        if (warning.severity === 'critical') {
+          overlays.push(
+            <Group key={key}>
+              {/* Solid red fill */}
+              <Rect
+                x={x - GRID_SPACING / 2}
+                y={y - GRID_SPACING / 2}
+                width={GRID_SPACING}
+                height={GRID_SPACING}
+                fill="#ef4444"
+                opacity={0.45}
+                cornerRadius={3}
+                onMouseEnter={(e) => {
+                  const stage = stageRef.current;
+                  if (!stage) return;
+                  const pos = stage.getPointerPosition();
+                  if (pos) setTooltip({ x: pos.x, y: pos.y, warning });
+                }}
+                onMouseLeave={() => setTooltip(null)}
+              />
+              {/* Highlight halo when selected in panel */}
+              {isHighlighted && (
+                <Circle
+                  x={x} y={y}
+                  radius={GRID_SPACING * 0.8}
+                  stroke="#facc15"
+                  strokeWidth={2}
+                  opacity={0.9}
+                />
+              )}
+            </Group>
+          );
+        } else {
+          // High severity — pulsing ring
+          overlays.push(
+            <Group key={key}>
+              <Circle
+                x={x} y={y}
+                radius={GRID_SPACING * 0.7}
+                stroke="#f97316"
+                strokeWidth={2.5}
+                opacity={pulseOpacity}
+                onMouseEnter={(e) => {
+                  const stage = stageRef.current;
+                  if (!stage) return;
+                  const pos = stage.getPointerPosition();
+                  if (pos) setTooltip({ x: pos.x, y: pos.y, warning });
+                }}
+                onMouseLeave={() => setTooltip(null)}
+              />
+              {isHighlighted && (
+                <Circle
+                  x={x} y={y}
+                  radius={GRID_SPACING * 1.1}
+                  stroke="#facc15"
+                  strokeWidth={2}
+                  opacity={0.85}
+                />
+              )}
+            </Group>
+          );
+        }
+      }
+    }
+
+    // Yellow halo for highlighted warning/suggestion (panel-visible warnings)
+    const highlighted = advisorWarnings.find(w => w.id === highlightedWarningId);
+    if (highlighted && (highlighted.severity === 'warning' || highlighted.severity === 'suggestion')) {
+      for (const hole of highlighted.affectedHoles) {
+        const x = MARGIN + hole.col * GRID_SPACING;
+        const y = MARGIN + hole.row * GRID_SPACING;
+        overlays.push(
+          <Circle
+            key={`hl-${highlighted.id}-${hole.col}-${hole.row}`}
+            x={x} y={y}
+            radius={GRID_SPACING * 0.8}
+            stroke="#facc15"
+            strokeWidth={2}
+            opacity={0.85}
+          />
+        );
+      }
+    }
+
+    return overlays;
+  };
+
   return (
-    <div 
+    <div
       ref={containerRef}
       className={`flex-1 bg-[#0f111a] overflow-hidden w-full h-full relative ${isMiddlePanning ? 'cursor-grabbing' : 'cursor-crosshair'}`}
       onDrop={handleDrop}
@@ -561,11 +786,11 @@ export const BoardCanvas: React.FC = () => {
       onMouseDown={(e) => { if (e.button === 1) e.preventDefault(); }}
     >
       <Stage
-        width={window.innerWidth - 512} // Subtracting both sidebars (256 * 2)
-        height={window.innerHeight - 88} // 56px toolbar + 32px statusbar
+        width={window.innerWidth - (isSidebarCollapsed ? 32 : 256) - (isRightPanelCollapsed ? 32 : 256)}
+        height={window.innerHeight - 88}
         onWheel={handleWheel}
         onMouseMove={handleMouseMove}
-        onMouseLeave={() => setCursorHole(null)}
+        onMouseLeave={() => { setCursorHole(null); setTooltip(null); }}
         onClick={handleStageClick}
         onContextMenu={handleStageContextMenu}
         onMouseDown={handleStageMouseDown}
@@ -592,10 +817,10 @@ export const BoardCanvas: React.FC = () => {
             {renderGridLabels()}
             {renderGridDots()}
             {renderTraces()}
-            
+
             <Group>
               {components.map(comp => (
-                <ComponentRenderer
+            <ComponentRenderer
                   key={comp.id}
                   component={comp}
                   isSelected={comp.id === selectedComponentId}
@@ -604,17 +829,89 @@ export const BoardCanvas: React.FC = () => {
                   margin={MARGIN}
                   bodyOpacity={getComponentOpacity()}
                   labelOpacity={getLabelOpacity()}
+                  onDragStartGrid={(origPos) => {
+                    setDraggingCompId(comp.id);
+                    setDraggingOrigPos(origPos);
+                    setDraggingDelta({ dcol: 0, drow: 0 });
+                  }}
+                  onDragMoveGrid={(delta) => {
+                    setDraggingDelta(delta);
+                  }}
+                  onDragEndGrid={() => {
+                    // Commit all connected trace endpoints to their new positions
+                    if (!draggingCompId || !draggingOrigPos) return;
+                    
+                    for (const trace of traces) {
+                      const fromMoved = isPinOf(draggingCompId, trace.from, draggingOrigPos);
+                      const toMoved   = isPinOf(draggingCompId, trace.to, draggingOrigPos);
+                      
+                      if (fromMoved || toMoved) {
+                        updateTrace(trace.id, {
+                          from: fromMoved
+                            ? { col: trace.from.col + draggingDelta.dcol, row: trace.from.row + draggingDelta.drow }
+                            : trace.from,
+                          to: toMoved
+                            ? { col: trace.to.col + draggingDelta.dcol, row: trace.to.row + draggingDelta.drow }
+                            : trace.to,
+                        });
+                      }
+                    }
+                    setDraggingCompId(null);
+                    setDraggingOrigPos(null);
+                    setDraggingDelta({ dcol: 0, drow: 0 });
+                  }}
                 />
               ))}
             </Group>
+
+            {/* Warning overlays — rendered last so they appear on top */}
+            <Group>{renderAdvisorOverlays()}</Group>
           </Group>
         </Layer>
       </Stage>
+
+      {/* SOLDER SIDE banner */}
       {isBottom && (
         <div className="absolute top-4 right-4 pointer-events-none bg-red-500/20 text-red-400 border border-red-500/50 px-4 py-2 rounded-lg font-bold tracking-widest text-sm flex items-center gap-2 backdrop-blur-sm z-10 shadow-lg">
           <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
           SOLDER SIDE — MIRRORED VIEW
         </div>
+      )}
+
+      {/* Warning hover tooltip */}
+      {tooltip && (
+        <div
+          className="absolute z-40 pointer-events-none max-w-[220px]"
+          style={{
+            left: Math.min(tooltip.x + 12, window.innerWidth - 240),
+            top: Math.max(tooltip.y - 10, 4),
+          }}
+        >
+          <div className={`rounded-lg shadow-xl px-3 py-2 text-[11px] leading-snug border ${
+            tooltip.warning.severity === 'critical'
+              ? 'bg-red-950 border-red-700 text-red-200'
+              : 'bg-orange-950 border-orange-700 text-orange-200'
+          }`}>
+            <div className="font-bold uppercase tracking-wider text-[9px] mb-1 opacity-70">
+              {tooltip.warning.severity} · {tooltip.warning.ruleId}
+            </div>
+            {tooltip.warning.message}
+          </div>
+        </div>
+      )}
+
+      {/* HF solder-trace completion popup */}
+      {popup?.visible && (
+        <TraceCompletionPopup
+          x={popup.x}
+          y={popup.y}
+          onKeep={() => setPopup(null)}
+          onSwitch={() => {
+            updateTrace(popup.traceId, { material: 'wire' });
+            commitHistory();
+            setPopup(null);
+          }}
+        />
       )}
     </div>
   );
