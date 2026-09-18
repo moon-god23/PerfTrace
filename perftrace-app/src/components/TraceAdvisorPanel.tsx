@@ -44,16 +44,6 @@ const SEVERITY_CONFIG: Record<WarningSeverity, {
     badgeStyle: 'bg-blue-900/50 text-blue-300 border border-blue-700',
   },
 };
-
-function severitySymbol(severity: WarningSeverity) {
-  switch (severity) {
-    case 'critical': return '⛔';
-    case 'high': return '🔴';
-    case 'warning': return '🟡';
-    case 'suggestion': return '💡';
-  }
-}
-
 export const TraceAdvisorPanel: React.FC = () => {
   const { advisorWarnings, highlightedWarningId, setHighlightedWarningId } = useUIStore();
 

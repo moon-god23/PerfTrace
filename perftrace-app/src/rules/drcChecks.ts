@@ -1,10 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import type { BoardState, AdvisorWarning, HoleCoord } from '../types';
 
-function holesEqual(a: HoleCoord, b: HoleCoord): boolean {
-  return a.col === b.col && a.row === b.row;
-}
-
 const POLARISED_TYPES = new Set(['led', 'capacitor']);
 
 /**

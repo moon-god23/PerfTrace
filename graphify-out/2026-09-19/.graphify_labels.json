@@ -1,0 +1,20 @@
+{
+  "0": "types/index.ts",
+  "1": "store/index.ts",
+  "2": "package.json",
+  "3": "useFileOps.ts",
+  "4": "BoardCanvas.tsx",
+  "5": "compilerOptions",
+  "6": "compilerOptions",
+  "7": "dependencies",
+  "8": "devDependencies",
+  "9": "tsconfig.json",
+  "10": "tailwind.config.js",
+  "11": "PerfTrace — Step-by-Step Development Guide for AI Assistants",
+  "12": "5. Trace Advisor *(Local Rule Engine — works fully offline, no AI/internet needed)*",
+  "13": "PerfTrace — Project Brief for AI Assistants",
+  "14": "React + TypeScript + Vite",
+  "15": "rules/graphify.md",
+  "16": "workflows/graphify.md",
+  "17": "progress.md"
+}

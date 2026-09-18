@@ -10,3 +10,19 @@
     font-family: ui-sans-serif, system-ui, sans-serif;
   }
 }
+
+.toolbar-scroll::-webkit-scrollbar {
+  height: 4px;
+}
+.toolbar-scroll::-webkit-scrollbar-track {
+  background: rgba(30, 33, 54, 0.4);
+  border-radius: 2px;
+}
+.toolbar-scroll::-webkit-scrollbar-thumb {
+  background: #3b82f6;
+  border-radius: 2px;
+}
+.toolbar-scroll::-webkit-scrollbar-thumb:hover {
+  background: #60a5fa;
+}
+

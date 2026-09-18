@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import type { BoardState, HoleCoord, PlacedComponent, Trace, DrawingTool, SignalType, AdvisorWarning } from '../types';
+import type { PerfTraceProject } from '../types/projectSchema';
 
 type HistorySnapshot = {
   components: PlacedComponent[];
@@ -10,19 +11,50 @@ interface BoardStore extends BoardState {
   past: HistorySnapshot[];
   future: HistorySnapshot[];
 
+  // ── Project metadata ──────────────────────────────────────────────────────
+  projectName: string;
+  setProjectName: (name: string) => void;
+
+  /** True when there are unsaved changes; false after a successful save. */
+  isDirty: boolean;
+  setIsDirty: (dirty: boolean) => void;
+
+  /**
+   * FileSystemFileHandle retained after Save As so that a subsequent
+   * Ctrl+S can overwrite silently without opening the picker again.
+   */
+  fileHandle: FileSystemFileHandle | null;
+  setFileHandle: (handle: FileSystemFileHandle | null) => void;
+
+  // ── Board size ────────────────────────────────────────────────────────────
   setBoardSize: (rows: number, cols: number) => void;
-  
+
+  // ── Components / Traces ───────────────────────────────────────────────────
   addComponent: (component: PlacedComponent) => void;
   updateComponent: (id: string, updates: Partial<PlacedComponent>) => void;
   removeComponent: (id: string) => void;
-  
+
   addTrace: (trace: Trace) => void;
   removeTrace: (id: string) => void;
   updateTrace: (id: string, updates: Partial<Trace>) => void;
 
+  // ── History ───────────────────────────────────────────────────────────────
   commitHistory: () => void;
   undo: () => void;
   redo: () => void;
+
+  // ── Project lifecycle ─────────────────────────────────────────────────────
+  /**
+   * Atomically replaces all board state from a loaded .ptrace project.
+   * Clears undo/redo history.
+   */
+  loadProject: (project: PerfTraceProject) => void;
+
+  /**
+   * Resets to a blank board with the given dimensions.
+   * Clears all components, traces, nets, and history.
+   */
+  newProject: (rows: number, cols: number, name?: string) => void;
 }
 
 export const useBoardStore = create<BoardStore>((set, get) => ({
@@ -34,7 +66,17 @@ export const useBoardStore = create<BoardStore>((set, get) => ({
   nets: [],
   past: [],
   future: [],
-  
+
+  // ── Project metadata defaults ─────────────────────────────────────────────
+  projectName: 'Untitled Project',
+  setProjectName: (name) => set({ projectName: name }),
+
+  isDirty: false,
+  setIsDirty: (dirty) => set({ isDirty: dirty }),
+
+  fileHandle: null,
+  setFileHandle: (handle) => set({ fileHandle: handle }),
+
   setBoardSize: (rows, cols) => set({ rows, cols }),
   
   addComponent: (comp) => set((state) => ({ components: [...state.components, comp] })),
@@ -57,10 +99,11 @@ export const useBoardStore = create<BoardStore>((set, get) => ({
     const state = get();
     set({
       past: [...state.past, { components: state.components, traces: state.traces }],
-      future: [] // Clear future on new action
+      future: [], // Clear future on new action
+      isDirty: true,
     });
   },
-  
+
   undo: () => set((state) => {
     if (state.past.length === 0) return state;
     const newPast = [...state.past];
@@ -70,6 +113,7 @@ export const useBoardStore = create<BoardStore>((set, get) => ({
       future: [{ components: state.components, traces: state.traces }, ...state.future],
       components: previous.components,
       traces: previous.traces,
+      isDirty: true,
     };
   }),
 
@@ -82,8 +126,36 @@ export const useBoardStore = create<BoardStore>((set, get) => ({
       future: newFuture,
       components: next.components,
       traces: next.traces,
+      isDirty: true,
     };
-  })
+  }),
+
+  loadProject: (project) => set({
+    rows: project.board.rows,
+    cols: project.board.cols,
+    components: project.components,
+    traces: project.traces,
+    jumpers: project.jumpers ?? [],
+    nets: project.nets ?? [],
+    past: [],
+    future: [],
+    projectName: project.meta.name,
+    isDirty: false,
+  }),
+
+  newProject: (rows, cols, name = 'Untitled Project') => set({
+    rows,
+    cols,
+    components: [],
+    traces: [],
+    jumpers: [],
+    nets: [],
+    past: [],
+    future: [],
+    projectName: name,
+    isDirty: false,
+    fileHandle: null,
+  }),
 }));
 
 interface UIStore {
@@ -122,6 +194,14 @@ interface UIStore {
 
   isBoardSizeModalOpen: boolean;
   setIsBoardSizeModalOpen: (isOpen: boolean) => void;
+
+  /** Whether the session-recovery modal is visible on app startup. */
+  isRecoveryModalOpen: boolean;
+  setIsRecoveryModalOpen: (open: boolean) => void;
+
+  /** Non-empty string when a save/load error toast should be shown. */
+  saveErrorMessage: string;
+  setSaveErrorMessage: (msg: string) => void;
 
   advisorWarnings: AdvisorWarning[];
   setAdvisorWarnings: (warnings: AdvisorWarning[]) => void;
@@ -175,6 +255,12 @@ export const useUIStore = create<UIStore>((set) => ({
 
   isBoardSizeModalOpen: false,
   setIsBoardSizeModalOpen: (isOpen) => set({ isBoardSizeModalOpen: isOpen }),
+
+  isRecoveryModalOpen: false,
+  setIsRecoveryModalOpen: (open) => set({ isRecoveryModalOpen: open }),
+
+  saveErrorMessage: '',
+  setSaveErrorMessage: (msg) => set({ saveErrorMessage: msg }),
 
   advisorWarnings: [],
   setAdvisorWarnings: (warnings) => set({ advisorWarnings: warnings }),
