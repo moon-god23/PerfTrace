@@ -112,16 +112,18 @@ export const ComponentRenderer: React.FC<Props> = ({
 
         {/* Component Body */}
         <Rect
-          x={rectX + 2}
-          y={rectY + 2}
-          width={rectW - 4}
-          height={rectH - 4}
+          x={rectX + 1}
+          y={rectY + 1}
+          width={rectW - 2}
+          height={rectH - 2}
           fill={def.color}
-          cornerRadius={3}
+          stroke="rgba(0,0,0,0.2)"
+          strokeWidth={1}
+          cornerRadius={4}
           shadowColor="black"
-          shadowBlur={4}
-          shadowOpacity={0.4}
-          shadowOffset={{ x: 2, y: 2 }}
+          shadowBlur={6}
+          shadowOpacity={0.3}
+          shadowOffset={{ x: 2, y: 3 }}
         />
 
         {/* Pins */}
@@ -139,9 +141,13 @@ export const ComponentRenderer: React.FC<Props> = ({
                 x={px}
                 y={py}
                 radius={2.5}
-                fill="#d1d5db"
-                stroke="#4b5563"
-                strokeWidth={1}
+                fill="#f8fafc"
+                stroke="#64748b"
+                strokeWidth={1.5}
+                shadowColor="black"
+                shadowBlur={1}
+                shadowOpacity={0.2}
+                shadowOffset={{ x: 0, y: 1 }}
               />
             );
           };

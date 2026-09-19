@@ -27,7 +27,7 @@ export const TraceCompletionPopup: React.FC<TraceCompletionPopupProps> = ({
 
   return (
     <div
-      className="absolute z-50 w-64 bg-[#1e2136] border border-[#3b82f6]/60 rounded-lg shadow-2xl shadow-black/60 p-3 pointer-events-auto"
+      className="absolute z-50 w-64 bg-surface-hover border border-blue-500/60 rounded-lg shadow-2xl shadow-black/60 p-3 pointer-events-auto"
       style={{ left: popupX, top: popupY }}
     >
       <div className="flex items-start gap-2 mb-3">
@@ -36,13 +36,13 @@ export const TraceCompletionPopup: React.FC<TraceCompletionPopupProps> = ({
         </div>
         <div>
           <p className="text-[11px] font-semibold text-blue-300 mb-0.5">HF Signal Detected</p>
-          <p className="text-[11px] text-gray-300 leading-relaxed">
+          <p className="text-[11px] text-main leading-relaxed">
             Wire jumpers minimise parasitic inductance on HF signals. Switch this trace?
           </p>
         </div>
         <button
           onClick={onKeep}
-          className="ml-auto text-[#4b5563] hover:text-gray-300 transition-colors shrink-0"
+          className="ml-auto text-muted hover:text-main transition-colors shrink-0"
           title="Dismiss"
         >
           <X className="w-3.5 h-3.5" />
@@ -52,20 +52,20 @@ export const TraceCompletionPopup: React.FC<TraceCompletionPopupProps> = ({
       <div className="flex gap-2">
         <button
           onClick={onSwitch}
-          className="flex-1 py-1.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded transition-colors"
+          className="flex-1 py-1.5 bg-blue-600 hover:bg-blue-500 text-main text-xs font-semibold rounded transition-colors"
         >
           Switch to Wire
         </button>
         <button
           onClick={onKeep}
-          className="flex-1 py-1.5 bg-[#2a2d45] hover:bg-[#353860] text-gray-300 text-xs font-medium rounded transition-colors border border-[#3b4168]"
+          className="flex-1 py-1.5 bg-surface-active hover:bg-[#353860] text-main text-xs font-medium rounded transition-colors border border-[#3b4168]"
         >
           Keep Solder
         </button>
       </div>
 
       {/* Auto-dismiss progress bar */}
-      <div className="mt-2 h-0.5 bg-[#2a2d45] rounded-full overflow-hidden">
+      <div className="mt-2 h-0.5 bg-surface-active rounded-full overflow-hidden">
         <div
           className="h-full bg-blue-500/60 rounded-full"
           style={{ animation: 'shrink 4s linear forwards' }}

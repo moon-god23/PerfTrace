@@ -209,6 +209,10 @@ interface UIStore {
   highlightedWarningId: string | null;
   setHighlightedWarningId: (id: string | null) => void;
 
+  /** Whether warning overlays are shown on the canvas. */
+  advisorHighlightsEnabled: boolean;
+  setAdvisorHighlightsEnabled: (enabled: boolean) => void;
+
   activeRightTab: 'advisor' | 'properties' | 'nets';
   setActiveRightTab: (tab: 'advisor' | 'properties' | 'nets') => void;
 
@@ -217,6 +221,9 @@ interface UIStore {
 
   isRightPanelCollapsed: boolean;
   setIsRightPanelCollapsed: (v: boolean) => void;
+
+  isPreferencesOpen: boolean;
+  setIsPreferencesOpen: (open: boolean) => void;
 }
 
 export const useUIStore = create<UIStore>((set) => ({
@@ -268,6 +275,9 @@ export const useUIStore = create<UIStore>((set) => ({
   highlightedWarningId: null,
   setHighlightedWarningId: (id) => set({ highlightedWarningId: id }),
 
+  advisorHighlightsEnabled: true,
+  setAdvisorHighlightsEnabled: (enabled) => set({ advisorHighlightsEnabled: enabled }),
+
   activeRightTab: 'advisor',
   setActiveRightTab: (tab) => set({ activeRightTab: tab }),
 
@@ -276,4 +286,7 @@ export const useUIStore = create<UIStore>((set) => ({
 
   isRightPanelCollapsed: false,
   setIsRightPanelCollapsed: (v) => set({ isRightPanelCollapsed: v }),
+
+  isPreferencesOpen: false,
+  setIsPreferencesOpen: (open) => set({ isPreferencesOpen: open }),
 }));

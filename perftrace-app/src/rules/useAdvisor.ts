@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 import { useBoardStore, useUIStore } from '../store';
+import { usePreferencesStore } from '../store/preferencesStore';
 import { runAllRules } from './index';
 import type { BoardState } from '../types';
 
 /**
  * useAdvisor — Subscribes to board state changes and runs the rule engine
- * debounced at 300ms. Writes results to useUIStore.advisorWarnings.
- *
+ * debounced by `advisorDebounceMs` (default 300ms).
+ * Respects the `traceAdvisorEnabled` preference — if disabled, clears warnings.
  * Call this hook once in App.tsx.
  */
 export function useAdvisor() {
@@ -18,7 +19,15 @@ export function useAdvisor() {
 
   const setAdvisorWarnings = useUIStore(s => s.setAdvisorWarnings);
 
+  const traceAdvisorEnabled = usePreferencesStore(s => s.traceAdvisorEnabled);
+  const advisorDebounceMs   = usePreferencesStore(s => s.advisorDebounceMs);
+
   useEffect(() => {
+    if (!traceAdvisorEnabled) {
+      setAdvisorWarnings([]);
+      return;
+    }
+
     const timer = setTimeout(() => {
       const board: BoardState = {
         rows,
@@ -30,9 +39,9 @@ export function useAdvisor() {
       };
       const warnings = runAllRules(board);
       setAdvisorWarnings(warnings);
-    }, 300);
+    }, advisorDebounceMs);
 
     return () => clearTimeout(timer);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [components, traces, rows, cols, nets]);
+  }, [components, traces, rows, cols, nets, traceAdvisorEnabled, advisorDebounceMs]);
 }

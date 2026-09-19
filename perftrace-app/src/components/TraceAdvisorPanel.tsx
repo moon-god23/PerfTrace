@@ -1,7 +1,7 @@
 import React from 'react';
 import { useUIStore } from '../store';
 import type { WarningSeverity } from '../types';
-import { AlertTriangle, AlertOctagon, Lightbulb, CheckCircle, Info } from 'lucide-react';
+import { AlertTriangle, AlertOctagon, Lightbulb, CheckCircle, Info, Eye, EyeOff } from 'lucide-react';
 
 const SEVERITY_CONFIG: Record<WarningSeverity, {
   icon: React.FC<React.SVGProps<SVGSVGElement>>;
@@ -45,7 +45,7 @@ const SEVERITY_CONFIG: Record<WarningSeverity, {
   },
 };
 export const TraceAdvisorPanel: React.FC = () => {
-  const { advisorWarnings, highlightedWarningId, setHighlightedWarningId } = useUIStore();
+  const { advisorWarnings, highlightedWarningId, setHighlightedWarningId, advisorHighlightsEnabled, setAdvisorHighlightsEnabled } = useUIStore();
 
   const counts = {
     critical:   advisorWarnings.filter(w => w.severity === 'critical').length,
@@ -59,9 +59,28 @@ export const TraceAdvisorPanel: React.FC = () => {
   return (
     <div className="flex flex-col h-full">
       {/* Summary row */}
-      <div className="px-4 pt-3 pb-2 border-b border-[#2a2d3e] shrink-0">
+      <div className="px-4 pt-3 pb-2 border-b border-subtle shrink-0">
+        <div className="flex items-center justify-between mb-2">
+          {/* Highlights toggle */}
+          <button
+            onClick={() => setAdvisorHighlightsEnabled(!advisorHighlightsEnabled)}
+            title={advisorHighlightsEnabled ? 'Hide canvas highlights' : 'Show canvas highlights'}
+            className={`flex items-center gap-1.5 px-2 py-1 rounded text-[10px] font-semibold uppercase tracking-wider transition-colors ${
+              advisorHighlightsEnabled
+                ? 'bg-[#10b981]/15 text-emerald-500 border border-[#10b981]/40 hover:bg-[#10b981]/25'
+                : 'bg-surface-hover text-muted border border-subtle hover:text-main'
+            }`}
+          >
+            {advisorHighlightsEnabled
+              ? <Eye className="w-3 h-3" />
+              : <EyeOff className="w-3 h-3" />
+            }
+            Highlights
+          </button>
+        </div>
+
         {totalIssues === 0 ? (
-          <div className="flex items-center gap-2 text-emerald-400 text-sm font-medium py-1">
+          <div className="flex items-center gap-2 text-emerald-500 text-sm font-medium py-1">
             <CheckCircle className="w-4 h-4" />
             No issues detected
           </div>
@@ -96,9 +115,9 @@ export const TraceAdvisorPanel: React.FC = () => {
         {totalIssues === 0 ? (
           <div className="flex flex-col items-center justify-center h-full gap-3 text-center px-4">
             <div className="w-14 h-14 rounded-full bg-emerald-900/30 flex items-center justify-center">
-              <CheckCircle className="w-7 h-7 text-emerald-400" />
+              <CheckCircle className="w-7 h-7 text-emerald-500" />
             </div>
-            <p className="text-[#6b7280] text-xs leading-relaxed">
+            <p className="text-muted text-xs leading-relaxed">
               Your board looks good!<br />
               Warnings will appear here as you place components and draw traces.
             </p>
@@ -128,11 +147,11 @@ export const TraceAdvisorPanel: React.FC = () => {
                         <span className={`text-[10px] font-bold uppercase tracking-wider ${cfg.iconColor}`}>
                           {cfg.label}
                         </span>
-                        <span className="text-[9px] text-[#4b5563] font-mono">
+                        <span className="text-[9px] text-muted font-mono">
                           {warning.ruleId}
                         </span>
                       </div>
-                      <p className="text-[11px] text-gray-300 leading-relaxed break-words">
+                      <p className="text-[11px] text-main leading-relaxed break-words">
                         {warning.message}
                       </p>
                       {isHighlighted && (
@@ -152,8 +171,8 @@ export const TraceAdvisorPanel: React.FC = () => {
 
       {/* Footer hint */}
       {totalIssues > 0 && (
-        <div className="px-3 py-2 border-t border-[#2a2d3e] shrink-0">
-          <p className="text-[10px] text-[#4b5563]">
+        <div className="px-3 py-2 border-t border-subtle shrink-0">
+          <p className="text-[10px] text-muted">
             Click a warning to highlight it on the canvas
           </p>
         </div>

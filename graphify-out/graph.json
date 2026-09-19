@@ -88,11 +88,63 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": "store/index.ts",
+      "community_name": "App.tsx",
       "file_type": "code",
       "norm_label": "tab",
       "source_file": "perftrace-app/src/components/PropertiesPanel.tsx",
-      "source_location": "L7"
+      "source_location": "L15"
+    },
+    {
+      "id": "perftrace_app_src_store_preferencesstore_apptheme",
+      "label": "AppTheme",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "autoSave.ts",
+      "file_type": "code",
+      "norm_label": "apptheme",
+      "source_file": "perftrace-app/src/store/preferencesStore.ts",
+      "source_location": "L3"
+    },
+    {
+      "id": "perftrace_app_src_store_preferencesstore_preferencesstore",
+      "label": "PreferencesStore",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "autoSave.ts",
+      "file_type": "code",
+      "norm_label": "preferencesstore",
+      "source_file": "perftrace-app/src/store/preferencesStore.ts",
+      "source_location": "L25"
+    },
+    {
+      "id": "perftrace_app_src_store_preferencesstore_userpreferences",
+      "label": "UserPreferences",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "autoSave.ts",
+      "file_type": "code",
+      "norm_label": "userpreferences",
+      "source_file": "perftrace-app/src/store/preferencesStore.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "perftrace_app_src_store_index_boardstore",
+      "label": "BoardStore",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "store/index.ts",
+      "file_type": "code",
+      "norm_label": "boardstore",
+      "source_file": "perftrace-app/src/store/index.ts",
+      "source_location": "L10"
     },
     {
       "id": "perftrace_app_src_store_index_historysnapshot",
@@ -100,7 +152,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 3,
       "community_name": "store/index.ts",
       "file_type": "code",
       "norm_label": "historysnapshot",
@@ -113,7 +165,7 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 3,
       "community_name": "store/index.ts",
       "file_type": "code",
       "norm_label": "uistore",
@@ -126,38 +178,12 @@
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 1,
+      "community": 3,
       "community_name": "store/index.ts",
       "file_type": "code",
       "norm_label": "drawingtool",
       "source_file": "perftrace-app/src/types/index.ts",
       "source_location": "L7"
-    },
-    {
-      "id": "perftrace_app_src_types_index_signaltype",
-      "label": "SignalType",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "store/index.ts",
-      "file_type": "code",
-      "norm_label": "signaltype",
-      "source_file": "perftrace-app/src/types/index.ts",
-      "source_location": "L3"
-    },
-    {
-      "id": "perftrace_app_src_store_index_boardstore",
-      "label": "BoardStore",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "useFileOps.ts",
-      "file_type": "code",
-      "norm_label": "boardstore",
-      "source_file": "perftrace-app/src/store/index.ts",
-      "source_location": "L10"
     },
     {
       "id": "perftrace_app_src_types_index_net",
@@ -166,7 +192,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 3,
-      "community_name": "useFileOps.ts",
+      "community_name": "store/index.ts",
       "file_type": "code",
       "norm_label": "net",
       "source_file": "perftrace-app/src/types/index.ts",
@@ -179,11 +205,24 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 3,
-      "community_name": "useFileOps.ts",
+      "community_name": "store/index.ts",
       "file_type": "code",
       "norm_label": "placedcomponent",
       "source_file": "perftrace-app/src/types/index.ts",
       "source_location": "L18"
+    },
+    {
+      "id": "perftrace_app_src_types_index_signaltype",
+      "label": "SignalType",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "store/index.ts",
+      "file_type": "code",
+      "norm_label": "signaltype",
+      "source_file": "perftrace-app/src/types/index.ts",
+      "source_location": "L3"
     },
     {
       "id": "perftrace_app_src_types_index_trace",
@@ -192,7 +231,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 3,
-      "community_name": "useFileOps.ts",
+      "community_name": "store/index.ts",
       "file_type": "code",
       "norm_label": "trace",
       "source_file": "perftrace-app/src/types/index.ts",
@@ -205,7 +244,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 3,
-      "community_name": "useFileOps.ts",
+      "community_name": "store/index.ts",
       "file_type": "code",
       "norm_label": "perftraceproject",
       "source_file": "perftrace-app/src/types/projectSchema.ts",
@@ -218,7 +257,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 3,
-      "community_name": "useFileOps.ts",
+      "community_name": "store/index.ts",
       "file_type": "code",
       "norm_label": "projectboard",
       "source_file": "perftrace-app/src/types/projectSchema.ts",
@@ -231,7 +270,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 3,
-      "community_name": "useFileOps.ts",
+      "community_name": "store/index.ts",
       "file_type": "code",
       "norm_label": "projectmeta",
       "source_file": "perftrace-app/src/types/projectSchema.ts",
@@ -244,7 +283,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 3,
-      "community_name": "useFileOps.ts",
+      "community_name": "store/index.ts",
       "file_type": "code",
       "norm_label": "schemaversion",
       "source_file": "perftrace-app/src/types/projectSchema.ts",
@@ -261,7 +300,7 @@
       "file_type": "code",
       "norm_label": "popupstate",
       "source_file": "perftrace-app/src/canvas/BoardCanvas.tsx",
-      "source_location": "L33"
+      "source_location": "L32"
     },
     {
       "id": "perftrace_app_src_canvas_boardcanvas_tooltipstate",
@@ -274,7 +313,7 @@
       "file_type": "code",
       "norm_label": "tooltipstate",
       "source_file": "perftrace-app/src/canvas/BoardCanvas.tsx",
-      "source_location": "L27"
+      "source_location": "L26"
     },
     {
       "id": "perftrace_app_src_canvas_componentrenderer_props",
@@ -502,11 +541,47 @@
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": "store/index.ts",
+      "community_name": "App.tsx",
       "file_type": "code",
       "norm_label": "app()",
       "source_file": "perftrace-app/src/App.tsx",
-      "source_location": "L16"
+      "source_location": "L19"
+    },
+    {
+      "id": "perftrace_app_src_canvas_boardcanvas_boardcanvas",
+      "label": "BoardCanvas()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "App.tsx",
+      "file_type": "code",
+      "norm_label": "boardcanvas()",
+      "source_file": "perftrace-app/src/canvas/BoardCanvas.tsx",
+      "source_location": "L39"
+    },
+    {
+      "id": "perftrace_app_src_canvas_boardcanvas_boardcanvas_ispinof",
+      "label": "isPinOf()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "App.tsx",
+      "file_type": "code",
+      "norm_label": "ispinof()",
+      "source_file": "perftrace-app/src/canvas/BoardCanvas.tsx",
+      "source_location": "L70"
+    },
+    {
+      "id": "perftrace_app_src_canvas_componentrenderer_componentrenderer",
+      "label": "ComponentRenderer()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "App.tsx",
+      "file_type": "code",
+      "norm_label": "componentrenderer()",
+      "source_file": "perftrace-app/src/canvas/ComponentRenderer.tsx",
+      "source_location": "L25"
     },
     {
       "id": "perftrace_app_src_components_boardsizemodal_boardsizemodal",
@@ -514,11 +589,23 @@
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": "store/index.ts",
+      "community_name": "App.tsx",
       "file_type": "code",
       "norm_label": "boardsizemodal()",
       "source_file": "perftrace-app/src/components/BoardSizeModal.tsx",
       "source_location": "L4"
+    },
+    {
+      "id": "perftrace_app_src_components_layerscrubber_getscrubberlabel",
+      "label": "getScrubberLabel()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "App.tsx",
+      "file_type": "code",
+      "norm_label": "getscrubberlabel()",
+      "source_file": "perftrace-app/src/components/LayerScrubber.tsx",
+      "source_location": "L19"
     },
     {
       "id": "perftrace_app_src_components_layerscrubber_layerscrubber",
@@ -526,11 +613,35 @@
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": "store/index.ts",
+      "community_name": "App.tsx",
       "file_type": "code",
       "norm_label": "layerscrubber()",
       "source_file": "perftrace-app/src/components/LayerScrubber.tsx",
-      "source_location": "L5"
+      "source_location": "L33"
+    },
+    {
+      "id": "perftrace_app_src_components_layerscrubber_snaptonearest",
+      "label": "snapToNearest()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "App.tsx",
+      "file_type": "code",
+      "norm_label": "snaptonearest()",
+      "source_file": "perftrace-app/src/components/LayerScrubber.tsx",
+      "source_location": "L27"
+    },
+    {
+      "id": "perftrace_app_src_components_preferencespanel_preferencespanel",
+      "label": "PreferencesPanel()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "App.tsx",
+      "file_type": "code",
+      "norm_label": "preferencespanel()",
+      "source_file": "perftrace-app/src/components/PreferencesPanel.tsx",
+      "source_location": "L103"
     },
     {
       "id": "perftrace_app_src_components_propertiespanel_propertiespanel",
@@ -538,11 +649,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": "store/index.ts",
+      "community_name": "App.tsx",
       "file_type": "code",
       "norm_label": "propertiespanel()",
       "source_file": "perftrace-app/src/components/PropertiesPanel.tsx",
-      "source_location": "L15"
+      "source_location": "L23"
     },
     {
       "id": "perftrace_app_src_components_saveerrortoast_saveerrortoast",
@@ -550,7 +661,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": "store/index.ts",
+      "community_name": "App.tsx",
       "file_type": "code",
       "norm_label": "saveerrortoast()",
       "source_file": "perftrace-app/src/components/SaveErrorToast.tsx",
@@ -562,7 +673,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": "store/index.ts",
+      "community_name": "App.tsx",
       "file_type": "code",
       "norm_label": "sidebar()",
       "source_file": "perftrace-app/src/components/Sidebar.tsx",
@@ -574,11 +685,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": "store/index.ts",
+      "community_name": "App.tsx",
       "file_type": "code",
       "norm_label": "columntoletter()",
       "source_file": "perftrace-app/src/components/StatusBar.tsx",
-      "source_location": "L4"
+      "source_location": "L7"
     },
     {
       "id": "perftrace_app_src_components_statusbar_statusbar",
@@ -586,11 +697,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": "store/index.ts",
+      "community_name": "App.tsx",
       "file_type": "code",
       "norm_label": "statusbar()",
       "source_file": "perftrace-app/src/components/StatusBar.tsx",
-      "source_location": "L14"
+      "source_location": "L35"
     },
     {
       "id": "perftrace_app_src_components_toolbar_toolbar",
@@ -598,7 +709,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": "store/index.ts",
+      "community_name": "App.tsx",
       "file_type": "code",
       "norm_label": "toolbar()",
       "source_file": "perftrace-app/src/components/Toolbar.tsx",
@@ -610,11 +721,23 @@
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": "store/index.ts",
+      "community_name": "App.tsx",
       "file_type": "code",
       "norm_label": "traceadvisorpanel()",
       "source_file": "perftrace-app/src/components/TraceAdvisorPanel.tsx",
       "source_location": "L47"
+    },
+    {
+      "id": "perftrace_app_src_hooks_useautosave_useautosave",
+      "label": "useAutoSave()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "App.tsx",
+      "file_type": "code",
+      "norm_label": "useautosave()",
+      "source_file": "perftrace-app/src/hooks/useAutoSave.ts",
+      "source_location": "L13"
     },
     {
       "id": "perftrace_app_src_rules_useadvisor_useadvisor",
@@ -622,35 +745,191 @@
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": "store/index.ts",
+      "community_name": "App.tsx",
       "file_type": "code",
       "norm_label": "useadvisor()",
       "source_file": "perftrace-app/src/rules/useAdvisor.ts",
-      "source_location": "L12"
+      "source_location": "L13"
+    },
+    {
+      "id": "perftrace_app_src_utils_theme_applytheme",
+      "label": "applyTheme()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "App.tsx",
+      "file_type": "code",
+      "norm_label": "applytheme()",
+      "source_file": "perftrace-app/src/utils/theme.ts",
+      "source_location": "L10"
+    },
+    {
+      "id": "perftrace_app_src_components_preferencespanel_sectionheader",
+      "label": "SectionHeader()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "autoSave.ts",
+      "file_type": "code",
+      "norm_label": "sectionheader()",
+      "source_file": "perftrace-app/src/components/PreferencesPanel.tsx",
+      "source_location": "L11"
+    },
+    {
+      "id": "perftrace_app_src_components_preferencespanel_slider",
+      "label": "Slider()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "autoSave.ts",
+      "file_type": "code",
+      "norm_label": "slider()",
+      "source_file": "perftrace-app/src/components/PreferencesPanel.tsx",
+      "source_location": "L46"
+    },
+    {
+      "id": "perftrace_app_src_components_preferencespanel_toggle",
+      "label": "Toggle()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "autoSave.ts",
+      "file_type": "code",
+      "norm_label": "toggle()",
+      "source_file": "perftrace-app/src/components/PreferencesPanel.tsx",
+      "source_location": "L18"
     },
     {
       "id": "perftrace_app_src_components_recoverymodal_recoverymodal",
       "label": "RecoveryModal()",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
-      "community_name": "useFileOps.ts",
+      "community": 13,
+      "community_name": "autoSave.ts",
       "file_type": "code",
       "norm_label": "recoverymodal()",
       "source_file": "perftrace-app/src/components/RecoveryModal.tsx",
       "source_location": "L10"
     },
     {
-      "id": "perftrace_app_src_hooks_useautosave_useautosave",
-      "label": "useAutoSave()",
+      "id": "perftrace_app_src_io_autosave_clearautosave",
+      "label": "clearAutoSave()",
       "_callable": true,
       "_origin": "ast",
-      "community": 3,
-      "community_name": "useFileOps.ts",
+      "community": 13,
+      "community_name": "autoSave.ts",
       "file_type": "code",
-      "norm_label": "useautosave()",
-      "source_file": "perftrace-app/src/hooks/useAutoSave.ts",
+      "norm_label": "clearautosave()",
+      "source_file": "perftrace-app/src/io/autoSave.ts",
+      "source_location": "L105"
+    },
+    {
+      "id": "perftrace_app_src_io_autosave_getdb",
+      "label": "getDB()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "autoSave.ts",
+      "file_type": "code",
+      "norm_label": "getdb()",
+      "source_file": "perftrace-app/src/io/autoSave.ts",
+      "source_location": "L64"
+    },
+    {
+      "id": "perftrace_app_src_io_autosave_idbdelete",
+      "label": "idbDelete()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "autoSave.ts",
+      "file_type": "code",
+      "norm_label": "idbdelete()",
+      "source_file": "perftrace-app/src/io/autoSave.ts",
+      "source_location": "L51"
+    },
+    {
+      "id": "perftrace_app_src_io_autosave_idbget",
+      "label": "idbGet()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "autoSave.ts",
+      "file_type": "code",
+      "norm_label": "idbget()",
+      "source_file": "perftrace-app/src/io/autoSave.ts",
+      "source_location": "L41"
+    },
+    {
+      "id": "perftrace_app_src_io_autosave_idbput",
+      "label": "idbPut()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "autoSave.ts",
+      "file_type": "code",
+      "norm_label": "idbput()",
+      "source_file": "perftrace-app/src/io/autoSave.ts",
+      "source_location": "L31"
+    },
+    {
+      "id": "perftrace_app_src_io_autosave_loadautosave",
+      "label": "loadAutoSave()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "autoSave.ts",
+      "file_type": "code",
+      "norm_label": "loadautosave()",
+      "source_file": "perftrace-app/src/io/autoSave.ts",
+      "source_location": "L93"
+    },
+    {
+      "id": "perftrace_app_src_io_autosave_loadpreferences",
+      "label": "loadPreferences()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "autoSave.ts",
+      "file_type": "code",
+      "norm_label": "loadpreferences()",
+      "source_file": "perftrace-app/src/io/autoSave.ts",
+      "source_location": "L137"
+    },
+    {
+      "id": "perftrace_app_src_io_autosave_opendb",
+      "label": "openDB()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "autoSave.ts",
+      "file_type": "code",
+      "norm_label": "opendb()",
+      "source_file": "perftrace-app/src/io/autoSave.ts",
       "source_location": "L13"
+    },
+    {
+      "id": "perftrace_app_src_io_autosave_savepreferences",
+      "label": "savePreferences()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "autoSave.ts",
+      "file_type": "code",
+      "norm_label": "savepreferences()",
+      "source_file": "perftrace-app/src/io/autoSave.ts",
+      "source_location": "L120"
+    },
+    {
+      "id": "perftrace_app_src_io_autosave_scheduleautosave",
+      "label": "scheduleAutoSave()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "autoSave.ts",
+      "file_type": "code",
+      "norm_label": "scheduleautosave()",
+      "source_file": "perftrace-app/src/io/autoSave.ts",
+      "source_location": "L77"
     },
     {
       "id": "perftrace_app_src_hooks_usefileops_buildproject",
@@ -658,7 +937,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 3,
-      "community_name": "useFileOps.ts",
+      "community_name": "store/index.ts",
       "file_type": "code",
       "norm_label": "buildproject()",
       "source_file": "perftrace-app/src/hooks/useFileOps.ts",
@@ -670,107 +949,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 3,
-      "community_name": "useFileOps.ts",
+      "community_name": "store/index.ts",
       "file_type": "code",
       "norm_label": "usefileops()",
       "source_file": "perftrace-app/src/hooks/useFileOps.ts",
       "source_location": "L37"
-    },
-    {
-      "id": "perftrace_app_src_io_autosave_clearautosave",
-      "label": "clearAutoSave()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "useFileOps.ts",
-      "file_type": "code",
-      "norm_label": "clearautosave()",
-      "source_file": "perftrace-app/src/io/autoSave.ts",
-      "source_location": "L95"
-    },
-    {
-      "id": "perftrace_app_src_io_autosave_getdb",
-      "label": "getDB()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "useFileOps.ts",
-      "file_type": "code",
-      "norm_label": "getdb()",
-      "source_file": "perftrace-app/src/io/autoSave.ts",
-      "source_location": "L54"
-    },
-    {
-      "id": "perftrace_app_src_io_autosave_idbdelete",
-      "label": "idbDelete()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "useFileOps.ts",
-      "file_type": "code",
-      "norm_label": "idbdelete()",
-      "source_file": "perftrace-app/src/io/autoSave.ts",
-      "source_location": "L41"
-    },
-    {
-      "id": "perftrace_app_src_io_autosave_idbget",
-      "label": "idbGet()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "useFileOps.ts",
-      "file_type": "code",
-      "norm_label": "idbget()",
-      "source_file": "perftrace-app/src/io/autoSave.ts",
-      "source_location": "L31"
-    },
-    {
-      "id": "perftrace_app_src_io_autosave_idbput",
-      "label": "idbPut()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "useFileOps.ts",
-      "file_type": "code",
-      "norm_label": "idbput()",
-      "source_file": "perftrace-app/src/io/autoSave.ts",
-      "source_location": "L21"
-    },
-    {
-      "id": "perftrace_app_src_io_autosave_loadautosave",
-      "label": "loadAutoSave()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "useFileOps.ts",
-      "file_type": "code",
-      "norm_label": "loadautosave()",
-      "source_file": "perftrace-app/src/io/autoSave.ts",
-      "source_location": "L83"
-    },
-    {
-      "id": "perftrace_app_src_io_autosave_opendb",
-      "label": "openDB()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "useFileOps.ts",
-      "file_type": "code",
-      "norm_label": "opendb()",
-      "source_file": "perftrace-app/src/io/autoSave.ts",
-      "source_location": "L10"
-    },
-    {
-      "id": "perftrace_app_src_io_autosave_scheduleautosave",
-      "label": "scheduleAutoSave()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "useFileOps.ts",
-      "file_type": "code",
-      "norm_label": "scheduleautosave()",
-      "source_file": "perftrace-app/src/io/autoSave.ts",
-      "source_location": "L67"
     },
     {
       "id": "perftrace_app_src_io_projectfile_deserialise",
@@ -778,7 +961,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 3,
-      "community_name": "useFileOps.ts",
+      "community_name": "store/index.ts",
       "file_type": "code",
       "norm_label": "deserialise()",
       "source_file": "perftrace-app/src/io/projectFile.ts",
@@ -790,7 +973,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 3,
-      "community_name": "useFileOps.ts",
+      "community_name": "store/index.ts",
       "file_type": "code",
       "norm_label": "openprojectfile()",
       "source_file": "perftrace-app/src/io/projectFile.ts",
@@ -802,7 +985,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 3,
-      "community_name": "useFileOps.ts",
+      "community_name": "store/index.ts",
       "file_type": "code",
       "norm_label": "saveprojectfile()",
       "source_file": "perftrace-app/src/io/projectFile.ts",
@@ -814,35 +997,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 3,
-      "community_name": "useFileOps.ts",
+      "community_name": "store/index.ts",
       "file_type": "code",
       "norm_label": "serialise()",
       "source_file": "perftrace-app/src/io/projectFile.ts",
       "source_location": "L6"
-    },
-    {
-      "id": "perftrace_app_src_canvas_boardcanvas_boardcanvas",
-      "label": "BoardCanvas()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "BoardCanvas.tsx",
-      "file_type": "code",
-      "norm_label": "boardcanvas()",
-      "source_file": "perftrace-app/src/canvas/BoardCanvas.tsx",
-      "source_location": "L40"
-    },
-    {
-      "id": "perftrace_app_src_canvas_boardcanvas_boardcanvas_ispinof",
-      "label": "isPinOf()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "BoardCanvas.tsx",
-      "file_type": "code",
-      "norm_label": "ispinof()",
-      "source_file": "perftrace-app/src/canvas/BoardCanvas.tsx",
-      "source_location": "L70"
     },
     {
       "id": "perftrace_app_src_canvas_boardcanvas_columntoletter",
@@ -854,19 +1013,7 @@
       "file_type": "code",
       "norm_label": "columntoletter()",
       "source_file": "perftrace-app/src/canvas/BoardCanvas.tsx",
-      "source_location": "L17"
-    },
-    {
-      "id": "perftrace_app_src_canvas_componentrenderer_componentrenderer",
-      "label": "ComponentRenderer()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 4,
-      "community_name": "BoardCanvas.tsx",
-      "file_type": "code",
-      "norm_label": "componentrenderer()",
-      "source_file": "perftrace-app/src/canvas/ComponentRenderer.tsx",
-      "source_location": "L25"
+      "source_location": "L16"
     },
     {
       "id": "perftrace_app_src_components_tracecompletionpopup_tracecompletionpopup",
@@ -1050,7 +1197,7 @@
       "label": "App.tsx",
       "_origin": "ast",
       "community": 1,
-      "community_name": "store/index.ts",
+      "community_name": "App.tsx",
       "file_type": "code",
       "norm_label": "app.tsx",
       "source_file": "perftrace-app/src/App.tsx",
@@ -1061,7 +1208,7 @@
       "label": "BoardSizeModal.tsx",
       "_origin": "ast",
       "community": 1,
-      "community_name": "store/index.ts",
+      "community_name": "App.tsx",
       "file_type": "code",
       "norm_label": "boardsizemodal.tsx",
       "source_file": "perftrace-app/src/components/BoardSizeModal.tsx",
@@ -1072,54 +1219,76 @@
       "label": "LayerScrubber.tsx",
       "_origin": "ast",
       "community": 1,
-      "community_name": "store/index.ts",
+      "community_name": "App.tsx",
       "file_type": "code",
       "norm_label": "layerscrubber.tsx",
       "source_file": "perftrace-app/src/components/LayerScrubber.tsx",
       "source_location": "L1"
     },
     {
+      "id": "perftrace_app_src_components_layerscrubber_snap_labels",
+      "label": "SNAP_LABELS",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "App.tsx",
+      "file_type": "code",
+      "norm_label": "snap_labels",
+      "source_file": "perftrace-app/src/components/LayerScrubber.tsx",
+      "source_location": "L8"
+    },
+    {
+      "id": "perftrace_app_src_components_layerscrubber_snap_points",
+      "label": "SNAP_POINTS",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "App.tsx",
+      "file_type": "code",
+      "norm_label": "snap_points",
+      "source_file": "perftrace-app/src/components/LayerScrubber.tsx",
+      "source_location": "L7"
+    },
+    {
       "id": "perftrace_app_src_components_propertiespanel",
       "label": "PropertiesPanel.tsx",
       "_origin": "ast",
       "community": 1,
-      "community_name": "store/index.ts",
+      "community_name": "App.tsx",
       "file_type": "code",
       "norm_label": "propertiespanel.tsx",
       "source_file": "perftrace-app/src/components/PropertiesPanel.tsx",
       "source_location": "L1"
     },
     {
+      "id": "perftrace_app_src_components_propertiespanel_net_signal_colors",
+      "label": "NET_SIGNAL_COLORS",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "App.tsx",
+      "file_type": "code",
+      "norm_label": "net_signal_colors",
+      "source_file": "perftrace-app/src/components/PropertiesPanel.tsx",
+      "source_location": "L7"
+    },
+    {
       "id": "perftrace_app_src_components_propertiespanel_tabs",
       "label": "TABS",
       "_origin": "ast",
       "community": 1,
-      "community_name": "store/index.ts",
+      "community_name": "App.tsx",
       "file_type": "code",
       "norm_label": "tabs",
       "source_file": "perftrace-app/src/components/PropertiesPanel.tsx",
-      "source_location": "L9"
+      "source_location": "L17"
     },
     {
       "id": "perftrace_app_src_components_saveerrortoast",
       "label": "SaveErrorToast.tsx",
       "_origin": "ast",
       "community": 1,
-      "community_name": "store/index.ts",
+      "community_name": "App.tsx",
       "file_type": "code",
       "norm_label": "saveerrortoast.tsx",
       "source_file": "perftrace-app/src/components/SaveErrorToast.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "perftrace_app_src_components_sidebar",
-      "label": "Sidebar.tsx",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "store/index.ts",
-      "file_type": "code",
-      "norm_label": "sidebar.tsx",
-      "source_file": "perftrace-app/src/components/Sidebar.tsx",
       "source_location": "L1"
     },
     {
@@ -1127,29 +1296,40 @@
       "label": "StatusBar.tsx",
       "_origin": "ast",
       "community": 1,
-      "community_name": "store/index.ts",
+      "community_name": "App.tsx",
       "file_type": "code",
       "norm_label": "statusbar.tsx",
       "source_file": "perftrace-app/src/components/StatusBar.tsx",
       "source_location": "L1"
     },
     {
-      "id": "perftrace_app_src_components_toolbar",
-      "label": "Toolbar.tsx",
+      "id": "perftrace_app_src_components_statusbar_tool_icons",
+      "label": "TOOL_ICONS",
       "_origin": "ast",
       "community": 1,
-      "community_name": "store/index.ts",
+      "community_name": "App.tsx",
       "file_type": "code",
-      "norm_label": "toolbar.tsx",
-      "source_file": "perftrace-app/src/components/Toolbar.tsx",
-      "source_location": "L1"
+      "norm_label": "tool_icons",
+      "source_file": "perftrace-app/src/components/StatusBar.tsx",
+      "source_location": "L26"
+    },
+    {
+      "id": "perftrace_app_src_components_statusbar_tool_labels",
+      "label": "TOOL_LABELS",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "App.tsx",
+      "file_type": "code",
+      "norm_label": "tool_labels",
+      "source_file": "perftrace-app/src/components/StatusBar.tsx",
+      "source_location": "L17"
     },
     {
       "id": "perftrace_app_src_components_traceadvisorpanel",
       "label": "TraceAdvisorPanel.tsx",
       "_origin": "ast",
       "community": 1,
-      "community_name": "store/index.ts",
+      "community_name": "App.tsx",
       "file_type": "code",
       "norm_label": "traceadvisorpanel.tsx",
       "source_file": "perftrace-app/src/components/TraceAdvisorPanel.tsx",
@@ -1160,18 +1340,29 @@
       "label": "SEVERITY_CONFIG",
       "_origin": "ast",
       "community": 1,
-      "community_name": "store/index.ts",
+      "community_name": "App.tsx",
       "file_type": "code",
       "norm_label": "severity_config",
       "source_file": "perftrace-app/src/components/TraceAdvisorPanel.tsx",
       "source_location": "L6"
     },
     {
+      "id": "perftrace_app_src_hooks_useautosave",
+      "label": "useAutoSave.ts",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "App.tsx",
+      "file_type": "code",
+      "norm_label": "useautosave.ts",
+      "source_file": "perftrace-app/src/hooks/useAutoSave.ts",
+      "source_location": "L1"
+    },
+    {
       "id": "perftrace_app_src_main",
       "label": "main.tsx",
       "_origin": "ast",
       "community": 1,
-      "community_name": "store/index.ts",
+      "community_name": "App.tsx",
       "file_type": "code",
       "norm_label": "main.tsx",
       "source_file": "perftrace-app/src/main.tsx",
@@ -1182,21 +1373,10 @@
       "label": "useAdvisor.ts",
       "_origin": "ast",
       "community": 1,
-      "community_name": "store/index.ts",
+      "community_name": "App.tsx",
       "file_type": "code",
       "norm_label": "useadvisor.ts",
       "source_file": "perftrace-app/src/rules/useAdvisor.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "perftrace_app_src_store_index",
-      "label": "store/index.ts",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "store/index.ts",
-      "file_type": "code",
-      "norm_label": "store/index.ts",
-      "source_file": "perftrace-app/src/store/index.ts",
       "source_location": "L1"
     },
     {
@@ -1204,7 +1384,7 @@
       "label": "useBoardStore",
       "_origin": "ast",
       "community": 1,
-      "community_name": "store/index.ts",
+      "community_name": "App.tsx",
       "file_type": "code",
       "norm_label": "useboardstore",
       "source_file": "perftrace-app/src/store/index.ts",
@@ -1215,18 +1395,29 @@
       "label": "useUIStore",
       "_origin": "ast",
       "community": 1,
-      "community_name": "store/index.ts",
+      "community_name": "App.tsx",
       "file_type": "code",
       "norm_label": "useuistore",
       "source_file": "perftrace-app/src/store/index.ts",
-      "source_location": "L222"
+      "source_location": "L229"
+    },
+    {
+      "id": "perftrace_app_src_store_preferencesstore_usepreferencesstore",
+      "label": "usePreferencesStore",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "App.tsx",
+      "file_type": "code",
+      "norm_label": "usepreferencesstore",
+      "source_file": "perftrace-app/src/store/preferencesStore.ts",
+      "source_location": "L50"
     },
     {
       "id": "ref_lucide_react",
       "label": "lucide-react",
       "_origin": "ast",
       "community": 1,
-      "community_name": "store/index.ts",
+      "community_name": "App.tsx",
       "file_type": "concept",
       "norm_label": "lucide-react",
       "source_file": "perftrace-app/package.json",
@@ -1237,7 +1428,7 @@
       "label": "react",
       "_origin": "ast",
       "community": 1,
-      "community_name": "store/index.ts",
+      "community_name": "App.tsx",
       "file_type": "concept",
       "norm_label": "react",
       "source_file": "perftrace-app/package.json",
@@ -1782,6 +1973,18 @@
       "source_location": "L489"
     },
     {
+      "id": "perftrace_ai_prompt_details",
+      "label": "perftrace_ai_prompt_details.md",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "5. Trace Advisor *(Local Rule Engine \u2014 works fully offline, no AI/internet needed)*",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "perftrace_ai_prompt_details.md",
+      "source_file": "perftrace_ai_prompt_details.md",
+      "source_location": "L1"
+    },
+    {
       "id": "perftrace_ai_prompt_details_1_perfboard_grid_canvas",
       "label": "1. Perfboard Grid Canvas",
       "_origin": "ast",
@@ -1854,6 +2057,42 @@
       "source_location": "L168"
     },
     {
+      "id": "perftrace_ai_prompt_details_analogy_to_understand_the_tool",
+      "label": "Analogy to Understand the Tool",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "5. Trace Advisor *(Local Rule Engine \u2014 works fully offline, no AI/internet needed)*",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "analogy to understand the tool",
+      "source_file": "perftrace_ai_prompt_details.md",
+      "source_location": "L282"
+    },
+    {
+      "id": "perftrace_ai_prompt_details_bottom_status_bar",
+      "label": "Bottom Status Bar",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "5. Trace Advisor *(Local Rule Engine \u2014 works fully offline, no AI/internet needed)*",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "bottom status bar",
+      "source_file": "perftrace_ai_prompt_details.md",
+      "source_location": "L244"
+    },
+    {
+      "id": "perftrace_ai_prompt_details_canvas_tooltips_hover",
+      "label": "Canvas Tooltips (Hover)",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "5. Trace Advisor *(Local Rule Engine \u2014 works fully offline, no AI/internet needed)*",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "canvas tooltips (hover)",
+      "source_file": "perftrace_ai_prompt_details.md",
+      "source_location": "L251"
+    },
+    {
       "id": "perftrace_ai_prompt_details_connection_method_recommendations",
       "label": "Connection Method Recommendations",
       "_origin": "ast",
@@ -1902,6 +2141,18 @@
       "source_location": "L94"
     },
     {
+      "id": "perftrace_ai_prompt_details_important_constraints_assumptions",
+      "label": "Important Constraints & Assumptions",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "5. Trace Advisor *(Local Rule Engine \u2014 works fully offline, no AI/internet needed)*",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "important constraints & assumptions",
+      "source_file": "perftrace_ai_prompt_details.md",
+      "source_location": "L272"
+    },
+    {
       "id": "perftrace_ai_prompt_details_internal_coordinate_system",
       "label": "Internal Coordinate System",
       "_origin": "ast",
@@ -1912,6 +2163,42 @@
       "norm_label": "internal coordinate system",
       "source_file": "perftrace_ai_prompt_details.md",
       "source_location": "L172"
+    },
+    {
+      "id": "perftrace_ai_prompt_details_left_panel_component_library",
+      "label": "Left Panel \u2014 Component Library",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "5. Trace Advisor *(Local Rule Engine \u2014 works fully offline, no AI/internet needed)*",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "left panel \u2014 component library",
+      "source_file": "perftrace_ai_prompt_details.md",
+      "source_location": "L234"
+    },
+    {
+      "id": "perftrace_ai_prompt_details_main_canvas_center",
+      "label": "Main Canvas (Center)",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "5. Trace Advisor *(Local Rule Engine \u2014 works fully offline, no AI/internet needed)*",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "main canvas (center)",
+      "source_file": "perftrace_ai_prompt_details.md",
+      "source_location": "L224"
+    },
+    {
+      "id": "perftrace_ai_prompt_details_perftrace_project_brief_for_ai_assistants",
+      "label": "PerfTrace \u2014 Project Brief for AI Assistants",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "5. Trace Advisor *(Local Rule Engine \u2014 works fully offline, no AI/internet needed)*",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "perftrace \u2014 project brief for ai assistants",
+      "source_file": "perftrace_ai_prompt_details.md",
+      "source_location": "L1"
     },
     {
       "id": "perftrace_ai_prompt_details_power_integrity_rules",
@@ -1936,6 +2223,18 @@
       "norm_label": "rework & testability suggestions",
       "source_file": "perftrace_ai_prompt_details.md",
       "source_location": "L120"
+    },
+    {
+      "id": "perftrace_ai_prompt_details_right_panel_collapsible_tabbed",
+      "label": "Right Panel (Collapsible, Tabbed)",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "5. Trace Advisor *(Local Rule Engine \u2014 works fully offline, no AI/internet needed)*",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "right panel (collapsible, tabbed)",
+      "source_file": "perftrace_ai_prompt_details.md",
+      "source_location": "L229"
     },
     {
       "id": "perftrace_ai_prompt_details_routing_geometry_rules",
@@ -1974,6 +2273,30 @@
       "source_location": "L105"
     },
     {
+      "id": "perftrace_ai_prompt_details_target_users",
+      "label": "Target Users",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "5. Trace Advisor *(Local Rule Engine \u2014 works fully offline, no AI/internet needed)*",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "target users",
+      "source_file": "perftrace_ai_prompt_details.md",
+      "source_location": "L13"
+    },
+    {
+      "id": "perftrace_ai_prompt_details_technical_context",
+      "label": "Technical Context",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "5. Trace Advisor *(Local Rule Engine \u2014 works fully offline, no AI/internet needed)*",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "technical context",
+      "source_file": "perftrace_ai_prompt_details.md",
+      "source_location": "L209"
+    },
+    {
       "id": "perftrace_ai_prompt_details_thermal_awareness_rules",
       "label": "Thermal Awareness Rules",
       "_origin": "ast",
@@ -1984,6 +2307,42 @@
       "norm_label": "thermal awareness rules",
       "source_file": "perftrace_ai_prompt_details.md",
       "source_location": "L111"
+    },
+    {
+      "id": "perftrace_ai_prompt_details_top_toolbar",
+      "label": "Top Toolbar",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "5. Trace Advisor *(Local Rule Engine \u2014 works fully offline, no AI/internet needed)*",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "top toolbar",
+      "source_file": "perftrace_ai_prompt_details.md",
+      "source_location": "L238"
+    },
+    {
+      "id": "perftrace_ai_prompt_details_typical_circuit_complexity",
+      "label": "Typical Circuit Complexity",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "5. Trace Advisor *(Local Rule Engine \u2014 works fully offline, no AI/internet needed)*",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "typical circuit complexity",
+      "source_file": "perftrace_ai_prompt_details.md",
+      "source_location": "L21"
+    },
+    {
+      "id": "perftrace_ai_prompt_details_ui_layout",
+      "label": "UI Layout",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "5. Trace Advisor *(Local Rule Engine \u2014 works fully offline, no AI/internet needed)*",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "ui layout",
+      "source_file": "perftrace_ai_prompt_details.md",
+      "source_location": "L222"
     },
     {
       "id": "perftrace_ai_prompt_details_user_configurable_options_for_board_side_view",
@@ -2022,6 +2381,18 @@
       "source_location": "L124"
     },
     {
+      "id": "perftrace_ai_prompt_details_what_i_am_building",
+      "label": "What I Am Building",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "5. Trace Advisor *(Local Rule Engine \u2014 works fully offline, no AI/internet needed)*",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "what i am building",
+      "source_file": "perftrace_ai_prompt_details.md",
+      "source_location": "L3"
+    },
+    {
       "id": "perftrace_ai_prompt_details_x_ray_mode",
       "label": "X-Ray Mode",
       "_origin": "ast",
@@ -2034,184 +2405,92 @@
       "source_location": "L181"
     },
     {
-      "id": "perftrace_ai_prompt_details",
-      "label": "perftrace_ai_prompt_details.md",
+      "id": "perftrace_app_src_components_preferencespanel",
+      "label": "PreferencesPanel.tsx",
       "_origin": "ast",
       "community": 13,
-      "community_name": "PerfTrace \u2014 Project Brief for AI Assistants",
-      "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "perftrace_ai_prompt_details.md",
-      "source_file": "perftrace_ai_prompt_details.md",
+      "community_name": "autoSave.ts",
+      "file_type": "code",
+      "norm_label": "preferencespanel.tsx",
+      "source_file": "perftrace-app/src/components/PreferencesPanel.tsx",
       "source_location": "L1"
     },
     {
-      "id": "perftrace_ai_prompt_details_analogy_to_understand_the_tool",
-      "label": "Analogy to Understand the Tool",
+      "id": "perftrace_app_src_components_preferencespanel_keyboard_shortcuts",
+      "label": "KEYBOARD_SHORTCUTS",
       "_origin": "ast",
       "community": 13,
-      "community_name": "PerfTrace \u2014 Project Brief for AI Assistants",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "analogy to understand the tool",
-      "source_file": "perftrace_ai_prompt_details.md",
-      "source_location": "L282"
+      "community_name": "autoSave.ts",
+      "file_type": "code",
+      "norm_label": "keyboard_shortcuts",
+      "source_file": "perftrace-app/src/components/PreferencesPanel.tsx",
+      "source_location": "L82"
     },
     {
-      "id": "perftrace_ai_prompt_details_bottom_status_bar",
-      "label": "Bottom Status Bar",
+      "id": "perftrace_app_src_components_recoverymodal",
+      "label": "RecoveryModal.tsx",
       "_origin": "ast",
       "community": 13,
-      "community_name": "PerfTrace \u2014 Project Brief for AI Assistants",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "bottom status bar",
-      "source_file": "perftrace_ai_prompt_details.md",
-      "source_location": "L244"
-    },
-    {
-      "id": "perftrace_ai_prompt_details_canvas_tooltips_hover",
-      "label": "Canvas Tooltips (Hover)",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "PerfTrace \u2014 Project Brief for AI Assistants",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "canvas tooltips (hover)",
-      "source_file": "perftrace_ai_prompt_details.md",
-      "source_location": "L251"
-    },
-    {
-      "id": "perftrace_ai_prompt_details_important_constraints_assumptions",
-      "label": "Important Constraints & Assumptions",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "PerfTrace \u2014 Project Brief for AI Assistants",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "important constraints & assumptions",
-      "source_file": "perftrace_ai_prompt_details.md",
-      "source_location": "L272"
-    },
-    {
-      "id": "perftrace_ai_prompt_details_left_panel_component_library",
-      "label": "Left Panel \u2014 Component Library",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "PerfTrace \u2014 Project Brief for AI Assistants",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "left panel \u2014 component library",
-      "source_file": "perftrace_ai_prompt_details.md",
-      "source_location": "L234"
-    },
-    {
-      "id": "perftrace_ai_prompt_details_main_canvas_center",
-      "label": "Main Canvas (Center)",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "PerfTrace \u2014 Project Brief for AI Assistants",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "main canvas (center)",
-      "source_file": "perftrace_ai_prompt_details.md",
-      "source_location": "L224"
-    },
-    {
-      "id": "perftrace_ai_prompt_details_perftrace_project_brief_for_ai_assistants",
-      "label": "PerfTrace \u2014 Project Brief for AI Assistants",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "PerfTrace \u2014 Project Brief for AI Assistants",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "perftrace \u2014 project brief for ai assistants",
-      "source_file": "perftrace_ai_prompt_details.md",
+      "community_name": "autoSave.ts",
+      "file_type": "code",
+      "norm_label": "recoverymodal.tsx",
+      "source_file": "perftrace-app/src/components/RecoveryModal.tsx",
       "source_location": "L1"
     },
     {
-      "id": "perftrace_ai_prompt_details_right_panel_collapsible_tabbed",
-      "label": "Right Panel (Collapsible, Tabbed)",
+      "id": "perftrace_app_src_io_autosave",
+      "label": "autoSave.ts",
       "_origin": "ast",
       "community": 13,
-      "community_name": "PerfTrace \u2014 Project Brief for AI Assistants",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "right panel (collapsible, tabbed)",
-      "source_file": "perftrace_ai_prompt_details.md",
-      "source_location": "L229"
+      "community_name": "autoSave.ts",
+      "file_type": "code",
+      "norm_label": "autosave.ts",
+      "source_file": "perftrace-app/src/io/autoSave.ts",
+      "source_location": "L1"
     },
     {
-      "id": "perftrace_ai_prompt_details_target_users",
-      "label": "Target Users",
+      "id": "perftrace_app_src_store_preferencesstore",
+      "label": "preferencesStore.ts",
       "_origin": "ast",
       "community": 13,
-      "community_name": "PerfTrace \u2014 Project Brief for AI Assistants",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "target users",
-      "source_file": "perftrace_ai_prompt_details.md",
-      "source_location": "L13"
+      "community_name": "autoSave.ts",
+      "file_type": "code",
+      "norm_label": "preferencesstore.ts",
+      "source_file": "perftrace-app/src/store/preferencesStore.ts",
+      "source_location": "L1"
     },
     {
-      "id": "perftrace_ai_prompt_details_technical_context",
-      "label": "Technical Context",
+      "id": "perftrace_app_src_store_preferencesstore_default_preferences",
+      "label": "DEFAULT_PREFERENCES",
       "_origin": "ast",
       "community": 13,
-      "community_name": "PerfTrace \u2014 Project Brief for AI Assistants",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "technical context",
-      "source_file": "perftrace_ai_prompt_details.md",
-      "source_location": "L209"
+      "community_name": "autoSave.ts",
+      "file_type": "code",
+      "norm_label": "default_preferences",
+      "source_file": "perftrace-app/src/store/preferencesStore.ts",
+      "source_location": "L39"
     },
     {
-      "id": "perftrace_ai_prompt_details_top_toolbar",
-      "label": "Top Toolbar",
+      "id": "perftrace_app_src_utils_theme",
+      "label": "theme.ts",
       "_origin": "ast",
       "community": 13,
-      "community_name": "PerfTrace \u2014 Project Brief for AI Assistants",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "top toolbar",
-      "source_file": "perftrace_ai_prompt_details.md",
-      "source_location": "L238"
+      "community_name": "autoSave.ts",
+      "file_type": "code",
+      "norm_label": "theme.ts",
+      "source_file": "perftrace-app/src/utils/theme.ts",
+      "source_location": "L1"
     },
     {
-      "id": "perftrace_ai_prompt_details_typical_circuit_complexity",
-      "label": "Typical Circuit Complexity",
+      "id": "ref_zustand",
+      "label": "zustand",
       "_origin": "ast",
       "community": 13,
-      "community_name": "PerfTrace \u2014 Project Brief for AI Assistants",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "typical circuit complexity",
-      "source_file": "perftrace_ai_prompt_details.md",
-      "source_location": "L21"
-    },
-    {
-      "id": "perftrace_ai_prompt_details_ui_layout",
-      "label": "UI Layout",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "PerfTrace \u2014 Project Brief for AI Assistants",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "ui layout",
-      "source_file": "perftrace_ai_prompt_details.md",
-      "source_location": "L222"
-    },
-    {
-      "id": "perftrace_ai_prompt_details_what_i_am_building",
-      "label": "What I Am Building",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "PerfTrace \u2014 Project Brief for AI Assistants",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "what i am building",
-      "source_file": "perftrace_ai_prompt_details.md",
-      "source_location": "L3"
+      "community_name": "autoSave.ts",
+      "file_type": "concept",
+      "norm_label": "zustand",
+      "source_file": "perftrace-app/package.json",
+      "source_location": "L25"
     },
     {
       "id": "perftrace_app_readme",
@@ -2485,17 +2764,6 @@
       "source_location": "L14"
     },
     {
-      "id": "ref_clsx",
-      "label": "clsx",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "package.json",
-      "file_type": "concept",
-      "norm_label": "clsx",
-      "source_file": "perftrace-app/package.json",
-      "source_location": "L15"
-    },
-    {
       "id": "ref_eslint",
       "label": "eslint",
       "_origin": "ast",
@@ -2705,36 +2973,14 @@
       "source_location": "L33"
     },
     {
-      "id": "ref_zustand",
-      "label": "zustand",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "package.json",
-      "file_type": "concept",
-      "norm_label": "zustand",
-      "source_file": "perftrace-app/package.json",
-      "source_location": "L25"
-    },
-    {
-      "id": "perftrace_app_src_components_recoverymodal",
-      "label": "RecoveryModal.tsx",
+      "id": "perftrace_app_src_components_toolbar",
+      "label": "Toolbar.tsx",
       "_origin": "ast",
       "community": 3,
-      "community_name": "useFileOps.ts",
+      "community_name": "store/index.ts",
       "file_type": "code",
-      "norm_label": "recoverymodal.tsx",
-      "source_file": "perftrace-app/src/components/RecoveryModal.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "perftrace_app_src_hooks_useautosave",
-      "label": "useAutoSave.ts",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "useFileOps.ts",
-      "file_type": "code",
-      "norm_label": "useautosave.ts",
-      "source_file": "perftrace-app/src/hooks/useAutoSave.ts",
+      "norm_label": "toolbar.tsx",
+      "source_file": "perftrace-app/src/components/Toolbar.tsx",
       "source_location": "L1"
     },
     {
@@ -2742,21 +2988,10 @@
       "label": "useFileOps.ts",
       "_origin": "ast",
       "community": 3,
-      "community_name": "useFileOps.ts",
+      "community_name": "store/index.ts",
       "file_type": "code",
       "norm_label": "usefileops.ts",
       "source_file": "perftrace-app/src/hooks/useFileOps.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "perftrace_app_src_io_autosave",
-      "label": "autoSave.ts",
-      "_origin": "ast",
-      "community": 3,
-      "community_name": "useFileOps.ts",
-      "file_type": "code",
-      "norm_label": "autosave.ts",
-      "source_file": "perftrace-app/src/io/autoSave.ts",
       "source_location": "L1"
     },
     {
@@ -2764,10 +2999,21 @@
       "label": "projectFile.ts",
       "_origin": "ast",
       "community": 3,
-      "community_name": "useFileOps.ts",
+      "community_name": "store/index.ts",
       "file_type": "code",
       "norm_label": "projectfile.ts",
       "source_file": "perftrace-app/src/io/projectFile.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "perftrace_app_src_store_index",
+      "label": "store/index.ts",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "store/index.ts",
+      "file_type": "code",
+      "norm_label": "store/index.ts",
+      "source_file": "perftrace-app/src/store/index.ts",
       "source_location": "L1"
     },
     {
@@ -2775,7 +3021,7 @@
       "label": "projectSchema.ts",
       "_origin": "ast",
       "community": 3,
-      "community_name": "useFileOps.ts",
+      "community_name": "store/index.ts",
       "file_type": "code",
       "norm_label": "projectschema.ts",
       "source_file": "perftrace-app/src/types/projectSchema.ts",
@@ -2786,11 +3032,22 @@
       "label": "SCHEMA_VERSION",
       "_origin": "ast",
       "community": 3,
-      "community_name": "useFileOps.ts",
+      "community_name": "store/index.ts",
       "file_type": "code",
       "norm_label": "schema_version",
       "source_file": "perftrace-app/src/types/projectSchema.ts",
       "source_location": "L7"
+    },
+    {
+      "id": "ref_clsx",
+      "label": "clsx",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "store/index.ts",
+      "file_type": "concept",
+      "norm_label": "clsx",
+      "source_file": "perftrace-app/package.json",
+      "source_location": "L15"
     },
     {
       "id": "perftrace_app_src_canvas_boardcanvas",
@@ -2812,6 +3069,17 @@
       "file_type": "code",
       "norm_label": "componentrenderer.tsx",
       "source_file": "perftrace-app/src/canvas/ComponentRenderer.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "perftrace_app_src_components_sidebar",
+      "label": "Sidebar.tsx",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "BoardCanvas.tsx",
+      "file_type": "code",
+      "norm_label": "sidebar.tsx",
+      "source_file": "perftrace-app/src/components/Sidebar.tsx",
       "source_location": "L1"
     },
     {
@@ -3611,7 +3879,7 @@
       "label": "perftrace_app_src_index",
       "_origin": "semantic",
       "community": 1,
-      "community_name": "store/index.ts",
+      "community_name": "App.tsx",
       "external": true,
       "file_type": "concept",
       "norm_label": "perftrace_app_src_index",
@@ -3623,7 +3891,7 @@
       "label": "ref_react_dom_client",
       "_origin": "semantic",
       "community": 1,
-      "community_name": "store/index.ts",
+      "community_name": "App.tsx",
       "external": true,
       "file_type": "concept",
       "norm_label": "ref_react_dom_client",
@@ -3665,7 +3933,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "perftrace-app/src/App.tsx",
-      "source_location": "L18",
+      "source_location": "L21",
       "weight": 1.0
     },
     {
@@ -3677,7 +3945,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "perftrace-app/src/App.tsx",
-      "source_location": "L21",
+      "source_location": "L24",
       "weight": 1.0
     },
     {
@@ -3689,7 +3957,43 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "perftrace-app/src/App.tsx",
-      "source_location": "L23",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_app_app",
+      "target": "perftrace_app_src_store_preferencesstore_usepreferencesstore",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "perftrace-app/src/App.tsx",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_app_app",
+      "target": "perftrace_app_src_io_autosave_loadpreferences",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "perftrace-app/src/App.tsx",
+      "source_location": "L32",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_app_app",
+      "target": "perftrace_app_src_utils_theme_applytheme",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "perftrace-app/src/App.tsx",
+      "source_location": "L35",
       "weight": 1.0
     },
     {
@@ -3701,7 +4005,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "perftrace-app/src/App.tsx",
-      "source_location": "L27",
+      "source_location": "L43",
       "weight": 1.0
     },
     {
@@ -3713,12 +4017,24 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "perftrace-app/src/canvas/BoardCanvas.tsx",
-      "source_location": "L41",
+      "source_location": "L40",
       "weight": 1.0
     },
     {
       "source": "perftrace_app_src_canvas_boardcanvas_boardcanvas",
       "target": "perftrace_app_src_store_index_useuistore",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "perftrace-app/src/canvas/BoardCanvas.tsx",
+      "source_location": "L41",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_canvas_boardcanvas_boardcanvas",
+      "target": "perftrace_app_src_store_preferencesstore_usepreferencesstore",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -3737,7 +4053,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "perftrace-app/src/canvas/BoardCanvas.tsx",
-      "source_location": "L464",
+      "source_location": "L465",
       "weight": 1.0
     },
     {
@@ -3797,7 +4113,91 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "perftrace-app/src/components/LayerScrubber.tsx",
-      "source_location": "L6",
+      "source_location": "L34",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_layerscrubber_layerscrubber",
+      "target": "perftrace_app_src_store_preferencesstore_usepreferencesstore",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "perftrace-app/src/components/LayerScrubber.tsx",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_layerscrubber_layerscrubber",
+      "target": "perftrace_app_src_components_layerscrubber_snaptonearest",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "perftrace-app/src/components/LayerScrubber.tsx",
+      "source_location": "L38",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_layerscrubber_layerscrubber",
+      "target": "perftrace_app_src_components_layerscrubber_getscrubberlabel",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "perftrace-app/src/components/LayerScrubber.tsx",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_preferencespanel_preferencespanel",
+      "target": "perftrace_app_src_store_index_useuistore",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "perftrace-app/src/components/PreferencesPanel.tsx",
+      "source_location": "L104",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_preferencespanel_preferencespanel",
+      "target": "perftrace_app_src_store_preferencesstore_usepreferencesstore",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "perftrace-app/src/components/PreferencesPanel.tsx",
+      "source_location": "L105",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_preferencespanel_preferencespanel",
+      "target": "perftrace_app_src_io_autosave_savepreferences",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "perftrace-app/src/components/PreferencesPanel.tsx",
+      "source_location": "L113",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_preferencespanel_preferencespanel",
+      "target": "perftrace_app_src_utils_theme_applytheme",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "perftrace-app/src/components/PreferencesPanel.tsx",
+      "source_location": "L139",
       "weight": 1.0
     },
     {
@@ -3809,7 +4209,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "perftrace-app/src/components/PropertiesPanel.tsx",
-      "source_location": "L21",
+      "source_location": "L29",
       "weight": 1.0
     },
     {
@@ -3821,7 +4221,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "perftrace-app/src/components/PropertiesPanel.tsx",
-      "source_location": "L22",
+      "source_location": "L30",
       "weight": 1.0
     },
     {
@@ -3905,7 +4305,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "perftrace-app/src/components/StatusBar.tsx",
-      "source_location": "L15",
+      "source_location": "L36",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_statusbar_statusbar",
+      "target": "perftrace_app_src_store_preferencesstore_usepreferencesstore",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "perftrace-app/src/components/StatusBar.tsx",
+      "source_location": "L37",
       "weight": 1.0
     },
     {
@@ -3917,7 +4329,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "perftrace-app/src/components/StatusBar.tsx",
-      "source_location": "L19",
+      "source_location": "L53",
       "weight": 1.0
     },
     {
@@ -3977,7 +4389,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "perftrace-app/src/hooks/useAutoSave.ts",
-      "source_location": "L41",
+      "source_location": "L44",
       "weight": 1.0
     },
     {
@@ -4049,7 +4461,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "perftrace-app/src/io/autoSave.ts",
-      "source_location": "L97",
+      "source_location": "L107",
       "weight": 1.0
     },
     {
@@ -4061,7 +4473,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "perftrace-app/src/io/autoSave.ts",
-      "source_location": "L98",
+      "source_location": "L108",
       "weight": 1.0
     },
     {
@@ -4073,7 +4485,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "perftrace-app/src/io/autoSave.ts",
-      "source_location": "L55",
+      "source_location": "L65",
       "weight": 1.0
     },
     {
@@ -4085,7 +4497,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "perftrace-app/src/io/autoSave.ts",
-      "source_location": "L85",
+      "source_location": "L95",
       "weight": 1.0
     },
     {
@@ -4097,7 +4509,31 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "perftrace-app/src/io/autoSave.ts",
-      "source_location": "L86",
+      "source_location": "L96",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_io_autosave_loadpreferences",
+      "target": "perftrace_app_src_io_autosave_getdb",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "perftrace-app/src/io/autoSave.ts",
+      "source_location": "L139",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_io_autosave_savepreferences",
+      "target": "perftrace_app_src_io_autosave_getdb",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "perftrace-app/src/io/autoSave.ts",
+      "source_location": "L122",
       "weight": 1.0
     },
     {
@@ -4109,7 +4545,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "perftrace-app/src/io/autoSave.ts",
-      "source_location": "L71",
+      "source_location": "L81",
       "weight": 1.0
     },
     {
@@ -4121,7 +4557,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "perftrace-app/src/io/autoSave.ts",
-      "source_location": "L72",
+      "source_location": "L82",
       "weight": 1.0
     },
     {
@@ -4313,7 +4749,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "perftrace-app/src/rules/useAdvisor.ts",
-      "source_location": "L13",
+      "source_location": "L14",
       "weight": 1.0
     },
     {
@@ -4325,7 +4761,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "perftrace-app/src/rules/useAdvisor.ts",
-      "source_location": "L19",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_rules_useadvisor_useadvisor",
+      "target": "perftrace_app_src_store_preferencesstore_usepreferencesstore",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "perftrace-app/src/rules/useAdvisor.ts",
+      "source_location": "L22",
       "weight": 1.0
     },
     {
@@ -4337,7 +4785,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "perftrace-app/src/rules/useAdvisor.ts",
-      "source_location": "L31",
+      "source_location": "L40",
       "weight": 1.0
     },
     {
@@ -4361,7 +4809,7 @@
       "confidence_score": 1.0,
       "context": "field",
       "source_file": "perftrace-app/src/canvas/BoardCanvas.tsx",
-      "source_location": "L30",
+      "source_location": "L29",
       "weight": 1.0
     },
     {
@@ -4822,7 +5270,7 @@
     },
     {
       "source": "perftrace_app_src_app",
-      "target": "perftrace_app_src_rules_useadvisor_useadvisor",
+      "target": "perftrace_app_src_components_preferencespanel_preferencespanel",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -4834,7 +5282,7 @@
     },
     {
       "source": "perftrace_app_src_app",
-      "target": "perftrace_app_src_hooks_useautosave_useautosave",
+      "target": "perftrace_app_src_rules_useadvisor_useadvisor",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -4846,7 +5294,7 @@
     },
     {
       "source": "perftrace_app_src_app",
-      "target": "perftrace_app_src_io_autosave_loadautosave",
+      "target": "perftrace_app_src_hooks_useautosave_useautosave",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -4858,7 +5306,7 @@
     },
     {
       "source": "perftrace_app_src_app",
-      "target": "perftrace_app_src_store_index_useuistore",
+      "target": "perftrace_app_src_io_autosave_loadautosave",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -4866,6 +5314,54 @@
       "context": "import",
       "source_file": "perftrace-app/src/App.tsx",
       "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_app",
+      "target": "perftrace_app_src_io_autosave_loadpreferences",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/App.tsx",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_app",
+      "target": "perftrace_app_src_store_index_useuistore",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/App.tsx",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_app",
+      "target": "perftrace_app_src_store_preferencesstore_usepreferencesstore",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/App.tsx",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_app",
+      "target": "perftrace_app_src_utils_theme_applytheme",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/App.tsx",
+      "source_location": "L17",
       "weight": 1.0
     },
     {
@@ -4973,7 +5469,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "perftrace-app/src/canvas/BoardCanvas.tsx",
-      "source_location": "L10",
+      "source_location": "L11",
       "weight": 1.0
     },
     {
@@ -5002,19 +5498,19 @@
     },
     {
       "source": "perftrace_app_src_canvas_boardcanvas",
-      "target": "perftrace_app_src_canvas_componentrenderer_componentrenderer",
+      "target": "perftrace_app_src_store_preferencesstore_usepreferencesstore",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "perftrace-app/src/canvas/BoardCanvas.tsx",
-      "source_location": "L5",
+      "source_location": "L4",
       "weight": 1.0
     },
     {
       "source": "perftrace_app_src_canvas_boardcanvas",
-      "target": "perftrace_app_src_types_componentlibrary_componentdefinition",
+      "target": "perftrace_app_src_canvas_componentrenderer_componentrenderer",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5026,7 +5522,7 @@
     },
     {
       "source": "perftrace_app_src_canvas_boardcanvas",
-      "target": "perftrace_app_src_types_componentlibrary_component_library",
+      "target": "perftrace_app_src_types_componentlibrary_componentdefinition",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5038,7 +5534,7 @@
     },
     {
       "source": "perftrace_app_src_canvas_boardcanvas",
-      "target": "perftrace_app_src_types_index_advisorwarning",
+      "target": "perftrace_app_src_types_componentlibrary_component_library",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5046,6 +5542,18 @@
       "context": "import",
       "source_file": "perftrace-app/src/canvas/BoardCanvas.tsx",
       "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_canvas_boardcanvas",
+      "target": "perftrace_app_src_types_index_advisorwarning",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/canvas/BoardCanvas.tsx",
+      "source_location": "L9",
       "weight": 1.0
     },
     {
@@ -5057,7 +5565,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "perftrace-app/src/canvas/BoardCanvas.tsx",
-      "source_location": "L8",
+      "source_location": "L9",
       "weight": 1.0
     },
     {
@@ -5069,7 +5577,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "perftrace-app/src/canvas/BoardCanvas.tsx",
-      "source_location": "L8",
+      "source_location": "L9",
       "weight": 1.0
     },
     {
@@ -5154,6 +5662,78 @@
       "context": "import",
       "source_file": "perftrace-app/src/components/LayerScrubber.tsx",
       "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_layerscrubber",
+      "target": "perftrace_app_src_store_preferencesstore_usepreferencesstore",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/components/LayerScrubber.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_preferencespanel",
+      "target": "perftrace_app_src_store_index_useuistore",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/components/PreferencesPanel.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_preferencespanel",
+      "target": "perftrace_app_src_store_preferencesstore_usepreferencesstore",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/components/PreferencesPanel.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_preferencespanel",
+      "target": "perftrace_app_src_store_preferencesstore_apptheme",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/components/PreferencesPanel.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_preferencespanel",
+      "target": "perftrace_app_src_io_autosave_savepreferences",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/components/PreferencesPanel.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_preferencespanel",
+      "target": "perftrace_app_src_utils_theme_applytheme",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/components/PreferencesPanel.tsx",
+      "source_location": "L7",
       "weight": 1.0
     },
     {
@@ -5325,6 +5905,30 @@
       "weight": 1.0
     },
     {
+      "source": "perftrace_app_src_components_statusbar",
+      "target": "perftrace_app_src_store_preferencesstore_usepreferencesstore",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/components/StatusBar.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_statusbar",
+      "target": "perftrace_app_src_types_index_drawingtool",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/components/StatusBar.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
       "source": "perftrace_app_src_components_toolbar",
       "target": "perftrace_app_src_hooks_usefileops_usefileops",
       "relation": "imports",
@@ -5422,7 +6026,7 @@
     },
     {
       "source": "perftrace_app_src_hooks_useautosave",
-      "target": "perftrace_app_src_io_autosave_scheduleautosave",
+      "target": "perftrace_app_src_store_preferencesstore_usepreferencesstore",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5434,7 +6038,7 @@
     },
     {
       "source": "perftrace_app_src_hooks_useautosave",
-      "target": "perftrace_app_src_types_projectschema_perftraceproject",
+      "target": "perftrace_app_src_io_autosave_scheduleautosave",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5446,7 +6050,7 @@
     },
     {
       "source": "perftrace_app_src_hooks_useautosave",
-      "target": "perftrace_app_src_types_projectschema_schema_version",
+      "target": "perftrace_app_src_types_projectschema_perftraceproject",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5454,6 +6058,18 @@
       "context": "import",
       "source_file": "perftrace-app/src/hooks/useAutoSave.ts",
       "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_hooks_useautosave",
+      "target": "perftrace_app_src_types_projectschema_schema_version",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/hooks/useAutoSave.ts",
+      "source_location": "L6",
       "weight": 1.0
     },
     {
@@ -5550,6 +6166,18 @@
       "context": "import",
       "source_file": "perftrace-app/src/io/autoSave.ts",
       "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_io_autosave",
+      "target": "perftrace_app_src_store_preferencesstore_userpreferences",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/io/autoSave.ts",
+      "source_location": "L2",
       "weight": 1.0
     },
     {
@@ -5950,7 +6578,7 @@
     },
     {
       "source": "perftrace_app_src_rules_useadvisor",
-      "target": "perftrace_app_src_rules_index_runallrules",
+      "target": "perftrace_app_src_store_preferencesstore_usepreferencesstore",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5962,7 +6590,7 @@
     },
     {
       "source": "perftrace_app_src_rules_useadvisor",
-      "target": "perftrace_app_src_types_index_boardstate",
+      "target": "perftrace_app_src_rules_index_runallrules",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5970,6 +6598,18 @@
       "context": "import",
       "source_file": "perftrace-app/src/rules/useAdvisor.ts",
       "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_rules_useadvisor",
+      "target": "perftrace_app_src_types_index_boardstate",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/rules/useAdvisor.ts",
+      "source_location": "L5",
       "weight": 1.0
     },
     {
@@ -6105,6 +6745,18 @@
       "weight": 1.0
     },
     {
+      "source": "perftrace_app_src_utils_theme",
+      "target": "perftrace_app_src_store_preferencesstore_apptheme",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/utils/theme.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
       "source": "perftrace_app_eslint_config",
       "target": "ref_eslint_js",
       "relation": "imports_from",
@@ -6202,7 +6854,7 @@
     },
     {
       "source": "perftrace_app_src_app",
-      "target": "perftrace_app_src_rules_useadvisor",
+      "target": "perftrace_app_src_components_preferencespanel",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -6214,7 +6866,7 @@
     },
     {
       "source": "perftrace_app_src_app",
-      "target": "perftrace_app_src_hooks_useautosave",
+      "target": "perftrace_app_src_rules_useadvisor",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -6226,7 +6878,7 @@
     },
     {
       "source": "perftrace_app_src_app",
-      "target": "perftrace_app_src_io_autosave",
+      "target": "perftrace_app_src_hooks_useautosave",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -6238,7 +6890,7 @@
     },
     {
       "source": "perftrace_app_src_app",
-      "target": "perftrace_app_src_store_index",
+      "target": "perftrace_app_src_io_autosave",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -6246,6 +6898,42 @@
       "context": "import",
       "source_file": "perftrace-app/src/App.tsx",
       "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_app",
+      "target": "perftrace_app_src_store_index",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/App.tsx",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_app",
+      "target": "perftrace_app_src_store_preferencesstore",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/App.tsx",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_app",
+      "target": "perftrace_app_src_utils_theme",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/App.tsx",
+      "source_location": "L17",
       "weight": 1.0
     },
     {
@@ -6358,7 +7046,7 @@
     },
     {
       "source": "perftrace_app_src_canvas_boardcanvas",
-      "target": "perftrace_app_src_components_tracecompletionpopup",
+      "target": "ref_uuid",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -6366,6 +7054,18 @@
       "context": "import",
       "source_file": "perftrace-app/src/canvas/BoardCanvas.tsx",
       "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_canvas_boardcanvas",
+      "target": "perftrace_app_src_components_tracecompletionpopup",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/canvas/BoardCanvas.tsx",
+      "source_location": "L11",
       "weight": 1.0
     },
     {
@@ -6394,7 +7094,7 @@
     },
     {
       "source": "perftrace_app_src_canvas_boardcanvas",
-      "target": "ref_konva_lib_node",
+      "target": "perftrace_app_src_store_preferencesstore",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -6402,6 +7102,18 @@
       "context": "import",
       "source_file": "perftrace-app/src/canvas/BoardCanvas.tsx",
       "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_canvas_boardcanvas",
+      "target": "ref_konva_lib_node",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/canvas/BoardCanvas.tsx",
+      "source_location": "L5",
       "type_only": true,
       "weight": 1.0
     },
@@ -6414,25 +7126,12 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "perftrace-app/src/canvas/BoardCanvas.tsx",
-      "source_location": "L5",
+      "source_location": "L6",
       "weight": 1.0
     },
     {
       "source": "perftrace_app_src_canvas_boardcanvas",
       "target": "perftrace_app_src_types_componentlibrary",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "perftrace-app/src/canvas/BoardCanvas.tsx",
-      "source_location": "L7",
-      "type_only": true,
-      "weight": 1.0
-    },
-    {
-      "source": "perftrace_app_src_canvas_boardcanvas",
-      "target": "perftrace_app_src_types_index",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -6445,7 +7144,7 @@
     },
     {
       "source": "perftrace_app_src_canvas_boardcanvas",
-      "target": "ref_uuid",
+      "target": "perftrace_app_src_types_index",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -6453,6 +7152,7 @@
       "context": "import",
       "source_file": "perftrace-app/src/canvas/BoardCanvas.tsx",
       "source_location": "L9",
+      "type_only": true,
       "weight": 1.0
     },
     {
@@ -6579,7 +7279,7 @@
     },
     {
       "source": "perftrace_app_src_components_layerscrubber",
-      "target": "ref_lucide_react",
+      "target": "perftrace_app_src_store_preferencesstore",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -6587,6 +7287,91 @@
       "context": "import",
       "source_file": "perftrace-app/src/components/LayerScrubber.tsx",
       "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_layerscrubber",
+      "target": "ref_lucide_react",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/components/LayerScrubber.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_preferencespanel",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/components/PreferencesPanel.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_preferencespanel",
+      "target": "ref_lucide_react",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/components/PreferencesPanel.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_preferencespanel",
+      "target": "perftrace_app_src_store_index",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/components/PreferencesPanel.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_preferencespanel",
+      "target": "perftrace_app_src_store_preferencesstore",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/components/PreferencesPanel.tsx",
+      "source_location": "L5",
+      "type_only": true,
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_preferencespanel",
+      "target": "perftrace_app_src_io_autosave",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/components/PreferencesPanel.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_preferencespanel",
+      "target": "perftrace_app_src_utils_theme",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/components/PreferencesPanel.tsx",
+      "source_location": "L7",
       "weight": 1.0
     },
     {
@@ -6797,6 +7582,43 @@
       "weight": 1.0
     },
     {
+      "source": "perftrace_app_src_components_statusbar",
+      "target": "perftrace_app_src_store_preferencesstore",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/components/StatusBar.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_statusbar",
+      "target": "perftrace_app_src_types_index",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/components/StatusBar.tsx",
+      "source_location": "L4",
+      "type_only": true,
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_statusbar",
+      "target": "ref_lucide_react",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/components/StatusBar.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
       "source": "perftrace_app_src_components_toolbar",
       "target": "ref_react",
       "relation": "imports_from",
@@ -6968,7 +7790,7 @@
     },
     {
       "source": "perftrace_app_src_hooks_useautosave",
-      "target": "perftrace_app_src_io_autosave",
+      "target": "perftrace_app_src_store_preferencesstore",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -6980,6 +7802,18 @@
     },
     {
       "source": "perftrace_app_src_hooks_useautosave",
+      "target": "perftrace_app_src_io_autosave",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/hooks/useAutoSave.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_hooks_useautosave",
       "target": "perftrace_app_src_types_projectschema",
       "relation": "imports_from",
       "_origin": "ast",
@@ -6987,7 +7821,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "perftrace-app/src/hooks/useAutoSave.ts",
-      "source_location": "L5",
+      "source_location": "L6",
       "type_only": true,
       "weight": 1.0
     },
@@ -7062,6 +7896,19 @@
       "context": "import",
       "source_file": "perftrace-app/src/io/autoSave.ts",
       "source_location": "L1",
+      "type_only": true,
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_io_autosave",
+      "target": "perftrace_app_src_store_preferencesstore",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/io/autoSave.ts",
+      "source_location": "L2",
       "type_only": true,
       "weight": 1.0
     },
@@ -7400,7 +8247,7 @@
     },
     {
       "source": "perftrace_app_src_rules_useadvisor",
-      "target": "perftrace_app_src_rules_index",
+      "target": "perftrace_app_src_store_preferencesstore",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -7412,7 +8259,7 @@
     },
     {
       "source": "perftrace_app_src_rules_useadvisor",
-      "target": "perftrace_app_src_types_index",
+      "target": "perftrace_app_src_rules_index",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -7420,6 +8267,18 @@
       "context": "import",
       "source_file": "perftrace-app/src/rules/useAdvisor.ts",
       "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_rules_useadvisor",
+      "target": "perftrace_app_src_types_index",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/rules/useAdvisor.ts",
+      "source_location": "L5",
       "type_only": true,
       "weight": 1.0
     },
@@ -7462,6 +8321,18 @@
       "weight": 1.0
     },
     {
+      "source": "perftrace_app_src_store_preferencesstore",
+      "target": "ref_zustand",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/store/preferencesStore.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
       "source": "perftrace_app_src_types_projectschema",
       "target": "perftrace_app_src_types_index",
       "relation": "imports_from",
@@ -7470,6 +8341,19 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "perftrace-app/src/types/projectSchema.ts",
+      "source_location": "L1",
+      "type_only": true,
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_utils_theme",
+      "target": "perftrace_app_src_store_preferencesstore",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "perftrace-app/src/utils/theme.ts",
       "source_location": "L1",
       "type_only": true,
       "weight": 1.0
@@ -7520,6 +8404,18 @@
       "context": "type",
       "source_file": "perftrace-app/src/store/index.ts",
       "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_store_preferencesstore_preferencesstore",
+      "target": "perftrace_app_src_store_preferencesstore_userpreferences",
+      "relation": "inherits",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "type",
+      "source_file": "perftrace-app/src/store/preferencesStore.ts",
+      "source_location": "L25",
       "weight": 1.0
     },
     {
@@ -8377,7 +9273,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "perftrace-app/src/App.tsx",
-      "source_location": "L16",
+      "source_location": "L19",
       "weight": 1.0
     },
     {
@@ -8388,7 +9284,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "perftrace-app/src/canvas/BoardCanvas.tsx",
-      "source_location": "L17",
+      "source_location": "L16",
       "weight": 1.0
     },
     {
@@ -8399,7 +9295,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "perftrace-app/src/canvas/BoardCanvas.tsx",
-      "source_location": "L27",
+      "source_location": "L26",
       "weight": 1.0
     },
     {
@@ -8410,7 +9306,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "perftrace-app/src/canvas/BoardCanvas.tsx",
-      "source_location": "L33",
+      "source_location": "L32",
       "weight": 1.0
     },
     {
@@ -8421,7 +9317,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "perftrace-app/src/canvas/BoardCanvas.tsx",
-      "source_location": "L40",
+      "source_location": "L39",
       "weight": 1.0
     },
     {
@@ -8459,24 +9355,112 @@
     },
     {
       "source": "perftrace_app_src_components_layerscrubber",
+      "target": "perftrace_app_src_components_layerscrubber_getscrubberlabel",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "perftrace-app/src/components/LayerScrubber.tsx",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_layerscrubber",
+      "target": "perftrace_app_src_components_layerscrubber_snaptonearest",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "perftrace-app/src/components/LayerScrubber.tsx",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_layerscrubber",
       "target": "perftrace_app_src_components_layerscrubber_layerscrubber",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "perftrace-app/src/components/LayerScrubber.tsx",
-      "source_location": "L5",
+      "source_location": "L33",
       "weight": 1.0
     },
     {
-      "source": "perftrace_app_src_components_propertiespanel",
-      "target": "perftrace_app_src_components_propertiespanel_propertiespanel",
+      "source": "perftrace_app_src_components_layerscrubber",
+      "target": "perftrace_app_src_components_layerscrubber_snap_points",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "perftrace-app/src/components/PropertiesPanel.tsx",
-      "source_location": "L15",
+      "source_file": "perftrace-app/src/components/LayerScrubber.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_layerscrubber",
+      "target": "perftrace_app_src_components_layerscrubber_snap_labels",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "perftrace-app/src/components/LayerScrubber.tsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_preferencespanel",
+      "target": "perftrace_app_src_components_preferencespanel_preferencespanel",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "perftrace-app/src/components/PreferencesPanel.tsx",
+      "source_location": "L103",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_preferencespanel",
+      "target": "perftrace_app_src_components_preferencespanel_sectionheader",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "perftrace-app/src/components/PreferencesPanel.tsx",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_preferencespanel",
+      "target": "perftrace_app_src_components_preferencespanel_toggle",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "perftrace-app/src/components/PreferencesPanel.tsx",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_preferencespanel",
+      "target": "perftrace_app_src_components_preferencespanel_slider",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "perftrace-app/src/components/PreferencesPanel.tsx",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_preferencespanel",
+      "target": "perftrace_app_src_components_preferencespanel_keyboard_shortcuts",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "perftrace-app/src/components/PreferencesPanel.tsx",
+      "source_location": "L82",
       "weight": 1.0
     },
     {
@@ -8487,7 +9471,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "perftrace-app/src/components/PropertiesPanel.tsx",
-      "source_location": "L7",
+      "source_location": "L15",
       "weight": 1.0
     },
     {
@@ -8498,7 +9482,29 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "perftrace-app/src/components/PropertiesPanel.tsx",
-      "source_location": "L9",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_propertiespanel",
+      "target": "perftrace_app_src_components_propertiespanel_propertiespanel",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "perftrace-app/src/components/PropertiesPanel.tsx",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_propertiespanel",
+      "target": "perftrace_app_src_components_propertiespanel_net_signal_colors",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "perftrace-app/src/components/PropertiesPanel.tsx",
+      "source_location": "L7",
       "weight": 1.0
     },
     {
@@ -8536,13 +9542,35 @@
     },
     {
       "source": "perftrace_app_src_components_statusbar",
+      "target": "perftrace_app_src_components_statusbar_tool_labels",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "perftrace-app/src/components/StatusBar.tsx",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_statusbar",
+      "target": "perftrace_app_src_components_statusbar_tool_icons",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "perftrace-app/src/components/StatusBar.tsx",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_components_statusbar",
       "target": "perftrace_app_src_components_statusbar_statusbar",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "perftrace-app/src/components/StatusBar.tsx",
-      "source_location": "L14",
+      "source_location": "L35",
       "weight": 1.0
     },
     {
@@ -8553,7 +9581,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "perftrace-app/src/components/StatusBar.tsx",
-      "source_location": "L4",
+      "source_location": "L7",
       "weight": 1.0
     },
     {
@@ -8646,13 +9674,46 @@
     },
     {
       "source": "perftrace_app_src_io_autosave",
+      "target": "perftrace_app_src_io_autosave_clearautosave",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "perftrace-app/src/io/autoSave.ts",
+      "source_location": "L105",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_io_autosave",
+      "target": "perftrace_app_src_io_autosave_savepreferences",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "perftrace-app/src/io/autoSave.ts",
+      "source_location": "L120",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_io_autosave",
       "target": "perftrace_app_src_io_autosave_opendb",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "perftrace-app/src/io/autoSave.ts",
-      "source_location": "L10",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_io_autosave",
+      "target": "perftrace_app_src_io_autosave_loadpreferences",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "perftrace-app/src/io/autoSave.ts",
+      "source_location": "L137",
       "weight": 1.0
     },
     {
@@ -8663,7 +9724,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "perftrace-app/src/io/autoSave.ts",
-      "source_location": "L21",
+      "source_location": "L31",
       "weight": 1.0
     },
     {
@@ -8674,7 +9735,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "perftrace-app/src/io/autoSave.ts",
-      "source_location": "L31",
+      "source_location": "L41",
       "weight": 1.0
     },
     {
@@ -8685,7 +9746,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "perftrace-app/src/io/autoSave.ts",
-      "source_location": "L41",
+      "source_location": "L51",
       "weight": 1.0
     },
     {
@@ -8696,7 +9757,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "perftrace-app/src/io/autoSave.ts",
-      "source_location": "L54",
+      "source_location": "L64",
       "weight": 1.0
     },
     {
@@ -8707,7 +9768,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "perftrace-app/src/io/autoSave.ts",
-      "source_location": "L67",
+      "source_location": "L77",
       "weight": 1.0
     },
     {
@@ -8718,18 +9779,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "perftrace-app/src/io/autoSave.ts",
-      "source_location": "L83",
-      "weight": 1.0
-    },
-    {
-      "source": "perftrace_app_src_io_autosave",
-      "target": "perftrace_app_src_io_autosave_clearautosave",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "perftrace-app/src/io/autoSave.ts",
-      "source_location": "L95",
+      "source_location": "L93",
       "weight": 1.0
     },
     {
@@ -9015,7 +10065,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "perftrace-app/src/rules/useAdvisor.ts",
-      "source_location": "L12",
+      "source_location": "L13",
       "weight": 1.0
     },
     {
@@ -9048,7 +10098,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "perftrace-app/src/store/index.ts",
-      "source_location": "L222",
+      "source_location": "L229",
       "weight": 1.0
     },
     {
@@ -9071,6 +10121,61 @@
       "confidence_score": 1.0,
       "source_file": "perftrace-app/src/store/index.ts",
       "source_location": "L60",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_store_preferencesstore",
+      "target": "perftrace_app_src_store_preferencesstore_preferencesstore",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "perftrace-app/src/store/preferencesStore.ts",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_store_preferencesstore",
+      "target": "perftrace_app_src_store_preferencesstore_apptheme",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "perftrace-app/src/store/preferencesStore.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_store_preferencesstore",
+      "target": "perftrace_app_src_store_preferencesstore_default_preferences",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "perftrace-app/src/store/preferencesStore.ts",
+      "source_location": "L39",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_store_preferencesstore",
+      "target": "perftrace_app_src_store_preferencesstore_userpreferences",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "perftrace-app/src/store/preferencesStore.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_store_preferencesstore",
+      "target": "perftrace_app_src_store_preferencesstore_usepreferencesstore",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "perftrace-app/src/store/preferencesStore.ts",
+      "source_location": "L50",
       "weight": 1.0
     },
     {
@@ -9269,6 +10374,17 @@
       "confidence_score": 1.0,
       "source_file": "perftrace-app/src/types/projectSchema.ts",
       "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "perftrace_app_src_utils_theme",
+      "target": "perftrace_app_src_utils_theme_applytheme",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "perftrace-app/src/utils/theme.ts",
+      "source_location": "L10",
       "weight": 1.0
     },
     {
@@ -10174,5 +11290,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "29d61bfe347188e78485b267a06cf68820f5094a"
+  "built_at_commit": "1de774eb092ffe111c9e92546ab4f9b4b791bba0"
 }

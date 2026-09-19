@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { Stage, Layer, Circle, Rect, Text, Group, Line, Path } from 'react-konva';
 import { useBoardStore, useUIStore } from '../store';
+import { usePreferencesStore } from '../store/preferencesStore';
 import type { KonvaEventObject } from 'konva/lib/Node';
 import { ComponentRenderer } from './ComponentRenderer';
 import type { ComponentDefinition } from '../types/componentLibrary';
@@ -10,8 +11,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { TraceCompletionPopup } from '../components/TraceCompletionPopup';
 
 const GRID_SPACING = 20;
-const HOLE_RADIUS = 3;
-const PAD_RADIUS = 5;
 const MARGIN = 40; // Margin around the grid for labels and board edge
 
 const columnToLetter = (col: number) => {
@@ -39,7 +38,8 @@ interface PopupState {
 
 export const BoardCanvas: React.FC = () => {
   const { rows, cols, components, traces, addComponent, removeComponent, updateComponent, addTrace, removeTrace, updateTrace, commitHistory } = useBoardStore();
-  const { zoom, setZoom, setCursorHole, cursorHole, pan, setPan, selectedComponentId, setSelectedComponentId, activeTool, activeSignalType, selectedTraceId, setSelectedTraceId, boardSide, layerVisibility, scrubberValue, advisorWarnings, highlightedWarningId, isSidebarCollapsed, isRightPanelCollapsed } = useUIStore();
+  const { zoom, setZoom, setCursorHole, cursorHole, pan, setPan, selectedComponentId, setSelectedComponentId, activeTool, activeSignalType, selectedTraceId, setSelectedTraceId, boardSide, layerVisibility, scrubberValue, advisorWarnings, highlightedWarningId, advisorHighlightsEnabled, isSidebarCollapsed, isRightPanelCollapsed } = useUIStore();
+  const { gridDotSize, xrayOpacity } = usePreferencesStore();
 
   const stageRef = useRef<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -174,7 +174,8 @@ export const BoardCanvas: React.FC = () => {
     if (!layerVisibility.components) return 0;
     let baseOp = 1;
     if (scrubberValue < 60) baseOp = Math.max(0, (scrubberValue - 40) / 20);
-    return isBottom ? Math.min(baseOp, 0.3) : baseOp;
+    // On solder side, use x-ray opacity from preferences (default 30%)
+    return isBottom ? Math.min(baseOp, xrayOpacity / 100) : baseOp;
   };
 
   const getLabelOpacity = () => {
@@ -490,6 +491,8 @@ export const BoardCanvas: React.FC = () => {
   };
 
   const renderGridDots = () => {
+    const holeRadius = Math.max(1, gridDotSize * 0.6);   // hole scales with dot size
+    const padRadius  = Math.max(2, gridDotSize);          // outer pad
     const dots = [];
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
@@ -499,14 +502,14 @@ export const BoardCanvas: React.FC = () => {
         dots.push(
           <Group key={`hole-${c}-${r}`} x={x} y={y}>
             <Circle
-              radius={PAD_RADIUS}
+              radius={padRadius}
               stroke="#d4af37"
               strokeWidth={1.5}
               fill="#1f5d34"
               perfectDrawEnabled={false}
             />
             <Circle
-              radius={HOLE_RADIUS}
+              radius={holeRadius}
               fill="#0f111a"
               perfectDrawEnabled={false}
             />
@@ -668,6 +671,9 @@ export const BoardCanvas: React.FC = () => {
    * Warning/Suggestion are panel-only.
    */
   const renderAdvisorOverlays = () => {
+    // If highlights are disabled, render nothing
+    if (!advisorHighlightsEnabled) return [];
+
     const overlays: React.ReactNode[] = [];
 
     for (const warning of advisorWarnings) {
@@ -770,7 +776,7 @@ export const BoardCanvas: React.FC = () => {
   return (
     <div
       ref={containerRef}
-      className={`flex-1 bg-[#0f111a] overflow-hidden w-full h-full relative ${isMiddlePanning ? 'cursor-grabbing' : 'cursor-crosshair'}`}
+      className={`flex-1 bg-surface-base overflow-hidden w-full h-full relative ${isMiddlePanning ? 'cursor-grabbing' : 'cursor-crosshair'}`}
       onDrop={handleDrop}
       onDragOver={handleDragOver}
       onMouseDown={(e) => { if (e.button === 1) e.preventDefault(); }}

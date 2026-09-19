@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useBoardStore } from '../store';
+import { usePreferencesStore } from '../store/preferencesStore';
 import { scheduleAutoSave } from '../io/autoSave';
 import type { PerfTraceProject } from '../types/projectSchema';
 import { SCHEMA_VERSION } from '../types/projectSchema';
@@ -7,15 +8,17 @@ import { SCHEMA_VERSION } from '../types/projectSchema';
 /**
  * Mounts once in App.tsx.
  * Subscribes to board state and triggers debounced auto-save to IndexedDB
- * on every mutation. The auto-saved snapshot is a full PerfTraceProject
- * so it can be directly loaded by the recovery flow.
+ * on every mutation, but only when `autoSaveEnabled` preference is true.
  */
 export function useAutoSave(): void {
-  // Track last-seen serialised state so we don't double-save on unrelated re-renders
   const lastSaved = useRef<string>('');
 
   useEffect(() => {
     const unsubscribe = useBoardStore.subscribe((state) => {
+      // Check preference at call time (avoids stale closure)
+      const autoSaveEnabled = usePreferencesStore.getState().autoSaveEnabled;
+      if (!autoSaveEnabled) return;
+
       // Only auto-save when there are actual board contents
       if (state.components.length === 0 && state.traces.length === 0) return;
 

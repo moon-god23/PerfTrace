@@ -18,15 +18,15 @@
     "semantic_hash": "084b54ce447935d2e2d72d19133e45ad"
   },
   "perftrace-app/src/App.tsx": {
-    "mtime": 1789748255.653828,
-    "seen": 1789756587.7995086,
-    "ast_hash": "c3add32599856ffcd6ea92fb478609ee",
-    "semantic_hash": "c3add32599856ffcd6ea92fb478609ee"
+    "mtime": 1789808151.6364396,
+    "seen": 1789808644.0120432,
+    "ast_hash": "5739355666083f6fc177a48934c314fb",
+    "semantic_hash": ""
   },
   "perftrace-app/src/canvas/BoardCanvas.tsx": {
-    "mtime": 1789757994.5471218,
-    "seen": 1789758033.566318,
-    "ast_hash": "608622221ba8a8caa29af2452bf393b5",
+    "mtime": 1789809537.7614453,
+    "seen": 1789809562.4884393,
+    "ast_hash": "21df131f25ea04ce4a8bd1e1b986f709",
     "semantic_hash": ""
   },
   "perftrace-app/src/canvas/ComponentRenderer.tsx": {
@@ -42,16 +42,16 @@
     "semantic_hash": "2b0df5637614f618f8f1a683b5a6f9e9"
   },
   "perftrace-app/src/components/LayerScrubber.tsx": {
-    "mtime": 1779203980.944446,
-    "seen": 1789756587.799524,
-    "ast_hash": "5e7843134516a70f527c0d768c652eef",
-    "semantic_hash": "5e7843134516a70f527c0d768c652eef"
+    "mtime": 1789809471.0890472,
+    "seen": 1789809562.4884462,
+    "ast_hash": "a56da22c9b76f5edab70d6ba89912161",
+    "semantic_hash": ""
   },
   "perftrace-app/src/components/PropertiesPanel.tsx": {
-    "mtime": 1779372445.5513098,
-    "seen": 1789756587.7995274,
-    "ast_hash": "327a6458f06cfd6fe7ae02271e9129d3",
-    "semantic_hash": "327a6458f06cfd6fe7ae02271e9129d3"
+    "mtime": 1789808132.2309196,
+    "seen": 1789808644.0120559,
+    "ast_hash": "47393d976ad0eb5373eeef095fe11584",
+    "semantic_hash": ""
   },
   "perftrace-app/src/components/RecoveryModal.tsx": {
     "mtime": 1789748177.4919953,
@@ -66,27 +66,27 @@
     "semantic_hash": "a57fc1893ed06e13cb5643059d778195"
   },
   "perftrace-app/src/components/Sidebar.tsx": {
-    "mtime": 1779372356.4335997,
-    "seen": 1789756587.7995389,
-    "ast_hash": "526aa941565c6ca5fb0362c524f3f9ed",
-    "semantic_hash": "526aa941565c6ca5fb0362c524f3f9ed"
+    "mtime": 1789808066.8768072,
+    "seen": 1789808644.0120606,
+    "ast_hash": "3594ef884f2ee8b27b69904fb47855e9",
+    "semantic_hash": ""
   },
   "perftrace-app/src/components/StatusBar.tsx": {
-    "mtime": 1779371269.3240986,
-    "seen": 1789756587.7995422,
-    "ast_hash": "b56eafd22881d4b85ab5a0b82430716a",
-    "semantic_hash": "b56eafd22881d4b85ab5a0b82430716a"
+    "mtime": 1789809501.0760312,
+    "seen": 1789809562.4884567,
+    "ast_hash": "642570e2a1bd4795a86b653843765780",
+    "semantic_hash": ""
   },
   "perftrace-app/src/components/Toolbar.tsx": {
-    "mtime": 1789758155.9522817,
-    "seen": 1789758608.275198,
-    "ast_hash": "e51f4a3569f8d8d4df5161d9007151da",
+    "mtime": 1789808010.271591,
+    "seen": 1789808644.0120633,
+    "ast_hash": "31036766b0e3531a16b07dea51db2a9b",
     "semantic_hash": ""
   },
   "perftrace-app/src/components/TraceAdvisorPanel.tsx": {
-    "mtime": 1789757969.6777291,
-    "seen": 1789758033.5663798,
-    "ast_hash": "afb098a74b776c7f0f1c728ffc6e5062",
+    "mtime": 1789809517.8146894,
+    "seen": 1789809562.4884603,
+    "ast_hash": "179a06dccb9cc8094d8f314aa434d651",
     "semantic_hash": ""
   },
   "perftrace-app/src/components/TraceCompletionPopup.tsx": {
@@ -96,10 +96,10 @@
     "semantic_hash": "aaa473aa4d12e8f2d7ebec77e8837193"
   },
   "perftrace-app/src/hooks/useAutoSave.ts": {
-    "mtime": 1789748130.1058385,
-    "seen": 1789756587.799555,
-    "ast_hash": "7840b42b211569ce439192e7a4afe8e5",
-    "semantic_hash": "7840b42b211569ce439192e7a4afe8e5"
+    "mtime": 1789809418.8555553,
+    "seen": 1789809562.4884632,
+    "ast_hash": "776ea2acd5f2b51ab089422bddfa03bf",
+    "semantic_hash": ""
   },
   "perftrace-app/src/hooks/useFileOps.ts": {
     "mtime": 1789748153.276901,
@@ -108,10 +108,10 @@
     "semantic_hash": "fa770c65ff17961324f43aeb0ba180bc"
   },
   "perftrace-app/src/io/autoSave.ts": {
-    "mtime": 1789748075.7992148,
-    "seen": 1789756587.799562,
-    "ast_hash": "f5b2d5e0571699c0ac8754b0b123a6c8",
-    "semantic_hash": "f5b2d5e0571699c0ac8754b0b123a6c8"
+    "mtime": 1789807846.9553554,
+    "seen": 1789808644.012071,
+    "ast_hash": "a58798394deb35483b25b0a672f13691",
+    "semantic_hash": ""
   },
   "perftrace-app/src/io/projectFile.ts": {
     "mtime": 1789748057.083833,
@@ -168,16 +168,16 @@
     "semantic_hash": "bfc25045d3c4d4b3bb3e0c5d3e81f505"
   },
   "perftrace-app/src/rules/useAdvisor.ts": {
-    "mtime": 1779371140.403782,
-    "seen": 1789756587.799596,
-    "ast_hash": "69da104e8cd8c9ebf9f62299483dfcc7",
-    "semantic_hash": "69da104e8cd8c9ebf9f62299483dfcc7"
+    "mtime": 1789809404.9273295,
+    "seen": 1789809562.4884818,
+    "ast_hash": "033de17480d31390e567549161f36a6d",
+    "semantic_hash": ""
   },
   "perftrace-app/src/store/index.ts": {
-    "mtime": 1789748113.8731594,
-    "seen": 1789756587.7995994,
-    "ast_hash": "37295522bb284d6f1080e6453c3a802a",
-    "semantic_hash": "37295522bb284d6f1080e6453c3a802a"
+    "mtime": 1789809389.7601247,
+    "seen": 1789809562.4884834,
+    "ast_hash": "9901df9d02bd32ecd36e03e0a9b91333",
+    "semantic_hash": ""
   },
   "perftrace-app/src/types/componentLibrary.ts": {
     "mtime": 1779198733.8280873,
@@ -264,9 +264,9 @@
     "semantic_hash": ""
   },
   "progress.md": {
-    "mtime": 1789755919.1453662,
-    "seen": 1789757921.299962,
-    "ast_hash": "f2cc025030424903dac0dd8f9c2dc794",
+    "mtime": 1789808590.9459836,
+    "seen": 1789808644.0121107,
+    "ast_hash": "b479b7b707fe249bddb9eb7710dcb844",
     "semantic_hash": ""
   },
   "perftrace-app/public/favicon.svg": {
@@ -297,6 +297,24 @@
     "mtime": 1778970186.1186445,
     "seen": 1789757921.299973,
     "ast_hash": "9960a24288958394ac50e57ff638b036",
+    "semantic_hash": ""
+  },
+  "perftrace-app/src/components/PreferencesPanel.tsx": {
+    "mtime": 1789807911.721423,
+    "seen": 1789808644.0120537,
+    "ast_hash": "4b7d11f80c3b9c6ff77835ed0d65819c",
+    "semantic_hash": ""
+  },
+  "perftrace-app/src/store/preferencesStore.ts": {
+    "mtime": 1789807826.2670562,
+    "seen": 1789808644.0120876,
+    "ast_hash": "86e024dac15cd28d016e8e99e39a96a7",
+    "semantic_hash": ""
+  },
+  "perftrace-app/src/utils/theme.ts": {
+    "mtime": 1789807927.751515,
+    "seen": 1789808644.0120928,
+    "ast_hash": "95f818472d80fd5bc492198f295218a9",
     "semantic_hash": ""
   }
 }

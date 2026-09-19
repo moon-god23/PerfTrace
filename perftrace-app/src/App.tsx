@@ -8,10 +8,13 @@ import { BoardSizeModal } from './components/BoardSizeModal';
 import { LayerScrubber } from './components/LayerScrubber';
 import { RecoveryModal } from './components/RecoveryModal';
 import { SaveErrorToast } from './components/SaveErrorToast';
+import { PreferencesPanel } from './components/PreferencesPanel';
 import { useAdvisor } from './rules/useAdvisor';
 import { useAutoSave } from './hooks/useAutoSave';
-import { loadAutoSave } from './io/autoSave';
+import { loadAutoSave, loadPreferences } from './io/autoSave';
 import { useUIStore } from './store';
+import { usePreferencesStore } from './store/preferencesStore';
+import { applyTheme } from './utils/theme';
 
 function App() {
   // Run the Trace Advisor rule engine — debounced 300ms, updates store on every board change
@@ -21,9 +24,22 @@ function App() {
   useAutoSave();
 
   const { setIsRecoveryModalOpen } = useUIStore();
+  const { loadPreferences: loadPrefsToStore, theme } = usePreferencesStore();
 
-  // On first mount, check if an auto-save exists and open the recovery modal
+  // On first mount: load preferences from IndexedDB + apply theme; check for auto-saved board
   useEffect(() => {
+    // Load and apply saved user preferences
+    loadPreferences().then((savedPrefs) => {
+      if (savedPrefs) {
+        loadPrefsToStore(savedPrefs);
+        applyTheme(savedPrefs.theme ?? 'dark');
+      } else {
+        // Apply default theme
+        applyTheme(theme);
+      }
+    });
+
+    // Check for unsaved board session
     loadAutoSave().then((saved) => {
       if (saved) {
         setIsRecoveryModalOpen(true);
@@ -33,7 +49,7 @@ function App() {
   }, []);
 
   return (
-    <div className="h-screen w-screen flex flex-col bg-[#0f111a] text-gray-100 overflow-hidden">
+    <div className="h-screen w-screen flex flex-col bg-surface-base text-main overflow-hidden">
       <Toolbar />
       <div className="flex-1 relative flex overflow-hidden">
         <Sidebar />
@@ -47,6 +63,9 @@ function App() {
       {/* Phase 6 — Save / Load overlays */}
       <RecoveryModal />
       <SaveErrorToast />
+
+      {/* Phase 7 — User Preferences panel */}
+      <PreferencesPanel />
     </div>
   );
 }

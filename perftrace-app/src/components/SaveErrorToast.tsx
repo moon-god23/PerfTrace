@@ -24,7 +24,7 @@ export const SaveErrorToast: React.FC = () => {
       <span className="text-sm">{saveErrorMessage}</span>
       <button
         onClick={() => setSaveErrorMessage('')}
-        className="ml-auto text-[#6b7280] hover:text-white transition-colors text-lg leading-none"
+        className="ml-auto text-muted hover:text-main transition-colors text-lg leading-none"
       >
         ×
       </button>
