@@ -20,7 +20,17 @@ PerfTrace is a modern, high-performance Perfboard/Stripboard prototyping tool bu
   <img src="docs/assets/light_mode.png" alt="PerfTrace Light Mode" width="100%">
 </div>
 
-## 🚀 Getting Started
+## 📥 Quick Download (No Installation Required)
+
+Want to try PerfTrace without installing any developer tools? 
+
+1. Go to the [Releases Page](../../releases/latest).
+2. Download the `PerfTrace-vX.X.X.html` file.
+3. Double-click the file to open it in your browser. It works completely offline!
+
+---
+
+## 🚀 Build from Source (For Developers)
 
 PerfTrace is a frontend application built with React, Vite, and Tailwind CSS v4.
 
