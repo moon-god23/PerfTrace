@@ -42,7 +42,7 @@ PerfTrace is a frontend application built with React, Vite, and Tailwind CSS v4.
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/PerfTrace.git
+   git clone https://github.com/moon-god23/PerfTrace.git
    cd PerfTrace/perftrace-app
    ```
 
