@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { BoardCanvas } from './canvas/BoardCanvas';
+import { MenuBar } from './components/MenuBar';
 import { Toolbar } from './components/Toolbar';
 import { StatusBar } from './components/StatusBar';
 import { Sidebar } from './components/Sidebar';
@@ -9,6 +10,9 @@ import { LayerScrubber } from './components/LayerScrubber';
 import { RecoveryModal } from './components/RecoveryModal';
 import { SaveErrorToast } from './components/SaveErrorToast';
 import { PreferencesPanel } from './components/PreferencesPanel';
+import { PrintModal } from './components/PrintModal';
+import { ShortcutsModal } from './components/ShortcutsModal';
+import { AboutModal } from './components/AboutModal';
 import { useAdvisor } from './rules/useAdvisor';
 import { useAutoSave } from './hooks/useAutoSave';
 import { loadAutoSave, loadPreferences } from './io/autoSave';
@@ -50,6 +54,7 @@ function App() {
 
   return (
     <div className="h-screen w-screen flex flex-col bg-surface-base text-main overflow-hidden">
+      <MenuBar />
       <Toolbar />
       <div className="flex-1 relative flex overflow-hidden">
         <Sidebar />
@@ -66,6 +71,11 @@ function App() {
 
       {/* Phase 7 — User Preferences panel */}
       <PreferencesPanel />
+
+      {/* v1.1.0 — Print & Support Modals */}
+      <PrintModal />
+      <ShortcutsModal />
+      <AboutModal />
     </div>
   );
 }

@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import {
   Zap, Ruler, RefreshCw, MousePointer2, PenTool, Pencil,
   Spline, Link, Eraser, Undo, Redo, FlipVertical,
-  FilePlus, FolderOpen, Save, SaveAll, Settings, ZoomIn, ZoomOut,
+  FilePlus, FolderOpen, Save, SaveAll, Settings, ZoomIn, ZoomOut, Printer,
 } from 'lucide-react';
 import { useBoardStore, useUIStore } from '../store';
 import type { DrawingTool, SignalType } from '../types';
@@ -11,7 +11,7 @@ import { useFileOps } from '../hooks/useFileOps';
 
 export const Toolbar: React.FC = () => {
   const { rows, cols, undo, redo, past, future, isDirty, projectName, setProjectName } = useBoardStore();
-  const { zoom, setZoom, setIsBoardSizeModalOpen, activeTool, setActiveTool, activeSignalType, setActiveSignalType, boardSide, setBoardSide, isPreferencesOpen, setIsPreferencesOpen } = useUIStore();
+  const { zoom, setZoom, setIsBoardSizeModalOpen, activeTool, setActiveTool, activeSignalType, setActiveSignalType, boardSide, setBoardSide, isPreferencesOpen, setIsPreferencesOpen, setIsPrintModalOpen } = useUIStore();
 
   const { newProject, openProject, saveProject, saveAsProject } = useFileOps();
 
@@ -217,6 +217,14 @@ export const Toolbar: React.FC = () => {
 
       {/* ── 3. Right Pinned Section (ALWAYS VISIBLE ON SCREEN) ───────────── */}
       <div className="flex items-center space-x-1.5 sm:space-x-2 shrink-0 pl-1.5">
+        <button
+          title="Print 1:1 Scale Layout (Ctrl+P)"
+          onClick={() => setIsPrintModalOpen(true)}
+          className="px-2 sm:px-2.5 py-1.5 bg-emerald-600/15 hover:bg-emerald-600/25 border border-emerald-500/30 text-emerald-400 hover:text-emerald-300 rounded text-xs font-medium flex items-center transition-colors shrink-0 shadow-sm"
+        >
+          <Printer className="w-3.5 h-3.5 sm:mr-1.5 text-emerald-500" />
+          <span className="hidden sm:inline">Print 1:1</span>
+        </button>
         <button
           title="Board Dimensions"
           onClick={() => setIsBoardSizeModalOpen(true)}

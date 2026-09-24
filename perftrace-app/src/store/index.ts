@@ -38,6 +38,9 @@ interface BoardStore extends BoardState {
   removeTrace: (id: string) => void;
   updateTrace: (id: string, updates: Partial<Trace>) => void;
 
+  clearAllTraces: () => void;
+  clearAllComponents: () => void;
+
   // ── History ───────────────────────────────────────────────────────────────
   commitHistory: () => void;
   undo: () => void;
@@ -94,6 +97,15 @@ export const useBoardStore = create<BoardStore>((set, get) => ({
   updateTrace: (id, updates) => set((state) => ({
     traces: state.traces.map(t => t.id === id ? { ...t, ...updates } : t)
   })),
+
+  clearAllTraces: () => {
+    get().commitHistory();
+    set({ traces: [], jumpers: [] });
+  },
+  clearAllComponents: () => {
+    get().commitHistory();
+    set({ components: [] });
+  },
 
   commitHistory: () => {
     const state = get();
@@ -224,6 +236,15 @@ interface UIStore {
 
   isPreferencesOpen: boolean;
   setIsPreferencesOpen: (open: boolean) => void;
+
+  isPrintModalOpen: boolean;
+  setIsPrintModalOpen: (open: boolean) => void;
+
+  isShortcutsModalOpen: boolean;
+  setIsShortcutsModalOpen: (open: boolean) => void;
+
+  isAboutModalOpen: boolean;
+  setIsAboutModalOpen: (open: boolean) => void;
 }
 
 export const useUIStore = create<UIStore>((set) => ({
@@ -289,4 +310,13 @@ export const useUIStore = create<UIStore>((set) => ({
 
   isPreferencesOpen: false,
   setIsPreferencesOpen: (open) => set({ isPreferencesOpen: open }),
+
+  isPrintModalOpen: false,
+  setIsPrintModalOpen: (open) => set({ isPrintModalOpen: open }),
+
+  isShortcutsModalOpen: false,
+  setIsShortcutsModalOpen: (open) => set({ isShortcutsModalOpen: open }),
+
+  isAboutModalOpen: false,
+  setIsAboutModalOpen: (open) => set({ isAboutModalOpen: open }),
 }));
