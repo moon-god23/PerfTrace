@@ -126,22 +126,6 @@ export const BoardCanvas: React.FC = () => {
     return true;
   }
 
-  useEffect(() => {
-    let rising = true;
-    const interval = setInterval(() => {
-      setPulseOpacity(prev => {
-        if (rising) {
-          if (prev >= 0.9) { rising = false; return 0.9; }
-          return prev + 0.05;
-        } else {
-          if (prev <= 0.25) { rising = true; return 0.25; }
-          return prev - 0.05;
-        }
-      });
-    }, 50);
-    return () => clearInterval(interval);
-  }, []);
-
   // Keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
