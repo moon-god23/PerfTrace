@@ -80,22 +80,26 @@ export const useBoardStore = create<BoardStore>((set, get) => ({
   fileHandle: null,
   setFileHandle: (handle) => set({ fileHandle: handle }),
 
-  setBoardSize: (rows, cols) => set({ rows, cols }),
+  setBoardSize: (rows, cols) => set({ rows, cols, isDirty: true }),
   
-  addComponent: (comp) => set((state) => ({ components: [...state.components, comp] })),
+  addComponent: (comp) => set((state) => ({ components: [...state.components, comp], isDirty: true })),
   updateComponent: (id, updates) => set((state) => ({
-    components: state.components.map(c => c.id === id ? { ...c, ...updates } : c)
+    components: state.components.map(c => c.id === id ? { ...c, ...updates } : c),
+    isDirty: true,
   })),
   removeComponent: (id) => set((state) => ({
-    components: state.components.filter(c => c.id !== id)
+    components: state.components.filter(c => c.id !== id),
+    isDirty: true,
   })),
 
-  addTrace: (trace) => set((state) => ({ traces: [...state.traces, trace] })),
+  addTrace: (trace) => set((state) => ({ traces: [...state.traces, trace], isDirty: true })),
   removeTrace: (id) => set((state) => ({
-    traces: state.traces.filter(t => t.id !== id)
+    traces: state.traces.filter(t => t.id !== id),
+    isDirty: true,
   })),
   updateTrace: (id, updates) => set((state) => ({
-    traces: state.traces.map(t => t.id === id ? { ...t, ...updates } : t)
+    traces: state.traces.map(t => t.id === id ? { ...t, ...updates } : t),
+    isDirty: true,
   })),
 
   clearAllTraces: () => {

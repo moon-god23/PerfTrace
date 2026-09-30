@@ -1,73 +1,23 @@
-# React + TypeScript + Vite
+# ⚡ PerfTrace Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This directory contains the React 19 + TypeScript + Vite frontend application for **PerfTrace**.
 
-Currently, two official plugins are available:
+For full feature documentation, screenshots, and user guides, please refer to the [Main Repository README](../README.md).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Development Scripts
 
-## React Compiler
+Inside this directory, you can run:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- `npm run dev`: Starts the local Vite development server at `http://localhost:5173`.
+- `npm run build`: Type-checks with TypeScript and compiles the single-file bundled HTML into `dist/index.html`.
+- `npm run preview`: Locally previews the production build.
+- `npm run lint`: Runs ESLint over all TypeScript and React files.
 
-## Expanding the ESLint configuration
+## 🏗️ Architecture Overview
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- `src/canvas/`: Konva.js canvas rendering engine (`BoardCanvas.tsx`, `ComponentRenderer.tsx`).
+- `src/components/`: Glassmorphic UI controls (`MenuBar.tsx`, `Toolbar.tsx`, `PrintModal.tsx`, `TraceAdvisorPanel.tsx`, `Sidebar.tsx`, etc.).
+- `src/rules/`: Real-time Trace Advisor DRC engine (`useAdvisor.ts`, rule implementations).
+- `src/store/`: Zustand state management (`useBoardStore`, `useUIStore`, `usePreferencesStore`).
+- `src/io/`: Local-first IndexedDB auto-save and `.ptrace` JSON serialization.
+- `src/utils/`: 1:1 true scale PDF print engine (`printEngine.ts`), theme utilities, and demo circuits.

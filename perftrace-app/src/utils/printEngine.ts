@@ -492,7 +492,7 @@ export function downloadBoardPdf(params: RenderBoardParams): void {
   const { projectName, options } = params;
   const doc = generatePdfDocument(params);
   const sanitizedName = (projectName || 'PerfTrace').trim().replace(/[^a-zA-Z0-9_-]/g, '_');
-  const filename = `${sanitizedName}_1-1_${options.side}_${options.style}_v1.1.pdf`;
+  const filename = `${sanitizedName}_1-1_${options.side}_${options.style}_v1.2.pdf`;
   doc.save(filename);
 }
 

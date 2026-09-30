@@ -40,7 +40,7 @@ export function useFileOps(): {
   saveProject: () => Promise<void>;
   saveAsProject: () => Promise<void>;
 } {
-  const { setSaveErrorMessage, setIsBoardSizeModalOpen } = useUIStore();
+  const { setSaveErrorMessage } = useUIStore();
 
   const showError = useCallback(
     (msg: string) => setSaveErrorMessage(msg),
@@ -48,20 +48,34 @@ export function useFileOps(): {
   );
 
   // ── New Project ────────────────────────────────────────────────────────────
-  const newProject = useCallback(() => {
-    const { isDirty } = useBoardStore.getState();
-    if (isDirty) {
+  const newProject = useCallback(async () => {
+    const state = useBoardStore.getState();
+    const hasContent = state.isDirty || state.components.length > 0 || state.traces.length > 0;
+
+    if (hasContent) {
       const confirmed = window.confirm(
-        'You have unsaved changes. Start a new project anyway?',
+        'You have an active circuit with unsaved changes.\n\nDo you want to discard your changes and start a fresh new board?',
       );
       if (!confirmed) return;
     }
-    clearAutoSave();
-    // Open the Board Size modal; the "Apply" button calls newProject on the store
-    setIsBoardSizeModalOpen(true);
-    // After the modal calls setBoardSize, also trigger a full reset
-    useBoardStore.getState().newProject(24, 30);
-  }, [setIsBoardSizeModalOpen]);
+
+    try {
+      await clearAutoSave();
+    } catch {
+      // Ignore clear errors on fresh session
+    }
+
+    // Immediately reset to a fresh blank board with existing dimensions
+    state.newProject(state.rows, state.cols, 'Untitled Project');
+
+    // Reset canvas camera & selections
+    const ui = useUIStore.getState();
+    ui.setZoom(1);
+    ui.setPan({ x: 100, y: 100 });
+    ui.setSelectedComponentId(null);
+    ui.setSelectedTraceId(null);
+    ui.setCursorHole(null);
+  }, []);
 
   // ── Open Project ───────────────────────────────────────────────────────────
   const openProject = useCallback(async () => {

@@ -16,9 +16,11 @@ import { AboutModal } from './components/AboutModal';
 import { useAdvisor } from './rules/useAdvisor';
 import { useAutoSave } from './hooks/useAutoSave';
 import { loadAutoSave, loadPreferences } from './io/autoSave';
-import { useUIStore } from './store';
+import { useUIStore, useBoardStore } from './store';
 import { usePreferencesStore } from './store/preferencesStore';
 import { applyTheme } from './utils/theme';
+
+import { DEMO_PROJECT } from './utils/demoCircuit';
 
 function App() {
   // Run the Trace Advisor rule engine — debounced 300ms, updates store on every board change
@@ -32,23 +34,52 @@ function App() {
 
   // On first mount: load preferences from IndexedDB + apply theme; check for auto-saved board
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const hasDemo = params.has('demo');
+    const paramTheme = params.get('theme') as 'dark' | 'light' | null;
+
+    if (hasDemo) {
+      useBoardStore.getState().loadProject(DEMO_PROJECT);
+      const zoom = Number(params.get('zoom')) || 1.15;
+      const panX = Number(params.get('panX')) || 140;
+      const panY = Number(params.get('panY')) || 100;
+      const ui = useUIStore.getState();
+      ui.setZoom(zoom);
+      ui.setPan({ x: panX, y: panY });
+
+      if (params.get('side') === 'bottom') {
+        ui.setBoardSide('bottom');
+      }
+      if (params.get('scrubber')) {
+        ui.setScrubberValue(Number(params.get('scrubber')));
+      }
+
+      if (params.get('modal') === 'print') {
+        setTimeout(() => {
+          useUIStore.getState().setIsPrintModalOpen(true);
+        }, 100);
+      }
+    }
+
     // Load and apply saved user preferences
     loadPreferences().then((savedPrefs) => {
+      const activeTheme = paramTheme ?? savedPrefs?.theme ?? theme;
       if (savedPrefs) {
-        loadPrefsToStore(savedPrefs);
-        applyTheme(savedPrefs.theme ?? 'dark');
+        loadPrefsToStore({ ...savedPrefs, theme: activeTheme });
       } else {
-        // Apply default theme
-        applyTheme(theme);
+        usePreferencesStore.getState().setTheme(activeTheme);
       }
+      applyTheme(activeTheme);
     });
 
-    // Check for unsaved board session
-    loadAutoSave().then((saved) => {
-      if (saved) {
-        setIsRecoveryModalOpen(true);
-      }
-    });
+    if (!hasDemo) {
+      // Check for unsaved board session only when not in demo mode
+      loadAutoSave().then((saved) => {
+        if (saved) {
+          setIsRecoveryModalOpen(true);
+        }
+      });
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

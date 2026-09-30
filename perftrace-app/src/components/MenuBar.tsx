@@ -109,12 +109,12 @@ export const MenuBar: React.FC = () => {
         <div 
           onClick={() => setIsAboutModalOpen(true)}
           className="flex items-center gap-1.5 px-2 py-0.5 rounded hover:bg-surface-hover cursor-pointer text-amber-500 mr-1"
-          title="About PerfTrace v1.1.0"
+          title="About PerfTrace v1.2.0"
         >
           <Zap className="w-3.5 h-3.5 fill-amber-500" />
           <span className="font-bold text-main tracking-tight hidden sm:inline">PerfTrace</span>
-          <span className="text-[10px] font-mono px-1 py-0.2 rounded bg-emerald-500/15 text-emerald-500 border border-emerald-500/20 font-semibold">
-            v1.1
+          <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-500 border border-emerald-500/20 font-semibold">
+            v1.2
           </span>
         </div>
 

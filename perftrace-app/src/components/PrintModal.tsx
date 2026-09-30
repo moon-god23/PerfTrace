@@ -84,7 +84,7 @@ export const PrintModal: React.FC = () => {
               <div className="flex items-center gap-2">
                 <h2 className="text-base font-bold text-main">Print 1:1 Physical Scale Layout</h2>
                 <span className="px-2 py-0.5 text-[10px] font-mono font-semibold rounded bg-emerald-500/20 text-emerald-500 border border-emerald-500/30">
-                  v1.1 True Scale
+                  v1.2 True Scale
                 </span>
               </div>
               <p className="text-xs text-muted">Generate exact-pitch perfboard templates for direct hardware overlay</p>

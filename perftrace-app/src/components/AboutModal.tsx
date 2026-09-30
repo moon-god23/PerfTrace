@@ -30,7 +30,7 @@ export const AboutModal: React.FC = () => {
               <div className="flex items-center gap-2">
                 <h2 className="text-base font-bold text-main">PerfTrace</h2>
                 <span className="px-1.5 py-0.5 text-[10px] font-mono font-semibold rounded bg-emerald-500/20 text-emerald-500 border border-emerald-500/30">
-                  v1.1.0
+                  v1.2.0
                 </span>
               </div>
               <p className="text-xs text-muted">Precision Perfboard Prototyping CAD</p>
@@ -46,20 +46,20 @@ export const AboutModal: React.FC = () => {
 
           <div className="bg-surface-base/80 border border-subtle rounded-lg p-3 space-y-2">
             <div className="font-semibold text-main text-[11px] uppercase tracking-wider text-emerald-500">
-              What's New in v1.1.0
+              What's New in v1.2.0
             </div>
             <ul className="space-y-1.5 text-muted">
               <li className="flex items-start gap-1.5">
                 <CheckCircle className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
-                <span><strong className="text-main">1:1 Physical Scale Print & PDF Export:</strong> Print overlays for real boards with 2.54mm pitch.</span>
+                <span><strong className="text-main">Instant Fresh Project Creation:</strong> Creates a new board immediately with safety prompts for unsaved work.</span>
               </li>
               <li className="flex items-start gap-1.5">
                 <CheckCircle className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
-                <span><strong className="text-main">Solder Side Mirroring:</strong> Automatically flips layout horizontally for soldering from underneath.</span>
+                <span><strong className="text-main">Streamlined Drawing Ribbon:</strong> Clean project badge and decluttered tool ribbon.</span>
               </li>
               <li className="flex items-start gap-1.5">
                 <CheckCircle className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
-                <span><strong className="text-main">Desktop Application Menu Bar:</strong> Full File, Edit, View, Board & Help menus with hotkeys.</span>
+                <span><strong className="text-main">1:1 Physical Scale Print & PDF Export:</strong> Print overlays with exact 2.54mm pitch and solder mirroring.</span>
               </li>
             </ul>
           </div>

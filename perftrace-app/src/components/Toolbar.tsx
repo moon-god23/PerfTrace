@@ -1,19 +1,16 @@
 import React, { useRef, useState } from 'react';
 import {
-  Zap, Ruler, RefreshCw, MousePointer2, PenTool, Pencil,
+  Ruler, RefreshCw, MousePointer2, PenTool, Pencil,
   Spline, Link, Eraser, Undo, Redo, FlipVertical,
-  FilePlus, FolderOpen, Save, SaveAll, Settings, ZoomIn, ZoomOut, Printer,
+  Settings, ZoomIn, ZoomOut, Printer, Edit3,
 } from 'lucide-react';
 import { useBoardStore, useUIStore } from '../store';
 import type { DrawingTool, SignalType } from '../types';
 import { clsx } from 'clsx';
-import { useFileOps } from '../hooks/useFileOps';
 
 export const Toolbar: React.FC = () => {
   const { rows, cols, undo, redo, past, future, isDirty, projectName, setProjectName } = useBoardStore();
   const { zoom, setZoom, setIsBoardSizeModalOpen, activeTool, setActiveTool, activeSignalType, setActiveSignalType, boardSide, setBoardSide, isPreferencesOpen, setIsPreferencesOpen, setIsPrintModalOpen } = useUIStore();
-
-  const { newProject, openProject, saveProject, saveAsProject } = useFileOps();
 
   const zoomIn  = () => setZoom(Math.min(zoom * 1.2, 5));
   const zoomOut = () => setZoom(Math.max(zoom / 1.2, 0.1));
@@ -30,7 +27,7 @@ export const Toolbar: React.FC = () => {
     setEditingName(false);
   };
 
-  const tools: { id: DrawingTool; icon: React.FC<any>; tooltip: string }[] = [
+  const tools: { id: DrawingTool; icon: React.ComponentType<{ className?: string }>; tooltip: string }[] = [
     { id: 'select', icon: MousePointer2, tooltip: 'Select (S)' },
     { id: 'pen', icon: PenTool, tooltip: 'Pen Tool (P)' },
     { id: 'freehand', icon: Pencil, tooltip: 'Freehand Trace (F)' },
@@ -48,56 +45,24 @@ export const Toolbar: React.FC = () => {
   ];
 
   return (
-    <div className="h-14 bg-surface-panel border-b border-subtle flex items-center justify-between px-2 sm:px-3 shrink-0 w-full z-10 shadow-md font-sans gap-2 select-none overflow-hidden">
-      {/* ── 1. Left Pinned Section (Brand & File Ops) ────────────────────── */}
-      <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-        {/* Logo */}
-        <div className="flex items-center space-x-1.5 mr-0.5 shrink-0" title="PerfTrace">
-          <Zap className="w-5 h-5 text-amber-500" fill="#f59e0b" />
-          <span className="text-xl font-bold tracking-wide text-emerald-500 hidden md:inline">PerfTrace</span>
-        </div>
-
-        {/* File Operations */}
-        <div className="flex items-center bg-surface-hover rounded p-1 border border-subtle gap-0.5 shrink-0">
-          <button
-            title="New Project (Ctrl+N)"
-            onClick={newProject}
-            className="p-1.5 rounded text-muted hover:text-main hover:bg-surface-active transition-colors"
-          >
-            <FilePlus className="w-4 h-4" />
-          </button>
-          <button
-            title="Open Project (Ctrl+O)"
-            onClick={openProject}
-            className="p-1.5 rounded text-muted hover:text-main hover:bg-surface-active transition-colors"
-          >
-            <FolderOpen className="w-4 h-4" />
-          </button>
-          <button
-            title="Save (Ctrl+S)"
-            onClick={saveProject}
-            className="p-1.5 rounded text-muted hover:text-main hover:bg-surface-active transition-colors"
-          >
-            <Save className="w-4 h-4" />
-          </button>
-          <button
-            title="Save As (Ctrl+Shift+S)"
-            onClick={saveAsProject}
-            className="p-1.5 rounded text-muted hover:text-main hover:bg-surface-active transition-colors"
-          >
-            <SaveAll className="w-4 h-4" />
-          </button>
-        </div>
-
-        {/* Project Name */}
-        <div className="flex items-center gap-1 min-w-0 max-w-[70px] sm:max-w-[110px] md:max-w-[150px]">
-          {isDirty && (
-            <span className="text-amber-500 text-lg leading-none shrink-0" title="Unsaved changes">●</span>
+    <div className="h-12 bg-surface-panel border-b border-subtle flex items-center justify-between px-2 sm:px-3 shrink-0 w-full z-10 shadow-sm font-sans gap-2 select-none overflow-hidden">
+      {/* ── 1. Left Pinned Section (Project Title & Status) ────────────────── */}
+      <div className="flex items-center gap-2 shrink-0">
+        <div
+          className="flex items-center gap-2 bg-surface-hover/80 hover:bg-surface-hover border border-subtle px-2.5 py-1.5 rounded-lg transition-colors group cursor-pointer"
+          title={`Project: ${projectName} (Click to rename)`}
+          onClick={() => { if (!editingName) { setNameValue(projectName); setEditingName(true); } }}
+        >
+          {isDirty ? (
+            <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse shrink-0" title="Unsaved changes" />
+          ) : (
+            <span className="w-2 h-2 rounded-full bg-emerald-500/70 shrink-0" title="All changes saved" />
           )}
+
           {editingName ? (
             <input
               ref={nameInputRef}
-              className="bg-surface-hover border border-blue-500 rounded px-2 py-0.5 text-xs sm:text-sm text-main outline-none min-w-0 w-24 sm:w-32"
+              className="bg-surface-base border border-blue-500 rounded px-2 py-0.5 text-xs text-main outline-none w-32 sm:w-40 font-medium"
               value={nameValue}
               autoFocus
               onChange={(e) => setNameValue(e.target.value)}
@@ -106,19 +71,19 @@ export const Toolbar: React.FC = () => {
                 if (e.key === 'Enter') commitName();
                 if (e.key === 'Escape') { setNameValue(projectName); setEditingName(false); }
               }}
+              onClick={(e) => e.stopPropagation()}
             />
           ) : (
-            <span
-              className="text-xs sm:text-sm text-muted hover:text-main cursor-pointer truncate"
-              title={`Project: ${projectName} (Double-click to rename)`}
-              onDoubleClick={() => { setNameValue(projectName); setEditingName(true); }}
-            >
-              {projectName}
-            </span>
+            <div className="flex items-center gap-1.5">
+              <span className="text-xs font-semibold text-main truncate max-w-[120px] sm:max-w-[180px]">
+                {projectName}
+              </span>
+              <Edit3 className="w-3 h-3 text-muted opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
+            </div>
           )}
         </div>
 
-        <div className="w-px h-5 bg-[#2a2d3e] shrink-0 hidden sm:block" />
+        <div className="w-px h-5 bg-subtle shrink-0 hidden sm:block" />
       </div>
 
       {/* ── 2. Middle Scrollable / Flexible Tool Strip ────────────────────── */}

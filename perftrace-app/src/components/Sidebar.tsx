@@ -26,18 +26,21 @@ export const Sidebar: React.FC = () => {
     e.dataTransfer.effectAllowed = 'copy';
   };
 
-  const LayerToggle = ({ name, layerKey }: { name: string; layerKey: keyof typeof layerVisibility }) => {
-    const isVisible = layerVisibility[layerKey];
-    return (
-      <div
-        className="flex items-center justify-between p-1.5 hover:bg-surface-hover rounded cursor-pointer transition-colors"
-        onClick={() => setLayerVisibility(layerKey, !isVisible)}
-      >
-        <span className="text-main font-medium">{name}</span>
-        {isVisible ? <Eye className="w-4 h-4 text-emerald-500" /> : <EyeOff className="w-4 h-4 text-muted" />}
-      </div>
-    );
-  };
+interface LayerToggleProps {
+  name: string;
+  isVisible: boolean;
+  onToggle: () => void;
+}
+
+const LayerToggle: React.FC<LayerToggleProps> = ({ name, isVisible, onToggle }) => (
+  <div
+    className="flex items-center justify-between p-1.5 hover:bg-surface-hover rounded cursor-pointer transition-colors"
+    onClick={onToggle}
+  >
+    <span className="text-main font-medium">{name}</span>
+    {isVisible ? <Eye className="w-4 h-4 text-emerald-500" /> : <EyeOff className="w-4 h-4 text-muted" />}
+  </div>
+);
 
   // ── Collapsed state: thin icon strip ──
   if (isSidebarCollapsed) {
@@ -78,10 +81,26 @@ export const Sidebar: React.FC = () => {
 
       <div className="p-3 border-b border-subtle shrink-0">
         <div className="space-y-1">
-          <LayerToggle name="Components"    layerKey="components" />
-          <LayerToggle name="Labels"        layerKey="labels" />
-          <LayerToggle name="Solder Traces" layerKey="solderTraces" />
-          <LayerToggle name="Wire Jumps"    layerKey="wireJumps" />
+          <LayerToggle
+            name="Components"
+            isVisible={layerVisibility.components}
+            onToggle={() => setLayerVisibility('components', !layerVisibility.components)}
+          />
+          <LayerToggle
+            name="Labels"
+            isVisible={layerVisibility.labels}
+            onToggle={() => setLayerVisibility('labels', !layerVisibility.labels)}
+          />
+          <LayerToggle
+            name="Solder Traces"
+            isVisible={layerVisibility.solderTraces}
+            onToggle={() => setLayerVisibility('solderTraces', !layerVisibility.solderTraces)}
+          />
+          <LayerToggle
+            name="Wire Jumps"
+            isVisible={layerVisibility.wireJumps}
+            onToggle={() => setLayerVisibility('wireJumps', !layerVisibility.wireJumps)}
+          />
         </div>
       </div>
 
