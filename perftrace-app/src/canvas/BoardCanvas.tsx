@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
-import { Stage, Layer, Circle, Rect, Text, Group, Line, Path } from 'react-konva';
+import { Stage, Layer, Circle, Rect, Text, Group, Line, Path, Shape } from 'react-konva';
 import { useBoardStore, useUIStore } from '../store';
 import { usePreferencesStore } from '../store/preferencesStore';
 import type { KonvaEventObject } from 'konva/lib/Node';
@@ -63,8 +63,30 @@ export const BoardCanvas: React.FC = () => {
   const [draggingOrigPos, setDraggingOrigPos] = useState<HoleCoord | null>(null);
   const [draggingDelta, setDraggingDelta] = useState<{ dcol: number; drow: number }>({ dcol: 0, drow: 0 });
 
-  // Pulsing animation for High-severity overlays
-  const [pulseOpacity, setPulseOpacity] = useState(0.6);
+  // Pulsing animation for High-severity overlays — driven by a ref, NOT React state,
+  // so it never causes a React re-render.
+  const pulseOpacityRef = useRef(0.6);
+  const pulseRisingRef = useRef(true);
+  const pulseRafRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    let lastTime = 0;
+    const step = (time: number) => {
+      if (time - lastTime >= 50) {
+        lastTime = time;
+        if (pulseRisingRef.current) {
+          if (pulseOpacityRef.current >= 0.9) pulseRisingRef.current = false;
+          else pulseOpacityRef.current = Math.min(0.9, pulseOpacityRef.current + 0.05);
+        } else {
+          if (pulseOpacityRef.current <= 0.25) pulseRisingRef.current = true;
+          else pulseOpacityRef.current = Math.max(0.25, pulseOpacityRef.current - 0.05);
+        }
+      }
+      pulseRafRef.current = requestAnimationFrame(step);
+    };
+    pulseRafRef.current = requestAnimationFrame(step);
+    return () => { if (pulseRafRef.current !== null) cancelAnimationFrame(pulseRafRef.current); };
+  }, []);
 
   // --- Helpers for trace-drag ---
   function isPinOf(compId: string, hole: HoleCoord, overridePos?: HoleCoord): boolean {
@@ -490,34 +512,46 @@ export const BoardCanvas: React.FC = () => {
     return labels;
   };
 
+  // Render ALL grid holes in a single canvas draw pass — one Konva node instead of rows*cols*2 nodes.
   const renderGridDots = () => {
-    const holeRadius = Math.max(1, gridDotSize * 0.6);   // hole scales with dot size
-    const padRadius  = Math.max(2, gridDotSize);          // outer pad
-    const dots = [];
-    for (let r = 0; r < rows; r++) {
-      for (let c = 0; c < cols; c++) {
-        const x = MARGIN + c * GRID_SPACING;
-        const y = MARGIN + r * GRID_SPACING;
+    const holeRadius = Math.max(1, gridDotSize * 0.6);
+    const padRadius  = Math.max(2, gridDotSize);
+    return (
+      <Shape
+        listening={false}
+        perfectDrawEnabled={false}
+        sceneFunc={(ctx) => {
+          // Outer pad rings (green with gold stroke)
+          ctx.beginPath();
+          for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+              const x = MARGIN + c * GRID_SPACING;
+              const y = MARGIN + r * GRID_SPACING;
+              ctx.moveTo(x + padRadius, y);
+              ctx.arc(x, y, padRadius, 0, Math.PI * 2);
+            }
+          }
+          ctx.fillStyle = '#1f5d34';
+          ctx.fill();
+          ctx.strokeStyle = '#d4af37';
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
 
-        dots.push(
-          <Group key={`hole-${c}-${r}`} x={x} y={y}>
-            <Circle
-              radius={padRadius}
-              stroke="#d4af37"
-              strokeWidth={1.5}
-              fill="#1f5d34"
-              perfectDrawEnabled={false}
-            />
-            <Circle
-              radius={holeRadius}
-              fill="#0f111a"
-              perfectDrawEnabled={false}
-            />
-          </Group>
-        );
-      }
-    }
-    return dots;
+          // Inner holes (dark)
+          ctx.beginPath();
+          for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+              const x = MARGIN + c * GRID_SPACING;
+              const y = MARGIN + r * GRID_SPACING;
+              ctx.moveTo(x + holeRadius, y);
+              ctx.arc(x, y, holeRadius, 0, Math.PI * 2);
+            }
+          }
+          ctx.fillStyle = '#0f111a';
+          ctx.fill();
+        }}
+      />
+    );
   };
 
   const getSignalColor = (type: SignalType) => {
@@ -727,7 +761,7 @@ export const BoardCanvas: React.FC = () => {
                 radius={GRID_SPACING * 0.7}
                 stroke="#f97316"
                 strokeWidth={2.5}
-                opacity={pulseOpacity}
+                opacity={pulseOpacityRef.current}
                 onMouseEnter={() => {
                   const stage = stageRef.current;
                   if (!stage) return;
@@ -803,7 +837,7 @@ export const BoardCanvas: React.FC = () => {
         }}
         ref={stageRef}
       >
-        <Layer>
+        <Layer listening={true}>
           <Group
             x={isBottom ? boardCenterX : 0}
             offsetX={isBottom ? boardCenterX : 0}
